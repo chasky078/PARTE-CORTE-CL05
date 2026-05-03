@@ -102,8 +102,19 @@ input {
 
 <input placeholder="Proveedor" enterkeyhint="next">
 
-<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Código (máx 4)" maxlength="4">
+<input 
+  id="codigo"
+  type="tel" 
+  inputmode="numeric" 
+  enterkeyhint="next" 
+  placeholder="Código (máx 4)" 
+  maxlength="4"
+  onblur="mostrarCodigo()"
+>
 
+<div id="codigoTexto" style="font-weight:bold; color:#1976d2; margin-top:-5px;">
+Código —
+</div>
 <label>Nº MATERIAL</label>
 <div class="material">
 3 0 0 0
@@ -255,6 +266,16 @@ function quitarBobina(){
     contador--;
   }
 }
+  function mostrarCodigo(){
+  const valor = document.getElementById("codigo").value;
+  const texto = document.getElementById("codigoTexto");
+
+  if(valor){
+    texto.innerText = "Código " + valor;
+  } else {
+    texto.innerText = "Código —";
+  }
+  }
 </script>
 
 </body>
