@@ -116,19 +116,41 @@ input {
 <label>Nº MATERIAL</label>
 <div class="material">
 3 0 0 0
-<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2">
+<input 
+  id="material1"
+  type="tel" 
+  inputmode="numeric" 
+  enterkeyhint="next" 
+  maxlength="2"
+  oninput="saltoMaterial()"
+>
 /
-<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3">
+<input 
+  id="material2"
+  type="tel" 
+  inputmode="numeric" 
+  enterkeyhint="next" 
+  maxlength="3"
+>
 </div>
 
 </div>
 
 <div class="section">
-<h3>Material</h3>
+<h3>Datos</h3>
 
-<div class="row">
-<input placeholder="S">
-<input placeholder="W">
+<div style="margin-bottom:10px;">
+  
+  <label class="check-line">
+    <input type="checkbox" id="checkS" onclick="soloUno('S')">
+    S (Recto)
+  </label>
+
+  <label class="check-line">
+    <input type="checkbox" id="checkW" onclick="soloUno('W')">
+    W (Scroll)
+  </label>
+
 </div>
 
 <div class="row">
@@ -287,6 +309,20 @@ function limpiarCodigo(){
 
   input.value = input.value.replace("Código ", "");
 }
+  function saltoMaterial(){
+  const input = document.getElementById("material1");
+
+  if(input.value.length >= 2){
+    document.getElementById("material2").focus();
+  }
+  }
+  function soloUno(tipo){
+  if(tipo === "S"){
+    document.getElementById("checkW").checked = false;
+  } else {
+    document.getElementById("checkS").checked = false;
+  }
+  }
 </script>
 
 </body>
