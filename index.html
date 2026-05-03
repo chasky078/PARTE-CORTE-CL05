@@ -364,8 +364,8 @@ function limpiarCodigo(){
       div.style.borderBottom = "1px solid #ccc";
 
       div.innerText = "Orden: " + parte.orden;
-      div.onclick = function(){
-  alert("Abrir parte " + parte.orden);
+    div.onclick = function(){
+  abrirParte(parte.orden);
 };
 
       contenedor.appendChild(div);
@@ -373,6 +373,24 @@ function limpiarCodigo(){
   }
 
   document.getElementById("listaPartes").style.display = "block";
+  }
+  function abrirParte(numeroOrden){
+
+  const data = localStorage.getItem("parte_" + numeroOrden);
+
+  if(!data){
+    alert("No se encontró el parte");
+    return;
+  }
+
+  const parte = JSON.parse(data);
+
+  // Rellenar campos
+  document.querySelector('input[placeholder="Número Orden"]').value = parte.orden;
+  document.querySelector('input[type="date"]').value = parte.fecha;
+
+  // Ocultar lista
+  document.getElementById("listaPartes").style.display = "none";
   }
 </script>
 
