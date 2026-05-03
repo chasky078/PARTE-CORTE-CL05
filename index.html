@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #eef3f8;
 }
 
@@ -20,9 +20,7 @@ header {
   font-weight: bold;
 }
 
-.container {
-  padding: 12px;
-}
+.container { padding: 12px; }
 
 .section {
   background: white;
@@ -31,26 +29,18 @@ header {
   border-radius: 8px;
 }
 
-h3 {
-  margin-top: 0;
-  color: #1976d2;
-}
-
 input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 8px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .row {
   display: flex;
   gap: 8px;
-}
-
-.row input {
-  flex: 1;
 }
 
 .button {
@@ -63,9 +53,7 @@ input {
   margin-top: 10px;
 }
 
-.button-danger {
-  background: #dc2626;
-}
+.button-danger { background: red; }
 
 .bobina {
   border: 1px dashed #ccc;
@@ -75,14 +63,23 @@ input {
   background: #f8fbff;
 }
 
-.bobina-confirmada {
-  background: #e6f7ed !important;
+.confirmada {
+  background: #e6f7ed;
 }
 
-.check-line {
+.material {
   display: flex;
-  gap: 6px;
   align-items: center;
+  gap: 6px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.material input {
+  width: 70px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -97,25 +94,24 @@ input {
 <h3>Cabecera</h3>
 
 <div class="row">
-<input type="number" placeholder="Número Orden">
+<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Número Orden">
 <input value="CL05" disabled>
 </div>
 
-<label>Fecha</label>
 <input type="date">
 
-<input placeholder="Proveedor">
+<input placeholder="Proveedor" enterkeyhint="next">
 
-<input id="codigo" type="number" placeholder="Código (4 dígitos)" oninput="limitar(this,4);mostrarCodigo();">
-<div id="codigoTexto">Código: —</div>
+<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Código (máx 4)" maxlength="4">
 
-<label>Nº Material</label>
-<div class="row">
-<span>3000</span>
-<input maxlength="2" oninput="limitar(this,2)">
-<span>/</span>
-<input maxlength="3" oninput="limitar(this,3)">
+<label>Nº MATERIAL</label>
+<div class="material">
+3 0 0 0
+<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2">
+/
+<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3">
 </div>
+
 </div>
 
 <div class="section">
@@ -127,52 +123,44 @@ input {
 </div>
 
 <div class="row">
-<input placeholder="Ancho">
-<input placeholder="Largo">
+<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Ancho">
+<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Largo">
 </div>
 
 <div class="row">
-<input id="espesor" placeholder="Espesor" oninput="mostrarEspesor();">
+<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
 <input placeholder="Txxx">
 </div>
 
 <div class="row">
-<input placeholder="Dif">
+<input type="tel" inputmode="numeric" enterkeyhint="done" placeholder="Dif">
 <input value="ST" disabled>
 </div>
 
-<div id="espesorTexto">Resultado: —</div>
 </div>
 
 <div class="section">
 <h3>Bobinas</h3>
-
 <div id="bobinas"></div>
 
-<div class="button" onclick="addBobina()">+ AÑADIR BOBINA</div>
-<div class="button button-danger" onclick="quitarBobina()">− QUITAR BOBINA</div>
-
+<div class="button" onclick="addBobina()">+ Añadir bobina</div>
+<div class="button button-danger" onclick="quitarBobina()">− Quitar bobina</div>
 </div>
 
 <div class="section">
 <h3>Personal</h3>
 
 <div class="row">
-<input maxlength="2" placeholder="Mecánico">
-<input maxlength="2" placeholder="Apoyo">
+<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" placeholder="Mecánico">
+<input type="tel" inputmode="numeric" enterkeyhint="done" maxlength="2" placeholder="Apoyo">
 </div>
 </div>
 
 <div class="section">
 <h3>Comprobaciones</h3>
 
-<label class="check-line">
-<input type="checkbox" checked> Espesor OK
-</label>
-
-<label class="check-line">
-<input type="checkbox" checked> Línea OK
-</label>
+<label><input type="checkbox" checked> Espesor OK</label><br>
+<label><input type="checkbox" checked> Línea OK</label>
 
 </div>
 
@@ -181,56 +169,17 @@ input {
 </div>
 
 <script>
-let contadorBobinas = 0;
-
-function limitar(input, max) {
-  input.value = input.value.slice(0, max);
-}
-
-function mostrarCodigo() {
-  const v = document.getElementById("codigo").value;
-  document.getElementById("codigoTexto").innerText = v ? "Código: " + v : "Código: —";
-}
-
-function mostrarEspesor() {
-  const v = document.getElementById("espesor").value;
-  if(v){
-    document.getElementById("espesorTexto").innerText = "Resultado: 0," + v;
-  } else {
-    document.getElementById("espesorTexto").innerText = "Resultado: —";
-  }
-}
-
-function toggleConfirm(id){
-  const b = document.getElementById(id);
-  const inputs = b.querySelectorAll("input");
-  const estado = b.dataset.estado;
-
-  if(estado === "edit"){
-    inputs.forEach(i => i.disabled = true);
-    b.dataset.estado = "ok";
-    b.classList.add("bobina-confirmada");
-    b.querySelector(".btn").innerText = "✏ EDITAR";
-  } else {
-    inputs.forEach(i => i.disabled = false);
-    b.dataset.estado = "edit";
-    b.classList.remove("bobina-confirmada");
-    b.querySelector(".btn").innerText = "✔ CONFIRMAR";
-  }
-}
+let contador = 0;
 
 function addBobina(){
-  contadorBobinas++;
+  contador++;
 
-  const id = "b"+contadorBobinas;
-
-  const div = document.createElement("div");
+  let div = document.createElement("div");
   div.className = "bobina";
-  div.id = id;
-  div.dataset.estado = "edit";
+  div.id = "b"+contador;
 
   div.innerHTML = `
-  <strong>BOBINA ${contadorBobinas}</strong>
+  <b>BOBINA ${contador}</b>
 
   <div class="row">
   <input type="time">
@@ -238,59 +187,72 @@ function addBobina(){
   </div>
 
   <div class="row">
-  <input placeholder="Total">
-  <input placeholder="Acum">
+  <input type="tel" inputmode="numeric" placeholder="Total">
+  <input type="tel" inputmode="numeric" placeholder="Acum">
   </div>
 
   <div class="row">
-  <input placeholder="Cambio">
-  <input placeholder="Cambio acum">
+  <input type="tel" inputmode="numeric" placeholder="Cambio">
+  <input type="tel" inputmode="numeric" placeholder="Cambio acum">
   </div>
 
   <div class="row">
-  <input placeholder="Golpes">
-  <input placeholder="Primeras">
+  <input type="tel" inputmode="numeric" placeholder="Golpes">
+  <input type="tel" inputmode="numeric" placeholder="Primeras">
   </div>
 
   <div class="row">
-  <input placeholder="+Esp">
-  <input placeholder="-Esp">
+  <input type="tel" inputmode="numeric" placeholder="+Esp">
+  <input type="tel" inputmode="numeric" placeholder="-Esp">
   </div>
 
   <div class="row">
-  <input placeholder="Visual">
-  <input placeholder="Poros">
+  <input type="tel" inputmode="numeric" placeholder="Visual">
+  <input type="tel" inputmode="numeric" placeholder="Poros">
   </div>
 
-  <input placeholder="Otros">
+  <input type="tel" inputmode="numeric" placeholder="Otros">
 
   <div class="row">
-  <input placeholder="A1">
-  <input placeholder="A2">
-  </div>
-
-  <div class="row">
-  <input placeholder="A3">
-  <input placeholder="A4">
+  <input type="tel" inputmode="numeric" placeholder="A1">
+  <input type="tel" inputmode="numeric" placeholder="A2">
   </div>
 
   <div class="row">
-  <input placeholder="Etiqueta">
-  <input placeholder="Medidos">
+  <input type="tel" inputmode="numeric" placeholder="A3">
+  <input type="tel" inputmode="numeric" placeholder="A4">
   </div>
 
-  <div class="button btn" onclick="toggleConfirm('${id}')">
-  ✔ CONFIRMAR
+  <div class="row">
+  <input type="tel" inputmode="numeric" placeholder="Etiqueta">
+  <input type="tel" inputmode="numeric" placeholder="Medidos">
   </div>
+
+  <div class="button" onclick="confirmar('${"b"+contador}')">✔ Confirmar</div>
   `;
 
   document.getElementById("bobinas").appendChild(div);
 }
 
+function confirmar(id){
+  let b = document.getElementById(id);
+  let inputs = b.querySelectorAll("input");
+
+  if(!b.classList.contains("confirmada")){
+    inputs.forEach(i=>i.disabled=true);
+    b.classList.add("confirmada");
+    b.querySelector(".button").innerText="✏ Editar";
+  }else{
+    inputs.forEach(i=>i.disabled=false);
+    b.classList.remove("confirmada");
+    b.querySelector(".button").innerText="✔ Confirmar";
+  }
+}
+
 function quitarBobina(){
-  if(contadorBobinas>0){
-    document.getElementById("b"+contadorBobinas).remove();
-    contadorBobinas--;
+  if(contador>0){
+    document.getElementById("b"+contador).remove();
+    contador--;
   }
 }
 </script>
