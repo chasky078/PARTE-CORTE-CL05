@@ -340,8 +340,9 @@ function limpiarCodigo(){
 
   const parte = {
   orden: numeroOrden,
-  fecha: document.querySelector('input[type="date"]').value,
+  fecha: document.querySelector('input[type="date"]').value,codigo: document.getElementById("codigo").value.replace("Código ", "")
   proveedor: document.querySelector('input[placeholder="Proveedor"]').value
+    
 };
 
   localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
