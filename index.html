@@ -87,6 +87,8 @@ input {
 <body>
 
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+  
+  <div class="button" onclick="verPartes()">📂 PARTES GUARDADOS</div>
 
 <div class="container">
 
@@ -196,6 +198,10 @@ input {
 </div>
 
 <div class="button" onclick="guardarParte()">💾 GUARDAR PARTE</div>
+  <div id="listaPartes" class="section" style="display:none;">
+  <h3>Partes guardados</h3>
+  <div id="contenidoPartes"></div>
+  </div>
 
 </div>
 
@@ -340,6 +346,29 @@ function limpiarCodigo(){
   localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
 
   alert("Parte guardado correctamente");
+  }
+  function verPartes(){
+
+  const contenedor = document.getElementById("contenidoPartes");
+  contenedor.innerHTML = "";
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key.startsWith("parte_")){
+      const parte = JSON.parse(localStorage.getItem(key));
+
+      const div = document.createElement("div");
+      div.style.padding = "10px";
+      div.style.borderBottom = "1px solid #ccc";
+
+      div.innerText = "Orden: " + parte.orden;
+
+      contenedor.appendChild(div);
+    }
+  }
+
+  document.getElementById("listaPartes").style.display = "block";
   }
 </script>
 
