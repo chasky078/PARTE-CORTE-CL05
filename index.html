@@ -195,7 +195,7 @@ input {
 
 </div>
 
-<div class="button">💾 GUARDAR PARTE</div>
+<div class="button" onclick="guardarParte()">💾 GUARDAR PARTE</div>
 
 </div>
 
@@ -322,6 +322,24 @@ function limpiarCodigo(){
   } else {
     document.getElementById("checkS").checked = false;
   }
+  }
+  function guardarParte(){
+
+  const numeroOrden = document.querySelector('input[placeholder="Número Orden"]').value;
+
+  if(!numeroOrden){
+    alert("Introduce Número de Orden");
+    return;
+  }
+
+  const parte = {
+    orden: numeroOrden,
+    fecha: document.querySelector('input[type="date"]').value
+  };
+
+  localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
+
+  alert("Parte guardado correctamente");
   }
 </script>
 
