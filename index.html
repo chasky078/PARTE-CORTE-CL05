@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte Producción</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
+
+header {
+  background: #1e88e5;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.container {
+  padding: 15px;
+}
+
+.section {
+  background: white;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+.small-input {
+  width: 60px;
+}
+
+.button {
+  background: #1e88e5;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.button:active {
+  background: #1565c0;
+}
+
+.bobina {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<header>PARTE PRODUCCIÓN</header>
+
+<div class="container">
+
+<!-- CABECERA -->
+<div class="section">
+<h3>Datos Orden</h3>
+
+<div class="row">
+<input placeholder="Nº Orden">
+<input value="CL05" disabled>
+</div>
+
+<input type="date">
+
+<input placeholder="Proveedor (PROV)">
+
+<input placeholder="Código">
+
+<label>Nº Material</label>
+<div class="row">
+<span>3000</span>
+<input class="small-input" maxlength="2">
+<input class="small-input" maxlength="2">
+<span>/</span>
+<input class="small-input" maxlength="3">
+</div>
+
+</div>
+
+<!-- MATERIAL -->
+<div class="section">
+<h3>Material</h3>
+
+<div class="row">
+<input placeholder="S">
+<input placeholder="W">
+</div>
+
+<div class="row">
+<input placeholder="Ancho">
+<input placeholder="Largo">
+</div>
+
+<div class="row">
+<input placeholder="Espesor">
+<input placeholder="H">
+</div>
+
+<div class="row">
+<input placeholder="Dif">
+<input placeholder="Estañado">
+</div>
+
+</div>
+
+<!-- BOBINAS -->
+<div class="section">
+<h3>Bobinas</h3>
+
+<div id="bobinas"></div>
+
+<div class="button" onclick="addBobina()">+ AÑADIR BOBINA</div>
+
+</div>
+
+<!-- PERSONAL -->
+<div class="section">
+<h3>Personal</h3>
+
+<div class="row">
+<input maxlength="2" placeholder="Mecánico">
+<input maxlength="2" placeholder="Apoyo">
+</div>
+
+</div>
+
+<!-- CHECKS -->
+<div class="section">
+<h3>Comprobaciones</h3>
+
+<div class="checks">
+<label><input type="checkbox" checked> Espesor OK</label>
+<label><input type="checkbox" checked> Línea OK</label>
+</div>
+
+</div>
+
+<div class="button">💾 GUARDAR PARTE</div>
+
+</div>
+
+<script>
+let contador = 0;
+
+function addBobina() {
+  contador++;
+
+  const div = document.createElement("div");
+  div.className = "bobina";
+
+  div.innerHTML = `
+    <strong>BOBINA ${contador}</strong>
+
+    <div class="row">
+      <input type="time" placeholder="Marcha">
+      <input type="time" placeholder="Parada">
+    </div>
+
+    <div class="row">
+      <input placeholder="Total min">
+      <input placeholder="Acumulado">
+    </div>
+
+    <div class="row">
+      <input placeholder="Cambio">
+      <input placeholder="Cambio acumulado">
+    </div>
+
+    <div class="row">
+      <input placeholder="Golpes">
+      <input placeholder="Primeras">
+    </div>
+
+    <div class="row">
+      <input placeholder="+Esp">
+      <input placeholder="-Esp">
+    </div>
+
+    <div class="row">
+      <input placeholder="Visual">
+      <input placeholder="Poros">
+    </div>
+
+    <input placeholder="Otros">
+
+    <div class="row">
+      <input placeholder="Apilador 1">
+      <input placeholder="Apilador 2">
+    </div>
+
+    <div class="row">
+      <input placeholder="Apilador 3">
+      <input placeholder="Apilador 4">
+    </div>
+
+    <div class="row">
+      <input placeholder="Etiqueta">
+      <input placeholder="Medidos">
+    </div>
+  `;
+
+  document.getElementById("bobinas").appendChild(div);
+}
+</script>
+
+</body>
+</html>
