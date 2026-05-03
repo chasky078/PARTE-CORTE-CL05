@@ -389,6 +389,7 @@ function limpiarCodigo(){
   // Rellenar campos
   document.querySelector('input[placeholder="Número Orden"]').value = parte.orden;
   document.querySelector('input[type="date"]').value = parte.fecha;
+    document.querySelector('input[placeholder="Proveedor"]').value = parte.proveedor || "";
 
   // Ocultar lista
   document.getElementById("listaPartes").style.display = "none";
