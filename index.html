@@ -110,6 +110,7 @@ input {
   placeholder="Código (máx 4)" 
   maxlength="4"
   onblur="mostrarCodigo()"
+  onfocus="limpiarCodigo()"
 >
 
 <div id="codigoTexto" style="font-weight:bold; color:#1976d2; margin-top:-5px;">
@@ -276,6 +277,19 @@ function quitarBobina(){
     texto.innerText = "Código —";
   }
   }
+  function mostrarCodigo(){
+  const input = document.getElementById("codigo");
+
+  if(input.value){
+    input.value = "Código " + input.value;
+  }
+}
+
+function limpiarCodigo(){
+  const input = document.getElementById("codigo");
+
+  input.value = input.value.replace("Código ", "");
+}
 </script>
 
 </body>
