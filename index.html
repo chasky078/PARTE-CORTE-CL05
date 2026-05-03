@@ -338,12 +338,12 @@ function limpiarCodigo(){
     return;
   }
 
-  const parte = {
+ const parte = {
   orden: numeroOrden,
-  fecha: document.querySelector('input[type="date"]').value,codigo: document.getElementById("codigo").value.replace("Código ", "")
-  proveedor: document.querySelector('input[placeholder="Proveedor"]').value
-    
-};
+  fecha: document.querySelector('input[type="date"]').value,
+  proveedor: document.querySelector('input[placeholder="Proveedor"]').value,
+  codigo: document.getElementById("codigo").value.replace("Código ", "")
+};;
 
   localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
 
