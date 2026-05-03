@@ -364,6 +364,9 @@ function limpiarCodigo(){
       div.style.borderBottom = "1px solid #ccc";
 
       div.innerText = "Orden: " + parte.orden;
+      div.onclick = function(){
+  alert("Abrir parte " + parte.orden);
+};
 
       contenedor.appendChild(div);
     }
