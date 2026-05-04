@@ -83,7 +83,7 @@ input {
 }
 </style>
 </head>
-
+onclick="limpiarFormulario(); mostrarPantalla('parte')"
 <body>
 
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
@@ -405,7 +405,6 @@ document.getElementById("pantallaGuardados").style.display = "none";
   function mostrarPantalla(pantalla){
 
   if(pantalla === "parte"){
-  limpiarFormulario();
   document.getElementById("pantallaParte").style.display = "block";
   document.getElementById("pantallaGuardados").style.display = "none";
   }
