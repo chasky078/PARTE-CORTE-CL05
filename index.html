@@ -398,7 +398,8 @@ function limpiarCodigo(){
     document.getElementById("codigo").value = parte.codigo ? "Código " + parte.codigo : "";
 
   // Ocultar lista
-  document.getElementById("listaPartes").style.display = "none";
+  mostrarPantalla("parte");
+document.getElementById("pantallaGuardados").style.display = "none";
   }
 
   function mostrarPantalla(pantalla){
