@@ -370,6 +370,16 @@ function limpiarCodigo(){
       div.style.borderBottom = "1px solid #ccc";
 
       div.innerText = "Orden: " + parte.orden;
+      const btnBorrar = document.createElement("button");
+btnBorrar.innerText = "❌";
+btnBorrar.style.marginLeft = "10px";
+
+btnBorrar.onclick = function(e){
+  e.stopPropagation();
+  borrarParte(parte.orden);
+};
+
+div.appendChild(btnBorrar);
     div.onclick = function(){
   abrirParte(parte.orden);
 };
@@ -429,6 +439,16 @@ document.getElementById("pantallaGuardados").style.display = "none";
   // Código
   document.getElementById("codigo").value = "";
 
+  }
+  function borrarParte(numeroOrden){
+
+  const confirmar = confirm("¿Borrar parte " + numeroOrden + "?");
+
+  if(!confirmar) return;
+
+  localStorage.removeItem("parte_" + numeroOrden);
+
+  verPartes(); // refrescar lista
   }
 </script>
 
