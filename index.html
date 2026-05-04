@@ -278,8 +278,8 @@ function addBobina(datos = null){
     <b>BOBINA ${contador}</b>
 
     <div class="row">
-<input class="bob-marcha" type="time" placeholder="Inicio">
-<input class="bob-parada" type="time" placeholder="Fin">
+<input class="bob-marcha" type="time" placeholder="Inicio" onchange="calcularTotal(this)">
+<input class="bob-parada" type="time" placeholder="Fin" onchange="calcularTotal(this)">
 </div>
 
     <div class="row">
@@ -562,6 +562,28 @@ function limpiarFormulario(){
   document.getElementById("bobinas").innerHTML = "";
   contador = 0;
 }
+  function calcularTotal(el){
+
+  const bobina = el.closest(".bobina");
+
+  const inicio = bobina.querySelector(".bob-marcha").value;
+  const fin = bobina.querySelector(".bob-parada").value;
+  const totalInput = bobina.querySelector(".bob-total");
+
+  if(!inicio || !fin) return;
+
+  const [h1, m1] = inicio.split(":").map(Number);
+  const [h2, m2] = fin.split(":").map(Number);
+
+  const minutosInicio = h1 * 60 + m1;
+  const minutosFin = h2 * 60 + m2;
+
+  let total = minutosFin - minutosInicio;
+
+  if(total < 0) total += 24 * 60; // por si pasa medianoche
+
+  totalInput.value = total;
+  }
 </script>
 
 </body>
