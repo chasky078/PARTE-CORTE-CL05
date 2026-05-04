@@ -405,14 +405,30 @@ document.getElementById("pantallaGuardados").style.display = "none";
   function mostrarPantalla(pantalla){
 
   if(pantalla === "parte"){
-    document.getElementById("pantallaParte").style.display = "block";
-    document.getElementById("pantallaGuardados").style.display = "none";
+  limpiarFormulario();
+  document.getElementById("pantallaParte").style.display = "block";
+  document.getElementById("pantallaGuardados").style.display = "none";
   }
 
   if(pantalla === "guardados"){
     document.getElementById("pantallaParte").style.display = "none";
     document.getElementById("pantallaGuardados").style.display = "block";
   }
+
+  }
+  function limpiarFormulario(){
+
+  // Número de orden
+  document.querySelector('input[placeholder="Número Orden"]').value = "";
+
+  // Fecha
+  document.querySelector('input[type="date"]').value = "";
+
+  // Proveedor
+  document.querySelector('input[placeholder="Proveedor"]').value = "";
+
+  // Código
+  document.getElementById("codigo").value = "";
 
   }
 </script>
