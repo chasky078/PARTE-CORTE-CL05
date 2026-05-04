@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #eef3f8;
 }
 
@@ -20,7 +20,9 @@ header {
   font-weight: bold;
 }
 
-.container { padding: 12px; }
+.container {
+  padding: 12px;
+}
 
 .section {
   background: white;
@@ -36,6 +38,7 @@ input {
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 .row {
@@ -51,9 +54,13 @@ input {
   border-radius: 8px;
   font-weight: bold;
   margin-top: 10px;
+  cursor: pointer;
+  user-select: none;
 }
 
-.button-danger { background: red; }
+.button-danger {
+  background: #d32f2f;
+}
 
 .bobina {
   border: 1px dashed #ccc;
@@ -81,281 +88,373 @@ input {
   font-size: 28px;
   font-weight: bold;
 }
+
+.check-line {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.check-line input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.guardado-item {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.guardado-item button {
+  float: right;
+  font-size: 16px;
+}
 </style>
 </head>
-onclick="limpiarFormulario(); mostrarPantalla('parte')"
+
 <body>
 
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
-  
-  <div style="display:flex; gap:8px; padding:10px;">
+
+<div style="display:flex; gap:8px; padding:10px;">
   <div class="button" style="flex:1; margin-top:0;" onclick="limpiarFormulario(); mostrarPantalla('parte')">📝 PARTE</div>
   <div class="button" style="flex:1; margin-top:0;" onclick="mostrarPantalla('guardados'); verPartes()">📂 GUARDADOS</div>
 </div>
 
 <div id="pantallaParte" class="container">
 
-<div class="section">
-<h3>Cabecera</h3>
+  <div class="section">
+    <h3>Cabecera</h3>
 
-<div class="row">
-<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Número Orden">
-<input value="CL05" disabled>
-</div>
+    <div class="row">
+      <input id="orden" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Número Orden">
+      <input id="linea" value="CL05" disabled>
+    </div>
 
-<input type="date">
+    <input id="fecha" type="date">
 
-<input placeholder="Proveedor" enterkeyhint="next">
+    <input id="proveedor" placeholder="Proveedor" enterkeyhint="next">
 
-<input 
-  id="codigo"
-  type="tel" 
-  inputmode="numeric" 
-  enterkeyhint="next" 
-  placeholder="Código (máx 4)" 
-  maxlength="4"
-  onblur="mostrarCodigo()"
-  onfocus="limpiarCodigo()"
->
+    <input 
+      id="codigo"
+      type="tel"
+      inputmode="numeric"
+      enterkeyhint="next"
+      placeholder="Código (máx 4)"
+      maxlength="4"
+      onblur="mostrarCodigo()"
+      onfocus="limpiarCodigo()"
+    >
 
-<label>Nº MATERIAL</label>
-<div class="material">
-3 0 0 0
-<input 
-  id="material1"
-  type="tel" 
-  inputmode="numeric" 
-  enterkeyhint="next" 
-  maxlength="2"
-  oninput="saltoMaterial()"
->
-/
-<input 
-  id="material2"
-  type="tel" 
-  inputmode="numeric" 
-  enterkeyhint="next" 
-  maxlength="3"
->
-</div>
+    <label>Nº MATERIAL</label>
+    <div class="material">
+      3 0 0 0
+      <input id="material1" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" oninput="saltoMaterial()">
+      /
+      <input id="material2" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3">
+    </div>
+  </div>
 
-</div>
+  <div class="section">
+    <h3>Datos</h3>
 
-<div class="section">
-<h3>Datos</h3>
+    <label class="check-line">
+      <input type="checkbox" id="checkS" onclick="soloUno('S')">
+      S (Recto)
+    </label>
 
-<div style="margin-bottom:10px;">
-  
-  <label class="check-line">
-    <input type="checkbox" id="checkS" onclick="soloUno('S')">
-    S (Recto)
-  </label>
+    <label class="check-line">
+      <input type="checkbox" id="checkW" onclick="soloUno('W')">
+      W (Scroll)
+    </label>
 
-  <label class="check-line">
-    <input type="checkbox" id="checkW" onclick="soloUno('W')">
-    W (Scroll)
-  </label>
+    <div class="row">
+      <input id="ancho" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Ancho">
+      <input id="largo" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Largo">
+    </div>
 
-</div>
+    <div class="row">
+      <input id="espesor" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
+      <input id="limite" placeholder="Txxx">
+    </div>
 
-<div class="row">
-<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Ancho">
-<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Largo">
-</div>
+    <div class="row">
+      <input id="diferencial" type="tel" inputmode="numeric" enterkeyhint="done" placeholder="Dif">
+      <input id="st" value="ST" disabled>
+    </div>
+  </div>
 
-<div class="row">
-<input type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
-<input placeholder="Txxx">
-</div>
+  <div class="section">
+    <h3>Bobinas</h3>
+    <div id="bobinas"></div>
 
-<div class="row">
-<input type="tel" inputmode="numeric" enterkeyhint="done" placeholder="Dif">
-<input value="ST" disabled>
-</div>
+    <div class="button" onclick="addBobina()">+ Añadir bobina</div>
+    <div class="button button-danger" onclick="quitarBobina()">− Quitar bobina</div>
+  </div>
 
-</div>
+  <div class="section">
+    <h3>Personal</h3>
 
-<div class="section">
-<h3>Bobinas</h3>
-<div id="bobinas"></div>
+    <div class="row">
+      <input id="mecanico" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" placeholder="Mecánico">
+      <input id="apoyo" type="tel" inputmode="numeric" enterkeyhint="done" maxlength="2" placeholder="Apoyo">
+    </div>
+  </div>
 
-<div class="button" onclick="addBobina()">+ Añadir bobina</div>
-<div class="button button-danger" onclick="quitarBobina()">− Quitar bobina</div>
-</div>
+  <div class="section">
+    <h3>Comprobaciones</h3>
 
-<div class="section">
-<h3>Personal</h3>
+    <label class="check-line">
+      <input id="espesorOk" type="checkbox" checked>
+      Espesor OK
+    </label>
 
-<div class="row">
-<input type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" placeholder="Mecánico">
-<input type="tel" inputmode="numeric" enterkeyhint="done" maxlength="2" placeholder="Apoyo">
-</div>
-</div>
+    <label class="check-line">
+      <input id="lineaOk" type="checkbox" checked>
+      Línea OK
+    </label>
+  </div>
 
-<div class="section">
-<h3>Comprobaciones</h3>
-
-<label><input type="checkbox" checked> Espesor OK</label><br>
-<label><input type="checkbox" checked> Línea OK</label>
+  <div class="button" onclick="guardarParte()">💾 GUARDAR PARTE</div>
 
 </div>
-
-<div class="button" onclick="guardarParte()">💾 GUARDAR PARTE</div>
-  
-</div>
-</div> <!-- cierre pantallaParte -->
 
 <div id="pantallaGuardados" class="container" style="display:none;">
   <h3>Partes guardados</h3>
   <div id="contenidoPartes"></div>
 </div>
+
 <script>
 let contador = 0;
 
-function addBobina(){
-  contador++;
+function mostrarPantalla(pantalla){
+  if(pantalla === "parte"){
+    document.getElementById("pantallaParte").style.display = "block";
+    document.getElementById("pantallaGuardados").style.display = "none";
+  }
 
-  let div = document.createElement("div");
-  div.className = "bobina";
-  div.id = "b"+contador;
-
-  div.innerHTML = `
-  <b>BOBINA ${contador}</b>
-
-  <div class="row">
-  <input type="time">
-  <input type="time">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="Total">
-  <input type="tel" inputmode="numeric" placeholder="Acum">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="Cambio">
-  <input type="tel" inputmode="numeric" placeholder="Cambio acum">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="Golpes">
-  <input type="tel" inputmode="numeric" placeholder="Primeras">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="+Esp">
-  <input type="tel" inputmode="numeric" placeholder="-Esp">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="Visual">
-  <input type="tel" inputmode="numeric" placeholder="Poros">
-  </div>
-
-  <input type="tel" inputmode="numeric" placeholder="Otros">
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="A1">
-  <input type="tel" inputmode="numeric" placeholder="A2">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="A3">
-  <input type="tel" inputmode="numeric" placeholder="A4">
-  </div>
-
-  <div class="row">
-  <input type="tel" inputmode="numeric" placeholder="Etiqueta">
-  <input type="tel" inputmode="numeric" placeholder="Medidos">
-  </div>
-
-  <div class="button" onclick="confirmar('${"b"+contador}')">✔ Confirmar</div>
-  `;
-
-  document.getElementById("bobinas").appendChild(div);
-}
-
-function confirmar(id){
-  let b = document.getElementById(id);
-  let inputs = b.querySelectorAll("input");
-
-  if(!b.classList.contains("confirmada")){
-    inputs.forEach(i=>i.disabled=true);
-    b.classList.add("confirmada");
-    b.querySelector(".button").innerText="✏ Editar";
-  }else{
-    inputs.forEach(i=>i.disabled=false);
-    b.classList.remove("confirmada");
-    b.querySelector(".button").innerText="✔ Confirmar";
+  if(pantalla === "guardados"){
+    document.getElementById("pantallaParte").style.display = "none";
+    document.getElementById("pantallaGuardados").style.display = "block";
   }
 }
 
-function quitarBobina(){
-  if(contador>0){
-    document.getElementById("b"+contador).remove();
-    contador--;
-  }
-}
-  function mostrarCodigo(){
-  const valor = document.getElementById("codigo").value;
-  const texto = document.getElementById("codigoTexto");
-
-  if(valor){
-    texto.innerText = "Código " + valor;
-  } else {
-    texto.innerText = "Código —";
-  }
-  }
-  function mostrarCodigo(){
+function mostrarCodigo(){
   const input = document.getElementById("codigo");
-
-  if(input.value){
+  if(input.value && !input.value.startsWith("Código ")){
     input.value = "Código " + input.value;
   }
 }
 
 function limpiarCodigo(){
   const input = document.getElementById("codigo");
-
   input.value = input.value.replace("Código ", "");
 }
-  function saltoMaterial(){
-  const input = document.getElementById("material1");
 
+function saltoMaterial(){
+  const input = document.getElementById("material1");
   if(input.value.length >= 2){
     document.getElementById("material2").focus();
   }
-  }
-  function soloUno(tipo){
+}
+
+function soloUno(tipo){
   if(tipo === "S"){
     document.getElementById("checkW").checked = false;
   } else {
     document.getElementById("checkS").checked = false;
   }
-  }
-  function guardarParte(){
+}
 
-  const numeroOrden = document.querySelector('input[placeholder="Número Orden"]').value;
+function addBobina(datos = null){
+  contador++;
+
+  const div = document.createElement("div");
+  div.className = "bobina";
+  div.id = "b" + contador;
+
+  div.innerHTML = `
+    <b>BOBINA ${contador}</b>
+
+    <div class="row">
+      <input class="bob-marcha" type="time">
+      <input class="bob-parada" type="time">
+    </div>
+
+    <div class="row">
+      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total">
+      <input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum">
+    </div>
+
+    <div class="row">
+      <input class="bob-cambio" type="tel" inputmode="numeric" placeholder="Cambio">
+      <input class="bob-cambio-acum" type="tel" inputmode="numeric" placeholder="Cambio acum">
+    </div>
+
+    <div class="row">
+      <input class="bob-golpes" type="tel" inputmode="numeric" placeholder="Golpes">
+      <input class="bob-primeras" type="tel" inputmode="numeric" placeholder="Primeras">
+    </div>
+
+    <div class="row">
+      <input class="bob-esp-mas" type="tel" inputmode="numeric" placeholder="+Esp">
+      <input class="bob-esp-menos" type="tel" inputmode="numeric" placeholder="-Esp">
+    </div>
+
+    <div class="row">
+      <input class="bob-visual" type="tel" inputmode="numeric" placeholder="Visual">
+      <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros">
+    </div>
+
+    <input class="bob-otros" type="tel" inputmode="numeric" placeholder="Otros">
+
+    <div class="row">
+      <input class="bob-a1" type="tel" inputmode="numeric" placeholder="A1">
+      <input class="bob-a2" type="tel" inputmode="numeric" placeholder="A2">
+    </div>
+
+    <div class="row">
+      <input class="bob-a3" type="tel" inputmode="numeric" placeholder="A3">
+      <input class="bob-a4" type="tel" inputmode="numeric" placeholder="A4">
+    </div>
+
+    <div class="row">
+      <input class="bob-etiqueta" type="tel" inputmode="numeric" placeholder="Etiqueta">
+      <input class="bob-medidos" type="tel" inputmode="numeric" placeholder="Medidos">
+    </div>
+
+    <div class="button" onclick="confirmar('${div.id}')">✔ Confirmar</div>
+  `;
+
+  document.getElementById("bobinas").appendChild(div);
+
+  if(datos){
+    cargarDatosBobina(div, datos);
+  }
+}
+
+function cargarDatosBobina(div, datos){
+  div.querySelector(".bob-marcha").value = datos.marcha || "";
+  div.querySelector(".bob-parada").value = datos.parada || "";
+  div.querySelector(".bob-total").value = datos.total || "";
+  div.querySelector(".bob-acum").value = datos.acum || "";
+  div.querySelector(".bob-cambio").value = datos.cambio || "";
+  div.querySelector(".bob-cambio-acum").value = datos.cambioAcum || "";
+  div.querySelector(".bob-golpes").value = datos.golpes || "";
+  div.querySelector(".bob-primeras").value = datos.primeras || "";
+  div.querySelector(".bob-esp-mas").value = datos.espMas || "";
+  div.querySelector(".bob-esp-menos").value = datos.espMenos || "";
+  div.querySelector(".bob-visual").value = datos.visual || "";
+  div.querySelector(".bob-poros").value = datos.poros || "";
+  div.querySelector(".bob-otros").value = datos.otros || "";
+  div.querySelector(".bob-a1").value = datos.a1 || "";
+  div.querySelector(".bob-a2").value = datos.a2 || "";
+  div.querySelector(".bob-a3").value = datos.a3 || "";
+  div.querySelector(".bob-a4").value = datos.a4 || "";
+  div.querySelector(".bob-etiqueta").value = datos.etiqueta || "";
+  div.querySelector(".bob-medidos").value = datos.medidos || "";
+
+  if(datos.confirmada){
+    confirmar(div.id);
+  }
+}
+
+function confirmar(id){
+  const b = document.getElementById(id);
+  const inputs = b.querySelectorAll("input");
+  const boton = b.querySelector(".button");
+
+  if(!b.classList.contains("confirmada")){
+    inputs.forEach(i => i.disabled = true);
+    b.classList.add("confirmada");
+    boton.innerText = "✏ Editar";
+  } else {
+    inputs.forEach(i => i.disabled = false);
+    b.classList.remove("confirmada");
+    boton.innerText = "✔ Confirmar";
+  }
+}
+
+function quitarBobina(){
+  if(contador > 0){
+    const ultima = document.getElementById("b" + contador);
+    if(ultima) ultima.remove();
+    contador--;
+  }
+}
+
+function recogerBobinas(){
+  const lista = [];
+  const bloques = document.querySelectorAll(".bobina");
+
+  bloques.forEach(b => {
+    lista.push({
+      marcha: b.querySelector(".bob-marcha").value,
+      parada: b.querySelector(".bob-parada").value,
+      total: b.querySelector(".bob-total").value,
+      acum: b.querySelector(".bob-acum").value,
+      cambio: b.querySelector(".bob-cambio").value,
+      cambioAcum: b.querySelector(".bob-cambio-acum").value,
+      golpes: b.querySelector(".bob-golpes").value,
+      primeras: b.querySelector(".bob-primeras").value,
+      espMas: b.querySelector(".bob-esp-mas").value,
+      espMenos: b.querySelector(".bob-esp-menos").value,
+      visual: b.querySelector(".bob-visual").value,
+      poros: b.querySelector(".bob-poros").value,
+      otros: b.querySelector(".bob-otros").value,
+      a1: b.querySelector(".bob-a1").value,
+      a2: b.querySelector(".bob-a2").value,
+      a3: b.querySelector(".bob-a3").value,
+      a4: b.querySelector(".bob-a4").value,
+      etiqueta: b.querySelector(".bob-etiqueta").value,
+      medidos: b.querySelector(".bob-medidos").value,
+      confirmada: b.classList.contains("confirmada")
+    });
+  });
+
+  return lista;
+}
+
+function guardarParte(){
+  limpiarCodigo();
+
+  const numeroOrden = document.getElementById("orden").value;
 
   if(!numeroOrden){
     alert("Introduce Número de Orden");
     return;
   }
 
- const parte = {
-  orden: numeroOrden,
-  fecha: document.querySelector('input[type="date"]').value,
-  proveedor: document.querySelector('input[placeholder="Proveedor"]').value,
-  codigo: document.getElementById("codigo").value.replace("Código ", "")
-};;
+  const parte = {
+    orden: numeroOrden,
+    linea: "CL05",
+    fecha: document.getElementById("fecha").value,
+    proveedor: document.getElementById("proveedor").value,
+    codigo: document.getElementById("codigo").value,
+    material1: document.getElementById("material1").value,
+    material2: document.getElementById("material2").value,
+    formato: document.getElementById("checkS").checked ? "S" : (document.getElementById("checkW").checked ? "W" : ""),
+    ancho: document.getElementById("ancho").value,
+    largo: document.getElementById("largo").value,
+    espesor: document.getElementById("espesor").value,
+    limite: document.getElementById("limite").value,
+    diferencial: document.getElementById("diferencial").value,
+    st: "ST",
+    mecanico: document.getElementById("mecanico").value,
+    apoyo: document.getElementById("apoyo").value,
+    espesorOk: document.getElementById("espesorOk").checked,
+    lineaOk: document.getElementById("lineaOk").checked,
+    bobinas: recogerBobinas()
+  };
 
   localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
 
+  mostrarCodigo();
   alert("Parte guardado correctamente");
-  }
-  function verPartes(){
-    alert("FUNCION ACTIVADA");
+}
 
+function verPartes(){
   const contenedor = document.getElementById("contenidoPartes");
   contenedor.innerHTML = "";
 
@@ -366,32 +465,27 @@ function limpiarCodigo(){
       const parte = JSON.parse(localStorage.getItem(key));
 
       const div = document.createElement("div");
-      div.style.padding = "10px";
-      div.style.borderBottom = "1px solid #ccc";
-
+      div.className = "guardado-item";
       div.innerText = "Orden: " + parte.orden;
+
+      div.onclick = function(){
+        abrirParte(parte.orden);
+      };
+
       const btnBorrar = document.createElement("button");
-btnBorrar.innerText = "❌";
-btnBorrar.style.marginLeft = "10px";
+      btnBorrar.innerText = "❌";
+      btnBorrar.onclick = function(e){
+        e.stopPropagation();
+        borrarParte(parte.orden);
+      };
 
-btnBorrar.onclick = function(e){
-  e.stopPropagation();
-  borrarParte(parte.orden);
-};
-
-div.appendChild(btnBorrar);
-    div.onclick = function(){
-  abrirParte(parte.orden);
-};
-
+      div.appendChild(btnBorrar);
       contenedor.appendChild(div);
     }
   }
+}
 
-  document.getElementById("pantallaGuardados").style.display = "block";
-  }
-  function abrirParte(numeroOrden){
-
+function abrirParte(numeroOrden){
   const data = localStorage.getItem("parte_" + numeroOrden);
 
   if(!data){
@@ -401,55 +495,73 @@ div.appendChild(btnBorrar);
 
   const parte = JSON.parse(data);
 
-  // Rellenar campos
-  document.querySelector('input[placeholder="Número Orden"]').value = parte.orden;
-  document.querySelector('input[type="date"]').value = parte.fecha;
-    document.querySelector('input[placeholder="Proveedor"]').value = parte.proveedor || "";
-    document.getElementById("codigo").value = parte.codigo ? "Código " + parte.codigo : "";
+  limpiarFormulario();
 
-  // Ocultar lista
+  document.getElementById("orden").value = parte.orden || "";
+  document.getElementById("fecha").value = parte.fecha || "";
+  document.getElementById("proveedor").value = parte.proveedor || "";
+  document.getElementById("codigo").value = parte.codigo ? "Código " + parte.codigo : "";
+
+  document.getElementById("material1").value = parte.material1 || "";
+  document.getElementById("material2").value = parte.material2 || "";
+
+  document.getElementById("checkS").checked = parte.formato === "S";
+  document.getElementById("checkW").checked = parte.formato === "W";
+
+  document.getElementById("ancho").value = parte.ancho || "";
+  document.getElementById("largo").value = parte.largo || "";
+  document.getElementById("espesor").value = parte.espesor || "";
+  document.getElementById("limite").value = parte.limite || "";
+  document.getElementById("diferencial").value = parte.diferencial || "";
+
+  document.getElementById("mecanico").value = parte.mecanico || "";
+  document.getElementById("apoyo").value = parte.apoyo || "";
+
+  document.getElementById("espesorOk").checked = parte.espesorOk !== false;
+  document.getElementById("lineaOk").checked = parte.lineaOk !== false;
+
+  if(parte.bobinas && parte.bobinas.length){
+    parte.bobinas.forEach(b => addBobina(b));
+  }
+
   mostrarPantalla("parte");
-document.getElementById("pantallaGuardados").style.display = "none";
-  }
+}
 
-  function mostrarPantalla(pantalla){
-
-  if(pantalla === "parte"){
-  document.getElementById("pantallaParte").style.display = "block";
-  document.getElementById("pantallaGuardados").style.display = "none";
-  }
-
-  if(pantalla === "guardados"){
-    document.getElementById("pantallaParte").style.display = "none";
-    document.getElementById("pantallaGuardados").style.display = "block";
-  }
-
-  }
-  function limpiarFormulario(){
-
-  // Número de orden
-  document.querySelector('input[placeholder="Número Orden"]').value = "";
-
-  // Fecha
-  document.querySelector('input[type="date"]').value = "";
-
-  // Proveedor
-  document.querySelector('input[placeholder="Proveedor"]').value = "";
-
-  // Código
-  document.getElementById("codigo").value = "";
-
-  }
-  function borrarParte(numeroOrden){
-
+function borrarParte(numeroOrden){
   const confirmar = confirm("¿Borrar parte " + numeroOrden + "?");
 
   if(!confirmar) return;
 
   localStorage.removeItem("parte_" + numeroOrden);
+  verPartes();
+}
 
-  verPartes(); // refrescar lista
-  }
+function limpiarFormulario(){
+  document.getElementById("orden").value = "";
+  document.getElementById("fecha").value = "";
+  document.getElementById("proveedor").value = "";
+  document.getElementById("codigo").value = "";
+  document.getElementById("material1").value = "";
+  document.getElementById("material2").value = "";
+
+  document.getElementById("checkS").checked = false;
+  document.getElementById("checkW").checked = false;
+
+  document.getElementById("ancho").value = "";
+  document.getElementById("largo").value = "";
+  document.getElementById("espesor").value = "";
+  document.getElementById("limite").value = "";
+  document.getElementById("diferencial").value = "";
+
+  document.getElementById("mecanico").value = "";
+  document.getElementById("apoyo").value = "";
+
+  document.getElementById("espesorOk").checked = true;
+  document.getElementById("lineaOk").checked = true;
+
+  document.getElementById("bobinas").innerHTML = "";
+  contador = 0;
+}
 </script>
 
 </body>
