@@ -604,6 +604,25 @@ function limpiarFormulario(){
 
   });
   }
+  function calcularCambioAcumulado(){
+
+  let acumulado = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const cambioInput = b.querySelector(".bob-cambio");
+    const cambioAcumInput = b.querySelector(".bob-cambio-acum");
+
+    const cambio = parseInt(cambioInput.value) || 0;
+
+    acumulado += cambio;
+
+    cambioAcumInput.value = acumulado;
+
+  });
+  }
 </script>
 
 </body>
