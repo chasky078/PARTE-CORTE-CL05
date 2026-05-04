@@ -88,9 +88,12 @@ input {
 
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
   
-  <div class="button" onclick="verPartes()">📂 PARTES GUARDADOS</div>
+  <div style="display:flex; gap:8px; padding:10px;">
+  <div class="button" style="flex:1; margin-top:0;" onclick="mostrarPantalla('parte')">📝 PARTE</div>
+  <div class="button" style="flex:1; margin-top:0;" onclick="mostrarPantalla('guardados'); verPartes()">📂 GUARDADOS</div>
+</div>
 
-<div class="container">
+<div id="pantallaParte" class="container">
 
 <div class="section">
 <h3>Cabecera</h3>
@@ -395,6 +398,25 @@ function limpiarCodigo(){
 
   // Ocultar lista
   document.getElementById("listaPartes").style.display = "none";
+  }
+  </div> <!-- cierre pantallaParte -->
+
+<div id="pantallaGuardados" class="container" style="display:none;">
+  <h3>Partes guardados</h3>
+  <div id="contenidoPartes"></div>
+</div>
+  function mostrarPantalla(pantalla){
+
+  if(pantalla === "parte"){
+    document.getElementById("pantallaParte").style.display = "block";
+    document.getElementById("pantallaGuardados").style.display = "none";
+  }
+
+  if(pantalla === "guardados"){
+    document.getElementById("pantallaParte").style.display = "none";
+    document.getElementById("pantallaGuardados").style.display = "block";
+  }
+
   }
 </script>
 
