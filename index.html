@@ -583,6 +583,26 @@ function limpiarFormulario(){
   if(total < 0) total += 24 * 60; // por si pasa medianoche
 
   totalInput.value = total;
+    calcularAcumulados();
+  }
+  function calcularAcumulados(){
+
+  let acumulado = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const totalInput = b.querySelector(".bob-total");
+    const acumInput = b.querySelector(".bob-acum");
+
+    const total = parseInt(totalInput.value) || 0;
+
+    acumulado += total;
+
+    acumInput.value = acumulado;
+
+  });
   }
 </script>
 
