@@ -430,6 +430,13 @@ function cargarDatosBobina(div, datos){
   div.querySelector(".bob-a4").value = datos.a4 || "";
   div.querySelector(".bob-etiqueta").value = datos.etiqueta || "";
   div.querySelector(".bob-medidos").value = datos.medidos || "";
+  const checks = div.querySelectorAll('.soldadura-box input[type="checkbox"]');
+
+checks.forEach(c => {
+  if(c.parentElement.innerText.trim() === datos.soldadura){
+    c.checked = true;
+  }
+});
 
   if(datos.confirmada){
     confirmar(div.id);
@@ -497,6 +504,13 @@ function recogerBobinas(){
       a4: b.querySelector(".bob-a4").value,
       etiqueta: b.querySelector(".bob-etiqueta").value,
       medidos: b.querySelector(".bob-medidos").value,
+      soldadura: (() => {
+  const checks = b.querySelectorAll('.soldadura-box input[type="checkbox"]');
+  for(let c of checks){
+    if(c.checked) return c.parentElement.innerText.trim();
+  }
+  return "";
+})(),
       confirmada: b.classList.contains("confirmada")
     });
   });
