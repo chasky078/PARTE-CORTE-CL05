@@ -469,6 +469,7 @@ function confirmar(id){
     inputs.forEach(i => i.disabled = true);
     b.classList.add("confirmada");
     boton.innerText = "✏ Editar";
+    mostrarMensajeConfirmacion("✔ Bobina confirmada");
     setTimeout(() => {
   const btnAdd = document.querySelector('[onclick="addBobina()"]');
   if(btnAdd){
