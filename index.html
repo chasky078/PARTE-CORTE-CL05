@@ -625,6 +625,18 @@ function limpiarFormulario(){
 
   });
   }
+  function ponerTexto(input, texto){
+  if(!input.value) return;
+
+  // quitar texto si ya existe
+  let valor = input.value.replace(texto + " ", "");
+
+  input.value = texto + " " + valor;
+}
+
+function limpiarTexto(input, texto){
+  input.value = input.value.replace(texto + " ", "");
+}
 </script>
 
 </body>
