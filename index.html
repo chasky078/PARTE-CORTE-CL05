@@ -626,11 +626,14 @@ acumInput.setAttribute("data-valor", acumulado);
     const cambioInput = b.querySelector(".bob-cambio");
     const cambioAcumInput = b.querySelector(".bob-cambio-acum");
 
-    const cambio = parseInt(cambioInput.value) || 0;
+    const cambio = parseInt(cambioInput.value.replace("Cambio ", "")) || 0;
+    if(cambioInput.value && !cambioInput.value.startsWith("Cambio ")){
+  cambioInput.value = "Cambio " + cambio;
+    }
 
     acumulado += cambio;
 
-    cambioAcumInput.value = acumulado;
+    cambioAcumInput.value = "Cambio acum " + acumulado;
 
   });
   }
