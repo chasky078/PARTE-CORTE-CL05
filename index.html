@@ -698,14 +698,17 @@ function limpiarTexto(input, texto){
     const ap1 = b.querySelector(".bob-a1");
     const ap2 = b.querySelector(".bob-a2");
 
-    const poros = parseInt((porosInput?.value || "").replace("Poros ", "")) || 0;
-    const visual = parseInt((visualInput?.value || "").replace("Visual ", "")) || 0;
+    let poros = (porosInput?.value || "").replace("Poros ", "");
+    let visual = (visualInput?.value || "").replace("Visual ", "");
+
+    poros = parseInt(poros) || 0;
+    visual = parseInt(visual) || 0;
 
     acumPoros += poros;
     acumVisual += visual;
 
-    ap1.value = "AP1 " + acumPoros;
-    ap2.value = "AP2 " + acumVisual;
+    if(ap1) ap1.value = "AP1 " + acumPoros;
+    if(ap2) ap2.value = "AP2 " + acumVisual;
 
   });
 
