@@ -459,11 +459,17 @@ function confirmar(id){
 }
 
 function quitarBobina(){
-  if(contador > 0){
-    const ultima = document.getElementById("b" + contador);
-    if(ultima) ultima.remove();
-    contador--;
-  }
+
+  if(contador === 0) return;
+
+  const confirmar = confirm("¿Eliminar última bobina? Se perderán los datos.");
+
+  if(!confirmar) return;
+
+  const ultima = document.getElementById("b" + contador);
+  if(ultima) ultima.remove();
+  contador--;
+
 }
 
 function recogerBobinas(){
