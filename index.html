@@ -311,11 +311,17 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
     </div>
 
     <div class="row">
-      <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros"
-oninput="calcularApiladores()"
-onblur="ponerTexto(this, 'Poros'); calcularApiladores();"
-onfocus="limpiarTexto(this, 'Poros')">
-    </div>
+      <div class="row">
+  <input class="bob-visual" type="tel" inputmode="numeric" placeholder="Visual"
+  oninput="calcularApiladores()"
+  onblur="ponerTexto(this, 'Visual'); calcularApiladores();"
+  onfocus="limpiarTexto(this, 'Visual')">
+
+  <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros"
+  oninput="calcularApiladores()"
+  onblur="ponerTexto(this, 'Poros'); calcularApiladores();"
+  onfocus="limpiarTexto(this, 'Poros')">
+</div>
 
     <input class="bob-otros" type="tel" inputmode="numeric" placeholder="Otros">
 
