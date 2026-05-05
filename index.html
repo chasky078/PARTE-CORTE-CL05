@@ -754,6 +754,18 @@ function saltoEnBobina(input, siguienteClase, longitud){
     }
   }
 }
+  function seleccionarSoldadura(check){
+
+  const contenedor = check.closest(".soldadura-box");
+  const checks = contenedor.querySelectorAll('input[type="checkbox"]');
+
+  checks.forEach(c => {
+    if(c !== check){
+      c.checked = false;
+    }
+  });
+
+  }
 </script>
 
 </body>
