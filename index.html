@@ -129,12 +129,27 @@ input {
   width: auto;
   margin: 0;
 }
+  .mensaje-ok {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e7d32;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 999;
+  }
 </style>
 </head>
 
 <body>
 
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+  <div id="mensajeConfirmacion" class="mensaje-ok"></div>
 
 <div style="display:flex; gap:8px; padding:10px;">
   <div class="button" style="flex:1; margin-top:0;" onclick="limpiarFormulario(); mostrarPantalla('parte')">📝 PARTE</div>
@@ -798,6 +813,18 @@ function saltoEnBobina(input, siguienteClase, longitud){
       c.checked = false;
     }
   });
+
+  }
+  function mostrarMensajeConfirmacion(texto){
+
+  const msg = document.getElementById("mensajeConfirmacion");
+
+  msg.innerText = texto;
+  msg.style.opacity = "1";
+
+  setTimeout(() => {
+    msg.style.opacity = "0";
+  }, 1500);
 
   }
 </script>
