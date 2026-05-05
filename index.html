@@ -203,7 +203,7 @@ type="text"
 inputmode="numeric" 
 maxlength="2" 
 placeholder="Mecánico"
-oninput="filtrarNumeros(this); saltoPersonal(this, 'apoyo')">
+oninput="filtrarNumeros(this); if(this.value.length>=2){document.getElementById('apoyo').focus();}">
 
 <input id="apoyo" 
 type="text" 
@@ -696,6 +696,9 @@ function limpiarTexto(input, texto){
   if(input.value.length >= 2){
     document.getElementById(siguienteId).focus();
   }
+  }
+  function filtrarNumeros(input){
+  input.value = input.value.replace(/\D/g, '');
   }
 
 </script>
