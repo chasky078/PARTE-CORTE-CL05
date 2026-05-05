@@ -583,7 +583,9 @@ function limpiarFormulario(){
   if(total < 0) total += 24 * 60; // por si pasa medianoche
 
   totalInput.value = total;
+totalInput.setAttribute("data-valor", total);
     calcularAcumulados();
+    aplicarFormatoVisual();
   }
   function calcularAcumulados(){
 
@@ -601,7 +603,8 @@ function limpiarFormulario(){
     acumulado += total;
 
     acumInput.value = acumulado;
-
+acumInput.setAttribute("data-valor", acumulado);
+    aplicarFormatoVisual();
   });
   }
   function calcularCambioAcumulado(){
@@ -635,6 +638,27 @@ function limpiarFormulario(){
 function limpiarTexto(input, texto){
   input.value = input.value.replace(texto + " ", "");
 }
+  function aplicarFormatoVisual(){
+
+  document.querySelectorAll(".bob-total").forEach(i=>{
+    const v = i.getAttribute("data-valor");
+    if(v) i.value = "Total " + v;
+  });
+
+  document.querySelectorAll(".bob-acum").forEach(i=>{
+    const v = i.getAttribute("data-valor");
+    if(v) i.value = "Acum " + v;
+  });
+
+  document.querySelectorAll(".bob-cambio").forEach(i=>{
+    if(i.value) i.value = "Cambio " + i.value;
+  });
+
+  document.querySelectorAll(".bob-cambio-acum").forEach(i=>{
+    if(i.value) i.value = "Cambio acum " + i.value;
+  });
+
+  }
 </script>
 
 </body>
