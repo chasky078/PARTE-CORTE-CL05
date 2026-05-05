@@ -198,9 +198,19 @@ input {
     <h3>Personal</h3>
 
     <div class="row">
-      <input id="mecanico" type="tel" inputmode="numeric" maxlength="2" placeholder="Mecánico" oninput="saltoPersonal(this, 'apoyo')">
+      <input id="mecanico" 
+type="text" 
+inputmode="numeric" 
+maxlength="2" 
+placeholder="Mecánico"
+oninput="filtrarNumeros(this); saltoPersonal(this, 'apoyo')">
 
-<input id="apoyo" type="tel" inputmode="numeric" maxlength="2" placeholder="Apoyo">
+<input id="apoyo" 
+type="text" 
+inputmode="numeric" 
+maxlength="2" 
+placeholder="Apoyo"
+oninput="filtrarNumeros(this)">
     </div>
   </div>
 
