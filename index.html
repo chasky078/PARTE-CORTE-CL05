@@ -311,10 +311,10 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
     </div>
 
     <div class="row">
-      <input class="bob-visual" type="tel" inputmode="numeric" placeholder="Visual"
-onblur="ponerTexto(this, 'Visual')" onfocus="limpiarTexto(this, 'Visual')">
       <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros"
-onblur="ponerTexto(this, 'Poros')" onfocus="limpiarTexto(this, 'Poros')">
+oninput="calcularApiladores()"
+onblur="ponerTexto(this, 'Poros'); calcularApiladores();"
+onfocus="limpiarTexto(this, 'Poros')">
     </div>
 
     <input class="bob-otros" type="tel" inputmode="numeric" placeholder="Otros">
@@ -674,6 +674,33 @@ function limpiarTexto(input, texto){
 
   document.querySelectorAll(".bob-cambio-acum").forEach(i=>{
     if(i.value) i.value = "Cambio acum " + i.value;
+  });
+
+  }
+  function calcularApiladores(){
+
+  let acumPoros = 0;
+  let acumVisual = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const porosInput = b.querySelector(".bob-poros");
+    const visualInput = b.querySelector(".bob-visual");
+
+    const ap1 = b.querySelector(".bob-a1");
+    const ap2 = b.querySelector(".bob-a2");
+
+    const poros = parseInt((porosInput?.value || "").replace("Poros ", "")) || 0;
+    const visual = parseInt((visualInput?.value || "").replace("Visual ", "")) || 0;
+
+    acumPoros += poros;
+    acumVisual += visual;
+
+    ap1.value = "AP1 " + acumPoros;
+    ap2.value = "AP2 " + acumVisual;
+
   });
 
   }
