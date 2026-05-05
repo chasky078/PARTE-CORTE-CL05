@@ -283,7 +283,9 @@ function addBobina(datos = null){
 </div>
 
     <div class="row">
-      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total">
+      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total"
+onfocus="limpiarTexto(this,'Total')"
+onblur="ponerTexto(this,'Total')">
       <input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum">
     </div>
 
