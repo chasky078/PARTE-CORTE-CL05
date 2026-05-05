@@ -198,8 +198,9 @@ input {
     <h3>Personal</h3>
 
     <div class="row">
-      <input id="mecanico" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" placeholder="Mecánico">
-      <input id="apoyo" type="tel" inputmode="numeric" enterkeyhint="done" maxlength="2" placeholder="Apoyo">
+      <input id="mecanico" type="tel" inputmode="numeric" maxlength="2" placeholder="Mecánico" oninput="saltoPersonal(this, 'apoyo')">
+
+<input id="apoyo" type="tel" inputmode="numeric" maxlength="2" placeholder="Apoyo">
     </div>
   </div>
 
@@ -680,6 +681,11 @@ function limpiarTexto(input, texto){
     if(i.value) i.value = "Cambio acum " + i.value;
   });
 
+  }
+  function saltoPersonal(input, siguienteId){
+  if(input.value.length >= 2){
+    document.getElementById(siguienteId).focus();
+  }
   }
 
 </script>
