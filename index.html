@@ -191,7 +191,7 @@ input {
 
     <div class="button" onclick="addBobina()">+ Añadir bobina</div>
     <div class="button button-danger" onclick="quitarBobina()">− Quitar bobina</div>
-    <div class="button" onclick="testApiladores()">TEST APILADORES</div>
+    
   </div>
 
   <div class="section">
@@ -313,11 +313,11 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
 
    <div class="row">
   <input class="bob-visual" type="tel" inputmode="numeric" placeholder="Visual"
-  onblur="ponerTexto(this, 'Visual'); calcularApiladores();"
+  onblur="ponerTexto(this, 'Visual');"
   onfocus="limpiarTexto(this, 'Visual')">
 
   <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros"
-  onblur="ponerTexto(this, 'Poros'); calcularApiladores();"
+  onblur="ponerTexto(this, 'Poros');"
   onfocus="limpiarTexto(this, 'Poros')">
 </div>
 
@@ -681,27 +681,7 @@ function limpiarTexto(input, texto){
   });
 
   }
-  function testApiladores(){
 
-  let acumPoros = 0;
-  let acumVisual = 0;
-
-  const bobinas = document.querySelectorAll(".bobina");
-
-  bobinas.forEach(b => {
-
-    const poros = parseInt((b.querySelector(".bob-poros")?.value || "").replace("Poros ", "")) || 0;
-    const visual = parseInt((b.querySelector(".bob-visual")?.value || "").replace("Visual ", "")) || 0;
-
-    acumPoros += poros;
-    acumVisual += visual;
-
-  });
-
-  alert("Poros total: " + acumPoros + " | Visual total: " + acumVisual);
-
-  }
- 
 </script>
 
 </body>
