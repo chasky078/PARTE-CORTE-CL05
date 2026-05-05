@@ -284,8 +284,6 @@ function addBobina(datos = null){
 
     <div class="row">
       <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total"
-onfocus="limpiarTexto(this,'Total')"
-onblur="ponerTexto(this,'Total')">
       <input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum">
     </div>
 
@@ -584,7 +582,7 @@ function limpiarFormulario(){
 
   if(total < 0) total += 24 * 60; // por si pasa medianoche
 
-  totalInput.value = total;
+  totalInput.value = "Total " + total;totalInput.value = total;
     calcularAcumulados();
   }
   function calcularAcumulados(){
@@ -598,7 +596,7 @@ function limpiarFormulario(){
     const totalInput = b.querySelector(".bob-total");
     const acumInput = b.querySelector(".bob-acum");
 
-    const total = parseInt(totalInput.value) || 0;
+    const total = parseInt(totalInput.value.replace("Total ", "")) || 0;
 
     acumulado += total;
 
