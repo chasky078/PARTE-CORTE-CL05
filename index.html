@@ -683,6 +683,27 @@ function limpiarTexto(input, texto){
   });
 
   }
+  function testApiladores(){
+
+  let acumPoros = 0;
+  let acumVisual = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const poros = parseInt((b.querySelector(".bob-poros")?.value || "").replace("Poros ", "")) || 0;
+    const visual = parseInt((b.querySelector(".bob-visual")?.value || "").replace("Visual ", "")) || 0;
+
+    acumPoros += poros;
+    acumVisual += visual;
+
+  });
+
+  console.log("POROS ACUM:", acumPoros);
+  console.log("VISUAL ACUM:", acumVisual);
+
+  }
  
 </script>
 
