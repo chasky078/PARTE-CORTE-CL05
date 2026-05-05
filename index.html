@@ -585,8 +585,9 @@ function limpiarFormulario(){
 
   if(total < 0) total += 24 * 60; // por si pasa medianoche
 
-  totalInput.value = total;
+  totalInput.value = "Total " + total;
 totalInput.setAttribute("data-valor", total);
+    
     calcularAcumulados();
 // aplicarFormatoVisual();
   }
@@ -608,7 +609,7 @@ acumInput.value = acumInput.value.replace("Acum ", "");
 
     acumulado += total;
 
-    acumInput.value = acumulado;
+    acumInput.value = "Acum " + acumulado;
 acumInput.setAttribute("data-valor", acumulado);
      
     // aplicarFormatoVisual(total, acumulado);
