@@ -286,6 +286,9 @@ function addBobina(datos = null){
       <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total">
 <input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum">
     </div>
+    <div class="bob-resumen" style="font-weight:bold; margin:6px 0 8px 0; color:#1976d2;">
+  Total 0 / Acum 0
+</div>
 
     <div class="row">
       <input class="bob-cambio" type="tel" inputmode="numeric" placeholder="Cambio" oninput="calcularCambioAcumulado()">
@@ -604,6 +607,11 @@ totalInput.setAttribute("data-valor", total);
 
     acumInput.value = acumulado;
 acumInput.setAttribute("data-valor", acumulado);
+    
+    const resumen = b.querySelector(".bob-resumen");
+if(resumen){
+  resumen.innerText = "Total " + total + " / Acum " + acumulado;
+}
     
     // aplicarFormatoVisual(total, acumulado);
   });
