@@ -283,13 +283,13 @@ function addBobina(datos = null){
 </div>
 
     <div class="row">
-      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total">
-<input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum">
-    </div>
-    <div class="bob-resumen" style="font-weight:bold; margin:6px 0 8px 0; color:#1976d2;">
-  Total 0 / Acum 0
-</div>
+      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total"
+onblur="ponerTexto(this, 'Total')" onfocus="limpiarTexto(this, 'Total')">
 
+<input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum"
+onblur="ponerTexto(this, 'Acum')" onfocus="limpiarTexto(this, 'Acum')">
+    </div>
+    
     <div class="row">
       <input class="bob-cambio" type="tel" inputmode="numeric" placeholder="Cambio" oninput="calcularCambioAcumulado()">
 <input class="bob-cambio-acum" type="tel" inputmode="numeric" placeholder="Cambio acum">
@@ -599,20 +599,18 @@ totalInput.setAttribute("data-valor", total);
   bobinas.forEach(b => {
 
     const totalInput = b.querySelector(".bob-total");
-    const acumInput = b.querySelector(".bob-acum");
+const acumInput = b.querySelector(".bob-acum");
 
-    const total = parseInt(totalInput.value) || 0;
+acumInput.value = acumInput.value.replace("Acum ", "");
+    
+
+    const total = parseInt(totalInput.value.replace("Total ", "")) || 0;
 
     acumulado += total;
 
     acumInput.value = acumulado;
 acumInput.setAttribute("data-valor", acumulado);
-    
-    const resumen = b.querySelector(".bob-resumen");
-if(resumen){
-  resumen.innerText = "Total " + total + " / Acum " + acumulado;
-}
-    
+     
     // aplicarFormatoVisual(total, acumulado);
   });
   }
