@@ -290,8 +290,12 @@ function addBobina(datos = null){
     <b>BOBINA ${contador}</b>
 
     <div class="row">
-<input class="bob-marcha" type="time" placeholder="Inicio" onchange="calcularTotal(this)">
-<input class="bob-parada" type="time" placeholder="Fin" onchange="calcularTotal(this)">
+<input class="bob-marcha" type="time" placeholder="Inicio"
+oninput="saltoEnBobina(this, 'bob-parada', 5)"
+onchange="calcularTotal(this)">
+
+<input class="bob-parada" type="time" placeholder="Fin"
+onchange="calcularTotal(this)">
 </div>
 
     <div class="row">
@@ -303,7 +307,8 @@ onblur="ponerTexto(this, 'Acum')" onfocus="limpiarTexto(this, 'Acum')">
     </div>
     
     <div class="row">
-      <input class="bob-cambio" type="tel" inputmode="numeric" placeholder="Cambio" oninput="calcularCambioAcumulado()">
+      <input class="bob-cambio" type="text" inputmode="numeric" maxlength="2" placeholder="Cambio"
+oninput="filtrarNumeros(this); calcularCambioAcumulado(); saltoEnBobina(this, 'bob-golpes', 2)">
 <input class="bob-cambio-acum" type="tel" inputmode="numeric" placeholder="Cambio acum">
     </div>
 
@@ -394,6 +399,12 @@ function confirmar(id){
     inputs.forEach(i => i.disabled = true);
     b.classList.add("confirmada");
     boton.innerText = "✏ Editar";
+    setTimeout(() => {
+  const btnAdd = document.querySelector(".button");
+  if(btnAdd){
+    btnAdd.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}, 200);
   } else {
     inputs.forEach(i => i.disabled = false);
     b.classList.remove("confirmada");
@@ -700,7 +711,15 @@ function limpiarTexto(input, texto){
   function filtrarNumeros(input){
   input.value = input.value.replace(/\D/g, '');
   }
-
+function saltoEnBobina(input, siguienteClase, longitud){
+  if(input.value.length >= longitud){
+    const bobina = input.closest(".bobina");
+    const siguiente = bobina.querySelector("." + siguienteClase);
+    if(siguiente){
+      siguiente.focus();
+    }
+  }
+}
 </script>
 
 </body>
