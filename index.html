@@ -191,6 +191,7 @@ input {
 
     <div class="button" onclick="addBobina()">+ Añadir bobina</div>
     <div class="button button-danger" onclick="quitarBobina()">− Quitar bobina</div>
+    <div class="button" onclick="testApiladores()">TEST APILADORES</div>
   </div>
 
   <div class="section">
@@ -700,8 +701,7 @@ function limpiarTexto(input, texto){
 
   });
 
-  console.log("POROS ACUM:", acumPoros);
-  console.log("VISUAL ACUM:", acumVisual);
+  alert("Poros total: " + acumPoros + " | Visual total: " + acumVisual);
 
   }
  
