@@ -308,10 +308,13 @@ oninput="filtrarNumeros(this)">
   <h3>Partes guardados</h3>
   
 <input 
-    id="buscadorPartes"
-    type="text"
-    placeholder="Buscar por orden o fecha..."
-    oninput="verPartes()"
+    <input 
+  id="buscadorPartes"
+  type="text"
+  inputmode="numeric"
+  placeholder="Buscar por orden..."
+  oninput="filtrarNumeros(this); verPartes()"
+>
   >
   <div id="contenidoPartes"></div>
 </div>
