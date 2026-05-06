@@ -463,11 +463,11 @@ checks.forEach(c => {
 });
 
   if(datos.confirmada){
-    confirmar(div.id);
+    confirmar(div.id, true);
   }
 }
 
-function confirmar(id){
+function confirmar(id, desdeCarga = false){
   const b = document.getElementById(id);
   const inputs = b.querySelectorAll("input");
   const boton = b.querySelector(".button");
@@ -476,13 +476,17 @@ function confirmar(id){
     inputs.forEach(i => i.disabled = true);
     b.classList.add("confirmada");
     boton.innerText = "✏ Editar";
-    mostrarMensajeConfirmacion("✔ Bobina confirmada");
-    setTimeout(() => {
-  const btnAdd = document.querySelector('[onclick="addBobina()"]');
-  if(btnAdd){
-    btnAdd.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-}, 200);
+
+    // 👉 SOLO si NO viene de carga
+    if(!desdeCarga){
+      setTimeout(() => {
+        const btnAdd = document.querySelector('[onclick="addBobina()"]');
+        if(btnAdd){
+          btnAdd.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 200);
+    }
+
   } else {
     inputs.forEach(i => i.disabled = false);
     b.classList.remove("confirmada");
