@@ -150,6 +150,37 @@ input {
   font-weight: 600;
   border: 1px solid #bbb;
   }
+  .guardado-item {
+  position: relative;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.guardado-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.guardado-fecha {
+  font-size: 13px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.guardado-item button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -610,7 +641,14 @@ function verPartes(){
     div.className = "guardado-item";
 
     const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
-    div.innerText = "Orden: " + parte.orden + " | Fecha: " + fechaFormateada;
+    div.innerHTML = `
+  <div class="guardado-top">
+    <span class="orden">Orden: ${parte.orden}</span>
+  </div>
+  <div class="guardado-fecha">
+    Fecha: ${fechaFormateada}
+  </div>
+`;
 
     div.onclick = function(){
       abrirParte(parte.orden);
