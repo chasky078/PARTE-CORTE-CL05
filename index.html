@@ -597,7 +597,7 @@ function verPartes(){
 
       const div = document.createElement("div");
       div.className = "guardado-item";
-      div.innerText = "Orden: " + parte.orden;
+      div.innerText = "Orden: " + parte.orden + " | Fecha: " + parte.fecha;
 
       div.onclick = function(){
         abrirParte(parte.orden);
