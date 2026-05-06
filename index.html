@@ -653,6 +653,7 @@ function abrirParte(numeroOrden){
 
   mostrarPantalla("parte");
 }
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
 function borrarParte(numeroOrden){
   const confirmar = confirm("¿Borrar parte " + numeroOrden + "?");
