@@ -627,11 +627,15 @@ function guardarParte(){
 }
 
 function verPartes(){
+
   const contenedor = document.getElementById("contenidoPartes");
   contenedor.innerHTML = "";
 
+  const textoBusqueda = document.getElementById("buscadorPartes")?.value.toLowerCase() || "";
+
   const partes = [];
 
+  // recoger partes
   for(let i = 0; i < localStorage.length; i++){
     const key = localStorage.key(i);
 
@@ -641,21 +645,30 @@ function verPartes(){
     }
   }
 
+  // ordenar por último guardado
   partes.sort((a, b) => (b.guardadoEn || 0) - (a.guardadoEn || 0));
 
+  // pintar
   partes.forEach(parte => {
+
+    const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
+
+    const texto = (parte.orden + " " + fechaFormateada).toLowerCase();
+
+    // 🔍 FILTRO BUSCADOR
+    if(!texto.includes(textoBusqueda)) return;
+
     const div = document.createElement("div");
     div.className = "guardado-item";
 
-    const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
     div.innerHTML = `
-  <div class="guardado-top">
-    <span class="orden">Orden: ${parte.orden}</span>
-  </div>
-  <div class="guardado-fecha">
-    Fecha: ${fechaFormateada}
-  </div>
-`;
+      <div class="guardado-top">
+        <span class="orden">Orden: ${parte.orden}</span>
+      </div>
+      <div class="guardado-fecha">
+        Fecha: ${fechaFormateada}
+      </div>
+    `;
 
     div.onclick = function(){
       abrirParte(parte.orden);
@@ -671,6 +684,7 @@ function verPartes(){
     div.appendChild(btnBorrar);
     contenedor.appendChild(div);
   });
+
 }
 
 function abrirParte(numeroOrden){
