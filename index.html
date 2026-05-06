@@ -561,6 +561,7 @@ function guardarParte(){
 
   const parte = {
     orden: numeroOrden,
+    guardadoEn: Date.now(),
     linea: "CL05",
     fecha: document.getElementById("fecha").value,
     proveedor: document.getElementById("proveedor").value,
@@ -591,32 +592,40 @@ function verPartes(){
   const contenedor = document.getElementById("contenidoPartes");
   contenedor.innerHTML = "";
 
-  for(let i = localStorage.length - 1; i >= 0; i--){
+  const partes = [];
+
+  for(let i = 0; i < localStorage.length; i++){
     const key = localStorage.key(i);
 
     if(key.startsWith("parte_")){
       const parte = JSON.parse(localStorage.getItem(key));
-
-      const div = document.createElement("div");
-      div.className = "guardado-item";
-      const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
-div.innerText = "Orden: " + parte.orden + " | Fecha: " + fechaFormateada;
-
-      div.onclick = function(){
-        abrirParte(parte.orden);
-      };
-
-      const btnBorrar = document.createElement("button");
-      btnBorrar.innerText = "❌";
-      btnBorrar.onclick = function(e){
-        e.stopPropagation();
-        borrarParte(parte.orden);
-      };
-
-      div.appendChild(btnBorrar);
-      contenedor.appendChild(div);
+      partes.push(parte);
     }
   }
+
+  partes.sort((a, b) => (b.guardadoEn || 0) - (a.guardadoEn || 0));
+
+  partes.forEach(parte => {
+    const div = document.createElement("div");
+    div.className = "guardado-item";
+
+    const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
+    div.innerText = "Orden: " + parte.orden + " | Fecha: " + fechaFormateada;
+
+    div.onclick = function(){
+      abrirParte(parte.orden);
+    };
+
+    const btnBorrar = document.createElement("button");
+    btnBorrar.innerText = "❌";
+    btnBorrar.onclick = function(e){
+      e.stopPropagation();
+      borrarParte(parte.orden);
+    };
+
+    div.appendChild(btnBorrar);
+    contenedor.appendChild(div);
+  });
 }
 
 function abrirParte(numeroOrden){
