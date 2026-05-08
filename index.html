@@ -1159,22 +1159,49 @@ document.getElementById("pantallaParte").style.display = "none";
 document.getElementById("pantallaGuardados").style.display = "none";
 document.getElementById("menuPrincipal").style.display = "flex";
   }
-  setInterval(autoGuardarTemporal, 5000);
+  setInterval(autoGuardarTemporal, 15000);
+
+setInterval(autoGuardarTemporal, 5000);
 
 function autoGuardarTemporal() {
 
 const borrador = {
+
 orden: document.getElementById("orden")?.value || "",
 fecha: document.getElementById("fecha")?.value || "",
 proveedor: document.getElementById("proveedor")?.value || "",
-codigo: document.getElementById("codigo")?.value || "",
-ancho: document.getElementById("ancho")?.value || "",
-largo: document.getElementById("largo")?.value || ""
+maquina: document.getElementById("maquina")?.value || ""
+
 };
 
-localStorage.setItem("borrador_cl05", JSON.stringify(borrador));
+localStorage.setItem(
+"borrador_cl05",
+JSON.stringify(borrador)
+);
 
 }
+  window.onload = function() {
+
+const borradorGuardado =
+JSON.parse(localStorage.getItem("borrador_cl05"));
+
+if(borradorGuardado){
+
+document.getElementById("orden").value =
+borradorGuardado.orden || "";
+
+document.getElementById("fecha").value =
+borradorGuardado.fecha || "";
+
+document.getElementById("proveedor").value =
+borradorGuardado.proveedor || "";
+
+document.getElementById("maquina").value =
+borradorGuardado.maquina || "";
+
+}
+
+  }
 </script>
 
 </body>
