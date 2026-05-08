@@ -354,6 +354,9 @@ box-shadow:0 8px 22px rgba(0,0,0,0.25);
 
   </div>
 <header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+  <div class="button" onclick="volverMenu()" style="margin:10px;">
+⬅ VOLVER AL MENÚ
+  </div>
   <div id="mensajeConfirmacion" class="mensaje-ok"></div>
 
 <div style="display:flex; gap:8px; padding:10px;">
@@ -1097,6 +1100,11 @@ document.getElementById("pantallaParte").style.display = "none";
 document.getElementById("pantallaGuardados").style.display = "block";
 verPartes();
 }
+  function volverMenu() {
+document.getElementById("pantallaParte").style.display = "none";
+document.getElementById("pantallaGuardados").style.display = "none";
+document.getElementById("menuPrincipal").style.display = "flex";
+  }
 </script>
 
 </body>
