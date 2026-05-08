@@ -1085,7 +1085,18 @@ function saltoEnBobina(input, siguienteClase, longitud){
 document.getElementById("pantallaInicio").style.display = "none";
 document.getElementById("menuPrincipal").style.display = "flex";
 }
+function abrirCrearParte() {
+document.getElementById("menuPrincipal").style.display = "none";
+document.getElementById("pantallaParte").style.display = "block";
+document.getElementById("pantallaGuardados").style.display = "none";
+}
 
+function abrirGuardados() {
+document.getElementById("menuPrincipal").style.display = "none";
+document.getElementById("pantallaParte").style.display = "none";
+document.getElementById("pantallaGuardados").style.display = "block";
+verPartes();
+}
 </script>
 
 </body>
