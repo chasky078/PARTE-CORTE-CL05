@@ -337,7 +337,7 @@ box-shadow:0 8px 22px rgba(0,0,0,0.35);
 📂 PARTES GUARDADOS
 </div>
 
-<div style="
+<div onclick="abrirAyuda()" style="
 width:320px;
 max-width:90%;
 background:rgba(255,255,255,0.15);
@@ -1129,6 +1129,12 @@ document.getElementById("pantallaParte").style.display = "none";
 document.getElementById("pantallaGuardados").style.display = "block";
 verPartes();
 }
+  function abrirAyuda() {
+document.getElementById("menuPrincipal").style.display = "none";
+document.getElementById("pantallaParte").style.display = "none";
+document.getElementById("pantallaGuardados").style.display = "none";
+document.getElementById("pantallaAyuda").style.display = "block";
+  }
   function volverMenu() {
 document.getElementById("pantallaParte").style.display = "none";
 document.getElementById("pantallaGuardados").style.display = "none";
