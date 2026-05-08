@@ -1155,6 +1155,22 @@ document.getElementById("pantallaParte").style.display = "none";
 document.getElementById("pantallaGuardados").style.display = "none";
 document.getElementById("menuPrincipal").style.display = "flex";
   }
+  setInterval(autoGuardarTemporal, 5000);
+
+function autoGuardarTemporal() {
+
+const borrador = {
+orden: document.getElementById("orden")?.value || "",
+fecha: document.getElementById("fecha")?.value || "",
+proveedor: document.getElementById("proveedor")?.value || "",
+codigo: document.getElementById("codigo")?.value || "",
+ancho: document.getElementById("ancho")?.value || "",
+largo: document.getElementById("largo")?.value || ""
+};
+
+localStorage.setItem("borrador_cl05", JSON.stringify(borrador));
+
+}
 </script>
 
 </body>
