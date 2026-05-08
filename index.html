@@ -30,6 +30,32 @@ header {
   margin-bottom: 12px;
   border-radius: 8px;
 }
+  .menu-card{
+background:linear-gradient(135deg,#16345f,#21497d);
+border:1px solid rgba(255,255,255,0.12);
+border-radius:22px;
+padding:28px;
+margin-bottom:18px;
+color:white;
+font-size:30px;
+font-weight:900;
+display:flex;
+align-items:center;
+gap:18px;
+justify-content:center;
+cursor:pointer;
+transition:0.25s;
+box-shadow:0 8px 24px rgba(0,0,0,0.35);
+}
+
+.menu-card:hover{
+transform:scale(1.02);
+box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+
+.menu-icon{
+font-size:34px;
+}
 .section-ayuda {
   background: rgba(255,255,255,0.10);
   padding: 22px;
@@ -314,51 +340,19 @@ letter-spacing:2px;
 MENÚ PRINCIPAL
 </h1>
 
-<div onclick="abrirCrearParte()" style="
-width:320px;
-max-width:90%;
-background:linear-gradient(180deg,#19b8ff,#006de6);
-color:white;
-padding:22px;
-border-radius:18px;
-font-size:26px;
-font-weight:900;
-margin-bottom:22px;
-cursor:pointer;
-box-shadow:0 8px 22px rgba(0,0,0,0.35);
-">
-📝 CREAR PARTE
+<div onclick="abrirCrearParte()" class="menu-card">
+  <div class="menu-icon">⚙️</div>
+  <div>CREAR PARTE</div>
 </div>
 
-<div onclick="abrirGuardados()" style="
-width:320px;
-max-width:90%;
-background:linear-gradient(180deg,#19b8ff,#006de6);
-color:white;
-padding:22px;
-border-radius:18px;
-font-size:26px;
-font-weight:900;
-margin-bottom:22px;
-cursor:pointer;
-box-shadow:0 8px 22px rgba(0,0,0,0.35);
-">
-📂 PARTES GUARDADOS
+<div onclick="abrirGuardados()" class="menu-card">
+  <div class="menu-icon">📊</div>
+  <div>PARTES GUARDADOS</div>
 </div>
 
-<div onclick="abrirAyuda()" style="
-width:320px;
-max-width:90%;
-background:rgba(255,255,255,0.15);
-color:white;
-padding:22px;
-border-radius:18px;
-font-size:26px;
-font-weight:900;
-cursor:pointer;
-box-shadow:0 8px 22px rgba(0,0,0,0.25);
-">
-❔ AYUDA
+<div onclick="abrirAyuda()" class="menu-card">
+  <div class="menu-icon">ℹ️</div>
+  <div>AYUDA</div>
 </div>
 
   </div>
