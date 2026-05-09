@@ -763,7 +763,16 @@ function addBobina(datos = null){
   div.id = "b" + contador;
 
   div.innerHTML = `
-    <b>BOBINA ${contador}</b>
+    <div class="bobina-top">
+
+<b>BOBINA ${contador}</b>
+
+<input 
+class="bob-proveedor" 
+type="text" 
+placeholder="Nº proveedor">
+
+</div>
 
     <div class="row">
 <input class="bob-marcha" type="time" placeholder="Inicio"
