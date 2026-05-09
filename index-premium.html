@@ -274,6 +274,7 @@ inset 0 0 0 1px rgba(255,255,255,0.03),
     0 0 30px rgba(40,120,255,0.18);
 }
 .bobina {
+  position:relative;
   border: 1px solid rgba(255,255,255,0.14);
   padding: 16px;
   margin-top: 14px;
@@ -282,16 +283,19 @@ inset 0 0 0 1px rgba(255,255,255,0.03),
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
 }
 .cerrar-bobina{
-  background:rgba(255,70,70,0.12);
-  border:1px solid rgba(255,90,90,0.35);
-  color:#ffb4b4;
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  font-size:20px;
-  font-weight:900;
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  border:1px solid rgba(255,120,120,0.35);
+  background:rgba(80,20,30,0.45);
+  color:#ffb3b3;
+  font-size:34px;
   cursor:pointer;
   transition:0.25s;
+  z-index:5;
 }
 
 .cerrar-bobina:hover{
