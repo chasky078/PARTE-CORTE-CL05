@@ -994,7 +994,7 @@ function eliminarBobina(boton){
 
   const confirmar = prompt("Para eliminar esta bobina escribe CONFIRMAR");
 
-  if(confirmar !== "CONFIRMAR"){
+  if(!confirmar || confirmar.trim().toUpperCase() !== "CONFIRMAR"){
     alert("Borrado cancelado");
     return;
   }
