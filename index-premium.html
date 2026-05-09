@@ -689,6 +689,42 @@ oninput="filtrarNumeros(this)">
   </div>
 
 </div>
+  <div id="pantallaPagina2" class="container" style="display:none;">
+
+<header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+
+<div class="button" onclick="volverParte()" style="margin:10px;">
+← PÁGINA ANTERIOR
+</div>
+
+<div class="section">
+
+<h2 style="
+text-align:center;
+color:white;
+margin-top:20px;
+margin-bottom:20px;
+">
+PÁGINA 2 / 2 · PARTE TRASERA
+</h2>
+
+<div style="
+height:400px;
+border:2px dashed rgba(255,255,255,0.15);
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:rgba(255,255,255,0.45);
+font-size:22px;
+font-weight:700;
+">
+PARTE TRASERA EN DESARROLLO
+</div>
+
+</div>
+
+  </div>
 <div id="pantallaAyuda" class="container" style="
 display:none;
 background:linear-gradient(135deg,#000814 0%,#002a5c 45%,#000814 100%);
@@ -1408,8 +1444,21 @@ document.getElementById("pantallaGuardados").style.display = "none";
 document.getElementById("pantallaAyuda").style.display = "none";
 document.getElementById("menuPrincipal").style.display = "flex";
   }
-  setInterval(autoGuardarTemporal, 15000);
+  function abrirPagina2(){
 
+  document.getElementById("pantallaParte").style.display = "none";
+
+  document.getElementById("pantallaPagina2").style.display = "block";
+
+  }
+  setInterval(autoGuardarTemporal, 15000);
+function volverParte(){
+
+  document.getElementById("pantallaPagina2").style.display = "none";
+
+  document.getElementById("pantallaParte").style.display = "block";
+
+}
 function autoGuardarTemporal() {
 
 const borrador = {
