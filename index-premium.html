@@ -994,7 +994,19 @@ function quitarBobina(){
   contador--;
 
 }
+function eliminarBobina(boton){
+  const bobina = boton.closest(".bobina");
+  if(!bobina) return;
 
+  const confirmar = prompt("Para eliminar esta bobina escribe CONFIRMAR");
+
+  if(confirmar !== "CONFIRMAR"){
+    alert("Borrado cancelado");
+    return;
+  }
+
+  bobina.remove();
+}
 function recogerBobinas(){
   const lista = [];
   const bloques = document.querySelectorAll(".bobina");
