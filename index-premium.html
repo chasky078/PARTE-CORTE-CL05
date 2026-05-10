@@ -949,8 +949,21 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
     </div>
 
     <div class="row">
-      <input class="bob-etiqueta" type="tel" inputmode="numeric" placeholder="Etiqueta">
-      <input class="bob-medidos" type="tel" inputmode="numeric" placeholder="Medidos">
+      <input class="bob-etiqueta"
+type="tel"
+inputmode="numeric"
+placeholder="Metros etiqueta">
+
+<input class="bob-largo-real"
+type="tel"
+inputmode="numeric"
+placeholder="Largo real"
+oninput="calcularMetros(this)">
+
+<input class="bob-medidos"
+type="text"
+placeholder="Metros medidos"
+disabled>
     </div>
     <div class="row">
   <div class="extra-box soldadura-box">
