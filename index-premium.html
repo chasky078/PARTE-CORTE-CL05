@@ -1349,29 +1349,30 @@ acumInput.setAttribute("data-valor", acumulado);
   }
   function calcularMetros(input){
 
-const bobina = input.closest('.bobina');
+  const bobina = input.closest('.bobina');
 
-const largoReal = parseFloat(
-bobina.querySelector('.bob-largo-real').value.replace(",", ".")
-) || 0;
+  function extraerNumero(valor){
+    const encontrado = valor.replace(",", ".").match(/[\d.]+/);
+    return encontrado ? parseFloat(encontrado[0]) : 0;
+  }
 
-const golpes = parseFloat(
-bobina.querySelector('.bob-golpes').value.replace(",", ".")
-) || 0;
+  const largoReal = extraerNumero(
+    bobina.querySelector('.bob-largo-real').value
+  );
 
-const metros = largoReal * golpes;
+  const golpes = extraerNumero(
+    bobina.querySelector('.bob-golpes').value
+  );
 
-const campoMetros = bobina.querySelector('.bob-metros');
+  const metros = largoReal * golpes;
 
-if(metros > 0){
+  const campoMetros = bobina.querySelector('.bob-metros');
 
-campoMetros.value = metros.toFixed(0) + " m";
-
-}else{
-
-campoMetros.value = "";
-
-}
+  if(metros > 0){
+    campoMetros.value = metros.toFixed(0) + " m";
+  }else{
+    campoMetros.value = "";
+  }
 
   }
   function calcularCambioAcumulado(){
