@@ -1346,6 +1346,33 @@ acumInput.setAttribute("data-valor", acumulado);
     // aplicarFormatoVisual(total, acumulado);
   });
   }
+  function calcularMetros(input){
+
+const bobina = input.closest('.bobina');
+
+const largoReal = parseFloat(
+bobina.querySelector('.bob-largo-real').value.replace(",", ".")
+) || 0;
+
+const golpes = parseFloat(
+bobina.querySelector('.bob-golpes').value.replace(",", ".")
+) || 0;
+
+const metros = largoReal * golpes;
+
+const campoMetros = bobina.querySelector('.bob-metros');
+
+if(metros > 0){
+
+campoMetros.value = metros.toFixed(0) + " m";
+
+}else{
+
+campoMetros.value = "";
+
+}
+
+  }
   function calcularCambioAcumulado(){
 
   let acumulado = 0;
