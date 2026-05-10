@@ -897,6 +897,7 @@ oninput="filtrarNumeros(this); calcularCambioAcumulado(); saltoEnBobina(this, 'b
 
     <div class="row">
       <input class="bob-golpes" type="tel" inputmode="numeric" placeholder="Total de golpes"
+      oninput="calcularMetros(this)"
 onblur="ponerTexto(this, 'Total de golpes')" 
 onfocus="limpiarTexto(this, 'Total de golpes')">
 <input class="bob-primeras" type="tel" inputmode="numeric" placeholder="Hojas de primera"
