@@ -902,7 +902,22 @@ onfocus="limpiarTexto(this, 'Total de golpes')">
 <input class="bob-primeras" type="tel" inputmode="numeric" placeholder="Hojas de primera"
 onblur="ponerTexto(this, 'Hojas de primera')" onfocus="limpiarTexto(this, 'Hojas de primera')">
     </div>
+<div class="row">
 
+<input class="bob-largo-real"
+type="tel"
+inputmode="numeric"
+placeholder="Largo real"
+oninput="calcularMetros(this)"
+onblur="ponerTexto(this, 'Largo real')"
+onfocus="limpiarTexto(this, 'Largo real')">
+
+<input class="bob-metros"
+type="text"
+placeholder="Metros reales cortados"
+disabled>
+
+</div>
     <div class="row">
       <input class="bob-esp-mas" type="tel" inputmode="numeric" placeholder="+Esp"
 onblur="ponerTexto(this, '+Esp')" onfocus="limpiarTexto(this, '+Esp')">
