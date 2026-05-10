@@ -925,13 +925,27 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
 
     
 <div class="row">
-  <input class="bob-a1" type="tel" inputmode="numeric" placeholder="A1 / HOJAS">
-  <input class="bob-a2" type="tel" inputmode="numeric" placeholder="A2 / HOJAS">
+  <input class="bob-a1" type="tel" inputmode="numeric" placeholder="A1"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A1', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A1', 'HOJAS')">
+
+  <input class="bob-a2" type="tel" inputmode="numeric" placeholder="A2"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A2', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A2', 'HOJAS')">
 </div>
 
 <div class="row">
-  <input class="bob-a3" type="tel" inputmode="numeric" placeholder="A3 / HOJAS">
-  <input class="bob-a4" type="tel" inputmode="numeric" placeholder="A4 / HOJAS">
+  <input class="bob-a3" type="tel" inputmode="numeric" placeholder="A3"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A3', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A3', 'HOJAS')">
+
+  <input class="bob-a4" type="tel" inputmode="numeric" placeholder="A4"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A4', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A4', 'HOJAS')">
 </div>
 
     <div class="row">
