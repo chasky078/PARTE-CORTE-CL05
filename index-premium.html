@@ -1422,6 +1422,23 @@ acumInput.setAttribute("data-valor", acumulado);
 function limpiarTexto(input, texto){
   input.value = input.value.replace(texto + " ", "");
 }
+  function ponerTextoFinal(input, prefijo, sufijo){
+
+const numero = input.value.replace(/\D/g,'');
+
+if(numero !== ''){
+input.value = prefijo + ' ' + numero + ' ' + sufijo;
+}
+
+}
+
+function limpiarTextoFinal(input, prefijo, sufijo){
+
+const numero = input.value.replace(/\D/g,'');
+
+input.value = numero;
+
+}
   function aplicarFormatoVisual(){
 
   document.querySelectorAll(".bob-total").forEach(i=>{
