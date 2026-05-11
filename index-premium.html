@@ -921,7 +921,10 @@ onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
   onfocus="limpiarTexto(this, 'Poros')">
 </div>
 
-    <input class="bob-otros" type="tel" inputmode="numeric" placeholder="OTROS / HOJAS">
+    <input class="bob-otros" type="tel" inputmode="numeric" placeholder="Otros"
+oninput="filtrarNumeros(this)"
+onblur="ponerTextoFinal(this, 'OTROS', 'HOJAS')"
+onfocus="limpiarTextoFinal(this, 'OTROS', 'HOJAS')">
 
     
 <div class="row">
