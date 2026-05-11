@@ -1544,10 +1544,16 @@ document.getElementById("pantallaInicio").style.display = "none";
 document.getElementById("menuPrincipal").style.display = "flex";
 }
 function abrirCrearParte() {
-document.getElementById("menuPrincipal").style.display = "none";
-document.getElementById("pantallaParte").style.display = "block";
-document.getElementById("pantallaGuardados").style.display = "none";
-document.getElementById("pantallaAyuda").style.display = "none";
+  limpiarFormulario();
+  localStorage.removeItem("borrador_cl05");
+
+  document.getElementById("menuPrincipal").style.display = "none";
+  document.getElementById("pantallaParte").style.display = "block";
+  document.getElementById("pantallaGuardados").style.display = "none";
+  document.getElementById("pantallaPagina2").style.display = "none";
+  document.getElementById("pantallaAyuda").style.display = "none";
+
+  window.scrollTo(0, 0);
 }
 
 function abrirGuardados() {
