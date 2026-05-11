@@ -627,11 +627,13 @@ MENÚ PRINCIPAL
 
     <div class="row">
       <input id="espesor" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
-      <input id="limite" placeholder="Txxx">
-    </div>
+      <input id="limite"
+placeholder="Txxx"
+enterkeyhint="next"
+oninput="this.value = this.value.toUpperCase()">
 
     <div class="row">
-      <input id="diferencial" type="tel" inputmode="numeric" enterkeyhint="done" placeholder="Dif">
+      <input id="diferencial" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Dif" oninput="filtrarNumeros(this)">
       <input id="st" value="ST" disabled>
     </div>
   </div>
