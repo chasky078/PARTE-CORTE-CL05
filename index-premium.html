@@ -607,6 +607,44 @@ MENÚ PRINCIPAL
     </div>
   </div>
   
+<div class="section">
+  <h3>Datos</h3>
+
+  <label class="check-line">
+    <input type="checkbox" id="checkS" onclick="soloUno('S')">
+    S (Recto)
+  </label>
+
+  <label class="check-line">
+    <input type="checkbox" id="checkW" onclick="soloUno('W')">
+    W (Scroll)
+  </label>
+
+  <div class="row">
+    <input id="ancho" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Ancho">
+    <input id="largo" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Largo">
+  </div>
+
+  <div class="row">
+    <input id="espesor" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
+
+    <input id="limite"
+      type="text"
+      placeholder="Txxx"
+      enterkeyhint="next"
+      oninput="this.value = this.value.toUpperCase()">
+  </div>
+
+  <div class="row">
+    <input id="diferencial"
+      type="text"
+      placeholder="Dif"
+      enterkeyhint="next"
+      oninput="this.value = this.value.toUpperCase()">
+
+    <input id="st" value="ST" disabled>
+  </div>
+</div>
   <div class="section">
     <h3>Bobinas</h3>
     <div id="bobinas"></div>
