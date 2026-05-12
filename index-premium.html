@@ -824,7 +824,23 @@ color:rgba(255,255,255,0.6);
 </div>
     </div>
   </div>
+<div style="
+margin-top:20px;
+font-size:42px;
+font-weight:900;
+color:white;
+">
+<span id="kpiMetros">0</span>
+</div>
 
+<div style="
+margin-top:12px;
+font-size:16px;
+letter-spacing:2px;
+color:rgba(255,255,255,0.6);
+">
+METROS CORTADOS
+</div>
   <div class="button" onclick="volverMenu()">
     ← VOLVER AL MENÚ
   </div>
@@ -1714,6 +1730,18 @@ for(let i = 0; i < localStorage.length; i++){
 }
 
 document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
+    let totalMetros = 0;
+
+partes.forEach(parte => {
+
+    let largo = parseFloat(parte.largoReal || 0);
+    let golpes = parseFloat(parte.totalGolpes || 0);
+
+    totalMetros += largo * golpes;
+
+});
+
+document.getElementById("kpiMetros").innerText = totalMetros;
   window.scrollTo(0, 0);
   }
   function abrirAyuda() {
