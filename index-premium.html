@@ -805,6 +805,23 @@ color:rgba(255,255,255,0.6);
 ">
 BOBINAS USADAS
 </div>
+      <div style="
+margin-top:30px;
+font-size:42px;
+font-weight:900;
+color:white;
+">
+<span id="kpiUltimaOrden">-</span>
+</div>
+
+<div style="
+margin-top:12px;
+font-size:16px;
+letter-spacing:2px;
+color:rgba(255,255,255,0.6);
+">
+ÚLTIMA ORDEN
+</div>
     </div>
   </div>
 
@@ -1680,6 +1697,23 @@ for(let i = 0; i < localStorage.length; i++){
 }
 
 document.getElementById("kpiBobinas").innerText = totalBobinas;
+    let ultimaOrden = "-";
+let ultimoGuardado = 0;
+
+for(let i = 0; i < localStorage.length; i++){
+  const key = localStorage.key(i);
+
+  if(key.startsWith("parte_")){
+    const parte = JSON.parse(localStorage.getItem(key));
+
+    if((parte.guardadoEn || 0) > ultimoGuardado){
+      ultimoGuardado = parte.guardadoEn || 0;
+      ultimaOrden = parte.orden || "-";
+    }
+  }
+}
+
+document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
   window.scrollTo(0, 0);
   }
   function abrirAyuda() {
