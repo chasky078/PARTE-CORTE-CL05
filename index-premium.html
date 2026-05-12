@@ -435,6 +435,48 @@ height:46px;
   .material{ font-size:22px; }
   .material input{ width:80px; font-size:24px; }
 }
+  .dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:18px;
+  padding:22px;
+  border:2px dashed rgba(140,210,255,.25);
+  border-radius:22px;
+}
+
+.dash-card{
+  background:linear-gradient(145deg, rgba(18,55,92,.95), rgba(8,28,52,.95));
+  border:1px solid rgba(140,210,255,.22);
+  border-radius:20px;
+  padding:24px 14px;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.28);
+}
+
+.dash-card-wide{
+  grid-column:1 / -1;
+}
+
+.dash-number{
+  font-size:44px;
+  font-weight:900;
+  color:white;
+  line-height:1;
+}
+
+.dash-label{
+  margin-top:12px;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:rgba(210,235,255,.72);
+}
+
+@media(max-width:700px){
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
@@ -769,50 +811,32 @@ PARTE TRASERA EN DESARROLLO
     ">
 
       <div id="kpiPartes" style="font-size:42px;font-weight:900;color:white;">0</div>
-      <div style="margin-top:12px;font-size:16px;letter-spacing:2px;color:rgba(255,255,255,0.6);">
-        PARTES GUARDADOS
-      </div>
-
-      <div style="margin-top:20px;font-size:42px;font-weight:900;color:white;">
-        <span id="kpiBobinas">0</span>
-      </div>
-      <div style="margin-top:12px;font-size:16px;letter-spacing:2px;color:rgba(255,255,255,0.6);">
-        BOBINAS USADAS
-      </div>
-
-      <div style="margin-top:30px;font-size:42px;font-weight:900;color:white;">
-        <span id="kpiUltimaOrden">-</span>
-      </div>
-      <div style="margin-top:12px;font-size:16px;letter-spacing:2px;color:rgba(255,255,255,0.6);">
-        ÚLTIMA ORDEN
-      </div>
-
-      <div style="margin-top:20px;font-size:42px;font-weight:900;color:white;">
-        <span id="kpiMetros">0</span>
-      </div>
-      <div style="margin-top:12px;font-size:16px;letter-spacing:2px;color:rgba(255,255,255,0.6);">
-        METROS CORTADOS
-      </div>
-<div style="
-margin-top:20px;
-font-size:42px;
-font-weight:900;
-color:white;
-">
-<span id="kpiGolpes">0</span>
-</div>
-
-<div style="
-margin-top:12px;
-font-size:16px;
-letter-spacing:2px;
-color:rgba(255,255,255,0.6);
-">
-TOTAL GOLPES
-</div>
-    </div>
+      <div class="dashboard-grid">
+  <div class="dash-card">
+    <div class="dash-number">${totalPartes}</div>
+    <div class="dash-label">PARTES GUARDADOS</div>
   </div>
 
+  <div class="dash-card">
+    <div class="dash-number">${totalBobinas}</div>
+    <div class="dash-label">BOBINAS USADAS</div>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-number">${ultimaOrden || "—"}</div>
+    <div class="dash-label">ÚLTIMA ORDEN</div>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-number">${totalMetros}</div>
+    <div class="dash-label">METROS CORTADOS</div>
+  </div>
+
+  <div class="dash-card dash-card-wide">
+    <div class="dash-number">${totalGolpes}</div>
+    <div class="dash-label">TOTAL GOLPES</div>
+  </div>
+      </div>
   <div class="button" onclick="volverMenu()">
     ← VOLVER AL MENÚ
   </div>
