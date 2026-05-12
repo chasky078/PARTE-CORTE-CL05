@@ -1631,9 +1631,17 @@ function abrirGuardados() {
 
   document.getElementById("pantallaDashboard").style.display = "block";
     
-const partes = JSON.parse(localStorage.getItem("partes_cl05")) || [];
+let totalPartes = 0;
 
-document.getElementById("kpiPartes").innerText = partes.length;
+for(let i = 0; i < localStorage.length; i++){
+  const key = localStorage.key(i);
+
+  if(key.startsWith("parte_")){
+    totalPartes++;
+  }
+}
+
+document.getElementById("kpiPartes").innerText = totalPartes;
   window.scrollTo(0, 0);
   }
   function abrirAyuda() {
