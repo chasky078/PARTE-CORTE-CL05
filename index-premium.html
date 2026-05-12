@@ -1666,13 +1666,16 @@ function abrirGuardados() {
   document.getElementById("pantallaParte").style.display = "none";
   document.getElementById("pantallaPagina2").style.display = "none";
   document.getElementById("pantallaAyuda").style.display = "none";
+  document.getElementById("pantallaDashboard").style.display = "none";
   document.getElementById("pantallaGuardados").style.display = "block";
-   verPartes();
+
+  verPartes();
+
   setTimeout(() => {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-  window.scrollTo(0, 0);
-}, 100);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, 100);
 }
   function abrirDashboard() {
 
@@ -1752,12 +1755,16 @@ document.getElementById("kpiMetros").innerText = totalMetros;
   function abrirAyuda() {
   document.getElementById("menuPrincipal").style.display = "none";
   document.getElementById("pantallaParte").style.display = "none";
-    document.getElementById("pantallaDashboard").style.display = "none";
   document.getElementById("pantallaGuardados").style.display = "none";
   document.getElementById("pantallaPagina2").style.display = "none";
+  document.getElementById("pantallaDashboard").style.display = "none";
   document.getElementById("pantallaAyuda").style.display = "block";
+
+  setTimeout(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     window.scrollTo(0, 0);
-    }, 100);
+  }, 100);
   }
  function volverMenu() {
   document.getElementById("pantallaParte").style.display = "none";
