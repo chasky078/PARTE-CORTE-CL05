@@ -1644,150 +1644,120 @@ function saltoEnBobina(input, siguienteClase, longitud){
   }, 1500);
 
   }
- function entrarApp() {
-document.getElementById("pantallaInicio").style.display = "none";
-document.getElementById("menuPrincipal").style.display = "flex";
+ function ocultarPantallas(){
+  document.getElementById("menuPrincipal").style.display = "none";
+  document.getElementById("pantallaParte").style.display = "none";
+  document.getElementById("pantallaGuardados").style.display = "none";
+  document.getElementById("pantallaPagina2").style.display = "none";
+  document.getElementById("pantallaAyuda").style.display = "none";
+  document.getElementById("pantallaDashboard").style.display = "none";
 }
+
+function subirArriba(){
+  setTimeout(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, 100);
+}
+
+function entrarApp() {
+  document.getElementById("pantallaInicio").style.display = "none";
+  ocultarPantallas();
+  document.getElementById("menuPrincipal").style.display = "flex";
+  subirArriba();
+}
+
 function abrirCrearParte() {
   limpiarFormulario();
   localStorage.removeItem("borrador_cl05");
 
-  document.getElementById("menuPrincipal").style.display = "none";
+  ocultarPantallas();
   document.getElementById("pantallaParte").style.display = "block";
-  document.getElementById("pantallaGuardados").style.display = "none";
-  document.getElementById("pantallaPagina2").style.display = "none";
-  document.getElementById("pantallaAyuda").style.display = "none";
-
-  window.scrollTo(0, 0);
+  subirArriba();
 }
 
 function abrirGuardados() {
-  document.getElementById("menuPrincipal").style.display = "none";
-  document.getElementById("pantallaParte").style.display = "none";
-  document.getElementById("pantallaPagina2").style.display = "none";
-  document.getElementById("pantallaAyuda").style.display = "none";
-  document.getElementById("pantallaDashboard").style.display = "none";
+  ocultarPantallas();
   document.getElementById("pantallaGuardados").style.display = "block";
-
   verPartes();
-
-  setTimeout(() => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    window.scrollTo(0, 0);
-  }, 100);
-}
-  function abrirDashboard() {
-
-  document.getElementById("menuPrincipal").style.display = "none";
-
-  document.getElementById("pantallaParte").style.display = "none";
-
-  document.getElementById("pantallaGuardados").style.display = "none";
-
-  document.getElementById("pantallaPagina2").style.display = "none";
-
-  document.getElementById("pantallaAyuda").style.display = "none";
-
-  document.getElementById("pantallaDashboard").style.display = "block";
-    
-let totalPartes = 0;
-
-for(let i = 0; i < localStorage.length; i++){
-  const key = localStorage.key(i);
-
-  if(key.startsWith("parte_")){
-    totalPartes++;
-  }
+  subirArriba();
 }
 
-document.getElementById("kpiPartes").innerText = totalPartes;
-    let totalBobinas = 0;
-
-for(let i = 0; i < localStorage.length; i++){
-
-  const key = localStorage.key(i);
-
-  if(key.startsWith("parte_")){
-
-    const parte = JSON.parse(localStorage.getItem(key));
-
-    if(parte.bobinas){
-      totalBobinas += parte.bobinas.length;
-    }
-
-  }
-
-}
-
-document.getElementById("kpiBobinas").innerText = totalBobinas;
-    let ultimaOrden = "-";
-let ultimoGuardado = 0;
-
-for(let i = 0; i < localStorage.length; i++){
-  const key = localStorage.key(i);
-
-  if(key.startsWith("parte_")){
-    const parte = JSON.parse(localStorage.getItem(key));
-
-    if((parte.guardadoEn || 0) > ultimoGuardado){
-      ultimoGuardado = parte.guardadoEn || 0;
-      ultimaOrden = parte.orden || "-";
-    }
-  }
-}
-
-document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
-    let totalMetros = 0;
-
-partes.forEach(parte => {
-
-    let largo = parseFloat(parte.largoReal || 0);
-    let golpes = parseFloat(parte.totalGolpes || 0);
-
-    totalMetros += largo * golpes;
-
-});
-
-document.getElementById("kpiMetros").innerText = totalMetros;
-  window.scrollTo(0, 0);
-  }
-  function abrirAyuda() {
-  document.getElementById("menuPrincipal").style.display = "none";
-  document.getElementById("pantallaParte").style.display = "none";
-  document.getElementById("pantallaGuardados").style.display = "none";
-  document.getElementById("pantallaPagina2").style.display = "none";
-  document.getElementById("pantallaDashboard").style.display = "none";
+function abrirAyuda() {
+  ocultarPantallas();
   document.getElementById("pantallaAyuda").style.display = "block";
+  subirArriba();
+}
 
-  setTimeout(() => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    window.scrollTo(0, 0);
-  }, 100);
+function abrirDashboard() {
+  ocultarPantallas();
+  document.getElementById("pantallaDashboard").style.display = "block";
+
+  let totalPartes = 0;
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+    if(key.startsWith("parte_")){
+      totalPartes++;
+    }
   }
- function volverMenu() {
-  document.getElementById("pantallaParte").style.display = "none";
-  document.getElementById("pantallaGuardados").style.display = "none";
-   document.getElementById("pantallaDashboard").style.display = "none";
-  document.getElementById("pantallaPagina2").style.display = "none";
-  document.getElementById("pantallaAyuda").style.display = "none";
+
+  document.getElementById("kpiPartes").innerText = totalPartes;
+
+  let totalBobinas = 0;
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key.startsWith("parte_")){
+      const parte = JSON.parse(localStorage.getItem(key));
+
+      if(parte.bobinas){
+        totalBobinas += parte.bobinas.length;
+      }
+    }
+  }
+
+  document.getElementById("kpiBobinas").innerText = totalBobinas;
+
+  let ultimaOrden = "-";
+  let ultimoGuardado = 0;
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key.startsWith("parte_")){
+      const parte = JSON.parse(localStorage.getItem(key));
+
+      if((parte.guardadoEn || 0) > ultimoGuardado){
+        ultimoGuardado = parte.guardadoEn || 0;
+        ultimaOrden = parte.orden || "-";
+      }
+    }
+  }
+
+  document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
+
+  subirArriba();
+}
+
+function volverMenu() {
+  ocultarPantallas();
   document.getElementById("menuPrincipal").style.display = "flex";
- }
-  function abrirPagina2(){
+  subirArriba();
+}
 
-  document.getElementById("pantallaParte").style.display = "none";
-
+function abrirPagina2(){
+  ocultarPantallas();
   document.getElementById("pantallaPagina2").style.display = "block";
+  subirArriba();
+}
 
-  }
-  setInterval(autoGuardarTemporal, 15000);
 function volverParte(){
-
-  document.getElementById("pantallaPagina2").style.display = "none";
-
+  ocultarPantallas();
   document.getElementById("pantallaParte").style.display = "block";
-
+  subirArriba();
 }
 function autoGuardarTemporal() {
 
