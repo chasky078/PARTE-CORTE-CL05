@@ -759,7 +759,9 @@ PARTE TRASERA EN DESARROLLO
     <h3>Panel de estadísticas</h3>
 
     <div style="
-    height:260px;
+    height:auto;
+min-height:260px;
+flex-direction:column;
     border:2px dashed rgba(255,255,255,0.15);
     border-radius:18px;
     display:flex;
@@ -785,6 +787,23 @@ letter-spacing:2px;
 color:rgba(255,255,255,0.6);
 ">
 PARTES GUARDADOS
+</div>
+      <div style="
+margin-top:20px;
+font-size:42px;
+font-weight:900;
+color:white;
+">
+<span id="kpiBobinas">0</span>
+</div>
+
+<div style="
+margin-top:12px;
+font-size:16px;
+letter-spacing:2px;
+color:rgba(255,255,255,0.6);
+">
+BOBINAS USADAS
 </div>
     </div>
   </div>
@@ -1642,6 +1661,25 @@ for(let i = 0; i < localStorage.length; i++){
 }
 
 document.getElementById("kpiPartes").innerText = totalPartes;
+    let totalBobinas = 0;
+
+for(let i = 0; i < localStorage.length; i++){
+
+  const key = localStorage.key(i);
+
+  if(key.startsWith("parte_")){
+
+    const parte = JSON.parse(localStorage.getItem(key));
+
+    if(parte.bobinas){
+      totalBobinas += parte.bobinas.length;
+    }
+
+  }
+
+}
+
+document.getElementById("kpiBobinas").innerText = totalBobinas;
   window.scrollTo(0, 0);
   }
   function abrirAyuda() {
