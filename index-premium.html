@@ -560,7 +560,10 @@ MENÚ PRINCIPAL
   <div class="menu-icon">🗂️</div>
   <div>PARTES GUARDADOS</div>
 </div>
-
+<div onclick="abrirDashboard()" class="menu-card">
+  <div class="menu-icon">📊</div>
+  <div>DASHBOARD</div>
+</div>
 <div onclick="abrirAyuda()" class="menu-card">
   <div class="menu-icon">ℹ️</div>
   <div>AYUDA</div>
@@ -739,6 +742,41 @@ PARTE TRASERA EN DESARROLLO
 </div>
 
 </div>
+
+  </div>
+  <div id="pantallaDashboard" class="container" style="display:none;">
+
+  <h2 style="
+  text-align:center;
+  color:white;
+  margin-bottom:25px;
+  letter-spacing:2px;
+  ">
+  📊 DASHBOARD CL05
+  </h2>
+
+  <div class="section">
+    <h3>Panel de estadísticas</h3>
+
+    <div style="
+    height:260px;
+    border:2px dashed rgba(255,255,255,0.15);
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,0.45);
+    font-size:22px;
+    font-weight:700;
+    text-align:center;
+    ">
+    DASHBOARD EN DESARROLLO
+    </div>
+  </div>
+
+  <div class="button" onclick="volverMenu()">
+    ← VOLVER AL MENÚ
+  </div>
 
   </div>
 <div id="pantallaAyuda" class="container" style="
@@ -1564,6 +1602,22 @@ function abrirGuardados() {
   document.getElementById("pantallaGuardados").style.display = "block";
   verPartes();
 }
+  function abrirDashboard() {
+
+  document.getElementById("menuPrincipal").style.display = "none";
+
+  document.getElementById("pantallaParte").style.display = "none";
+
+  document.getElementById("pantallaGuardados").style.display = "none";
+
+  document.getElementById("pantallaPagina2").style.display = "none";
+
+  document.getElementById("pantallaAyuda").style.display = "none";
+
+  document.getElementById("pantallaDashboard").style.display = "block";
+
+  window.scrollTo(0, 0);
+  }
   function abrirAyuda() {
   document.getElementById("menuPrincipal").style.display = "none";
   document.getElementById("pantallaParte").style.display = "none";
