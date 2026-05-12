@@ -793,7 +793,23 @@ PARTE TRASERA EN DESARROLLO
       <div style="margin-top:12px;font-size:16px;letter-spacing:2px;color:rgba(255,255,255,0.6);">
         METROS CORTADOS
       </div>
+<div style="
+margin-top:20px;
+font-size:42px;
+font-weight:900;
+color:white;
+">
+<span id="kpiGolpes">0</span>
+</div>
 
+<div style="
+margin-top:12px;
+font-size:16px;
+letter-spacing:2px;
+color:rgba(255,255,255,0.6);
+">
+TOTAL GOLPES
+</div>
     </div>
   </div>
 
@@ -1696,7 +1712,34 @@ function abrirDashboard() {
   }
 
   document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
+let totalMetros = 0;
+let totalGolpes = 0;
 
+for(let i = 0; i < localStorage.length; i++){
+
+const key = localStorage.key(i);
+
+if(key.startsWith("parte_")){
+
+const parte = JSON.parse(localStorage.getItem(key));
+
+if(parte.bobinas){
+
+parte.bobinas.forEach(b => {
+
+totalMetros += Number(b.metros || 0);
+totalGolpes += Number(b.golpes || 0);
+
+});
+
+}
+
+}
+
+}
+
+document.getElementById("kpiMetros").innerText = totalMetros;
+document.getElementById("kpiGolpes").innerText = totalGolpes;
   subirArriba();
 }
 
