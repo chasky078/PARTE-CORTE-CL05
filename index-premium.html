@@ -1,28 +1,1798 @@
-<div class="dashboard-grid">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte Producción CL05</title>
 
-  <div class="dash-card">
-    <div class="dash-number" id="kpiPartes">0</div>
-    <div class="dash-label">PARTES GUARDADOS</div>
+<style>
+:root{
+  --azul-0:#000814;
+  --azul-1:#00162f;
+  --azul-2:#002a5c;
+  --azul-3:#004a99;
+  --azul-luz:#18b8ff;
+  --texto:#ffffff;
+  --muted:#a8c7ef;
+  --card:rgba(255,255,255,0.08);
+  --card2:rgba(255,255,255,0.12);
+  --borde:rgba(255,255,255,0.12);
+  --shadow:0 18px 45px rgba(0,0,0,0.38);
+}
+
+*{ box-sizing:border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(0,120,255,0.18) 0%,transparent 32%),
+    linear-gradient(135deg,#000814 0%,#001f45 48%,#000814 100%);
+  color: var(--texto);
+  min-height:100vh;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;
+  opacity:0.35;
+}
+
+header {
+  background: rgba(0,20,48,0.92);
+  color: white;
+  padding: 18px 14px;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing:1.5px;
+  border-bottom:1px solid rgba(255,255,255,0.10);
+  box-shadow:0 10px 30px rgba(0,0,0,0.32);
+  position:relative;
+  z-index:1;
+}
+
+.container {
+  width:min(980px,100%);
+  margin:0 auto;
+  padding: 16px;
+  position:relative;
+  z-index:1;
+}
+
+.section {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.32);
+  color:white;
+}
+
+.section h3{
+  margin:0 0 18px 0;
+  color:#7dd3ff;
+  font-size:18px;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.section-ayuda {
+  background: rgba(255,255,255,0.10);
+  padding: 22px;
+  margin-bottom: 18px;
+  border-radius: 22px;
+  color: white;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.30);
+}
+
+input {
+  width: 100%;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,10,28,0.48);
+  color: white;
+  font-size: 17px;
+  letter-spacing:0.4px;
+  box-shadow:
+0 4px 14px rgba(0,0,0,0.22),
+inset 0 1px 0 rgba(255,255,255,0.03);
+  font-weight:600;
+  box-sizing: border-box;
+  outline:none;
+  transition:0.28s;
+}
+
+input::placeholder{ color:rgba(210,230,255,0.62); }
+
+input:focus{
+  border-color:rgba(24,184,255,0.85);
+  box-shadow:0 0 0 3px rgba(24,184,255,0.14);
+  background: rgba(0,18,48,0.72);
+}
+
+input:disabled {
+  opacity: 1;
+  color: #dff3ff;
+  background: rgba(255,255,255,0.10);
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  background: linear-gradient(135deg,#1a2f52 0%,#21406d 55%,#173459 100%);
+  color: white;
+  padding: 22px;
+  text-align: center;
+  border-radius: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.22s;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.30), 0 0 14px rgba(24,184,255,0.18);
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+.button:hover{
+filter:brightness(1.06);
+transform:translateY(-2px) scale(1.01);
+box-shadow:
+0 16px 38px rgba(0,0,0,0.38),
+0 0 28px rgba(40,140,255,0.22);
+}
+
+.button-danger {
+  background: linear-gradient(135deg,#9b1c1c,#d32f2f);
+  box-shadow:0 10px 24px rgba(0,0,0,0.30), 0 0 14px rgba(211,47,47,0.18);
+}
+
+.menu-card{
+  .btn-entrar{
+  background:linear-gradient(135deg,#1a2f52 0%,#21406d 55%,#173459 100%);
+  border:1px solid rgba(80,160,255,0.35);
+  color:white;
+  padding:24px 90px;
+  font-size:54px;
+  font-weight:900;
+  border-radius:28px;
+  cursor:pointer;
+  transition:0.25s;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.04),
+    0 0 30px rgba(40,120,255,0.18);
+}
+
+.btn-entrar:hover{
+  transform:translateY(-3px) scale(1.02);
+  filter:brightness(1.08);
+  box-shadow:
+    0 24px 50px rgba(0,0,0,0.55),
+    0 0 40px rgba(40,120,255,0.28);
+}
+background:
+linear-gradient(135deg,rgba(18,43,75,0.92),rgba(24,58,98,0.88));
+border:2px solid rgba(74,158,255,0.45);
+border-radius:18px;
+padding:32px 38px;
+margin-bottom:22px;
+color:white;
+font-size:26px;
+font-weight:900;
+display:flex;
+align-items:center;
+gap:22px;
+justify-content:flex-start;
+  padding-left:70px;
+cursor:pointer;
+transition:0.25s;
+box-shadow:
+0 14px 34px rgba(0,0,0,0.45),
+inset 0 0 0 1px rgba(255,255,255,0.04);
+width:min(620px,92vw);
+letter-spacing:0.5px;
+}
+
+.menu-card:hover{
+  transform:scale(1.02);
+  filter:brightness(1.08);
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+
+.menu-icon{
+font-size:30px;
+width:52px;
+height:52px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+inset 0 0 0 1px rgba(255,255,255,0.03),
+0 4px 14px rgba(0,0,0,0.35);
+}
+.btn-entrar{
+  background:linear-gradient(135deg,#1a2f52 0%,#21406d 55%,#173459 100%);
+  border:1px solid rgba(80,160,255,0.35);
+  color:white;
+  padding:24px 90px;
+  font-size:54px;
+  font-weight:900;
+  border-radius:28px;
+  cursor:pointer;
+  transition:0.25s;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.04),
+    0 0 30px rgba(40,120,255,0.18);
+}
+
+.btn-entrar:hover{
+  transform:translateY(-3px) scale(1.02);
+  filter:brightness(1.08);
+  box-shadow:
+    0 24px 50px rgba(0,0,0,0.55),
+    0 0 40px rgba(40,120,255,0.28);
+}
+  .btn-volver{
+  width:100%;
+  background:linear-gradient(135deg,#17345a 0%,#214a7a 55%,#17345a 100%);
+  border:1px solid rgba(80,160,255,0.28);
+  color:white;
+  padding:20px;
+  font-size:28px;
+  font-weight:900;
+  text-align:center;
+  border-radius:0 0 22px 22px;
+  cursor:pointer;
+  transition:0.25s;
+  letter-spacing:1px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.btn-volver:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.45),
+    0 0 30px rgba(40,120,255,0.18);
+}
+.bobina {
+  position:relative;
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 16px;
+  margin-top: 14px;
+  border-radius: 20px;
+  background: rgba(0,12,32,0.38);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.cerrar-bobina{
+  position:absolute;
+  top:14px;
+right:14px;
+  width:46px;
+height:46px;
+  border-radius:16px;
+  border:1px solid rgba(255,120,120,0.35);
+  background:rgba(80,20,30,0.45);
+  color:#ffb3b3;
+  font-size:34px;
+  cursor:pointer;
+  transition:0.25s;
+  z-index:5;
+}
+
+.cerrar-bobina:hover{
+  background:rgba(255,70,70,0.25);
+  color:white;
+  transform:scale(1.05);
+}
+.bobina > b{
+  display:block;
+  color:#7dd3ff;
+  letter-spacing:1px;
+  margin-bottom:12px;
+}
+
+.confirmada {
+  background: rgba(21,128,61,0.18);
+  border: 2px solid rgba(34,197,94,0.75);
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+}
+
+.material {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 28px;
+  font-weight: 900;
+  color:white;
+}
+
+.material input {
+  width: 92px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.check-line {
+  display: block;
+  margin-bottom: 10px;
+  color:#dcecff;
+  font-weight:700;
+}
+
+.check-line input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.guardado-item {
+  position: relative;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color:white;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+
+.guardado-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 900;
+}
+
+.guardado-fecha {
+  font-size: 13px;
+  color: #b8d7ff;
+  margin-top: 4px;
+}
+
+.guardado-item button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.soldadura-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color:#dcecff;
+}
+
+.soldadura-box label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.soldadura-box input {
+  width: auto;
+  margin: 0;
+}
+
+.mensaje-ok {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e7d32;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+
+#pantallaGuardados h3{
+  color:white;
+  text-align:center;
+  font-size:28px;
+  letter-spacing:1px;
+}
+
+@media (max-width:700px){
+  .row{ gap:8px; }
+  .section{ padding:16px; border-radius:20px; }
+  .container{ padding:12px; }
+  .menu-card{ font-size:24px; padding:22px; }
+  .material{ font-size:22px; }
+  .material input{ width:80px; font-size:24px; }
+}
+  .dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:18px;
+  padding:22px;
+  border:2px dashed rgba(140,210,255,.25);
+  border-radius:22px;
+}
+
+.dash-card{
+  background:linear-gradient(145deg, rgba(18,55,92,.95), rgba(8,28,52,.95));
+  border:1px solid rgba(140,210,255,.22);
+  border-radius:20px;
+  padding:24px 14px;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.28);
+}
+
+.dash-card-wide{
+  grid-column:1 / -1;
+}
+
+.dash-number{
+  font-size:44px;
+  font-weight:900;
+  color:white;
+  line-height:1;
+}
+
+.dash-label{
+  margin-top:12px;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:rgba(210,235,255,.72);
+}
+
+@media(max-width:700px){
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="pantallaInicio" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left,rgba(0,120,255,0.18) 0%,transparent 28%),
+linear-gradient(135deg,#000814 0%,#002a5c 45%,#000814 100%);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+text-align:center;
+padding:24px;
+box-sizing:border-box;
+overflow:hidden;
+">
+<img src="./logo-fondo.png?v=1" style="
+position:absolute;
+right:-240px;
+top:50%;
+transform:translateY(-50%);
+width:950px;
+opacity:0.08;
+z-index:0;
+pointer-events:none;
+">
+
+<img src="./logo.png?v=1" style="
+width:180px;
+margin-bottom:40px;
+position:relative;
+z-index:2;
+filter:drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+">
+
+<h1 style="
+color:white;
+font-size:92px;
+margin:0;
+font-weight:900;
+letter-spacing:4px;
+">
+SECCIÓN DE CORTE
+</h1>
+
+<div style="
+width:100px;
+height:4px;
+background:#15b7ff;
+margin:24px 0;
+border-radius:20px;
+"></div>
+
+<h2 style="
+color:white;
+font-size:20px;
+margin:0 0 45px 0;
+letter-spacing:1px;
+">
+PARTE DE PRODUCCIÓN CL05
+</h2>
+
+<button onclick="entrarApp()" 
+  class="btn-entrar">
+ENTRAR
+</button>
+
+<div style="
+margin-top:35px;
+color:white;
+font-size:28px;
+  opacity:0.92;
+">
+By Rubén D. 268
+</div>
+
+</div>
+  <div id="menuPrincipal" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#000814 0%,#002a5c 45%,#000814 100%);
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9998;
+text-align:center;
+padding:24px;
+box-sizing:border-box;
+">
+
+<img src="./logo.png?v=1" style="
+width:140px;
+margin-bottom:35px;
+">
+
+<h1 style="
+color:white;
+font-size:42px;
+margin:0 0 45px 0;
+font-weight:900;
+letter-spacing:2px;
+">
+MENÚ PRINCIPAL
+</h1>
+
+<div onclick="abrirCrearParte()" class="menu-card">
+  <div class="menu-icon">📋</div>
+  <div>CREAR PARTE</div>
+</div>
+
+<div onclick="abrirGuardados()" class="menu-card">
+  <div class="menu-icon">🗂️</div>
+  <div>PARTES GUARDADOS</div>
+</div>
+<div onclick="abrirDashboard()" class="menu-card">
+  <div class="menu-icon">📊</div>
+  <div>DASHBOARD</div>
+</div>
+<div onclick="abrirAyuda()" class="menu-card">
+  <div class="menu-icon">ℹ️</div>
+  <div>AYUDA</div>
+</div>
+
+  </div>
+<header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+  <div onclick="volverMenu()" class="btn-volver">
+← VOLVER AL MENÚ
+  </div>
+  <div id="mensajeConfirmacion" class="mensaje-ok"></div>
+
+<div id="pantallaParte" class="container">
+
+  <div class="section">
+    <h3>Cabecera</h3>
+
+    <div class="row">
+      <input id="orden" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Número Orden">
+      <input id="linea" value="CL05" disabled>
+    </div>
+
+    <input id="fecha" type="date">
+
+    <input id="proveedor" placeholder="Proveedor" enterkeyhint="next">
+
+    <input 
+      id="codigo"
+      type="tel"
+      inputmode="numeric"
+      enterkeyhint="next"
+      placeholder="Código (máx 4)"
+      maxlength="4"
+      onblur="mostrarCodigo()"
+      onfocus="limpiarCodigo()"
+    >
+
+    <label>Nº MATERIAL</label>
+    <div class="material">
+      3 0 0 0
+      <input id="material1" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" oninput="saltoMaterial()">
+      /
+      <input id="material2" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3">
+    </div>
+  </div>
+  
+<div class="section">
+  <h3>Datos</h3>
+
+  <label class="check-line">
+    <input type="checkbox" id="checkS" onclick="soloUno('S')">
+    S (Recto)
+  </label>
+
+  <label class="check-line">
+    <input type="checkbox" id="checkW" onclick="soloUno('W')">
+    W (Scroll)
+  </label>
+
+  <div class="row">
+    <input id="ancho" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Ancho">
+    <input id="largo" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Largo">
   </div>
 
-  <div class="dash-card">
-    <div class="dash-number" id="kpiBobinas">0</div>
-    <div class="dash-label">BOBINAS USADAS</div>
+  <div class="row">
+    <input id="espesor" type="tel" inputmode="numeric" enterkeyhint="next" placeholder="Espesor">
+
+    <input id="limite"
+      type="text"
+      placeholder="Txxx"
+      enterkeyhint="next"
+      oninput="this.value = this.value.toUpperCase()">
   </div>
 
-  <div class="dash-card">
-    <div class="dash-number" id="kpiUltimaOrden">-</div>
-    <div class="dash-label">ÚLTIMA ORDEN</div>
+  <div class="row">
+    <input id="diferencial"
+      type="text"
+      placeholder="Dif"
+      enterkeyhint="next"
+      oninput="this.value = this.value.toUpperCase()">
+
+    <input id="st" value="ST" disabled>
+  </div>
+</div>
+  <div class="section">
+    <h3>Bobinas</h3>
+    <div id="bobinas"></div>
+
+    <div class="button" onclick="addBobina()">+ Añadir bobina</div>
+    
   </div>
 
-  <div class="dash-card">
-    <div class="dash-number" id="kpiMetros">0</div>
-    <div class="dash-label">METROS CORTADOS</div>
+  <div class="section">
+    <h3>Personal</h3>
+
+    <div class="row">
+      <input id="mecanico" 
+type="text" 
+inputmode="numeric" 
+maxlength="2" 
+placeholder="Mecánico"
+oninput="filtrarNumeros(this); if(this.value.length>=2){document.getElementById('apoyo').focus();}">
+
+<input id="apoyo" 
+type="text" 
+inputmode="numeric" 
+maxlength="2" 
+placeholder="Apoyo"
+oninput="filtrarNumeros(this)">
+    </div>
   </div>
 
-  <div class="dash-card dash-card-wide">
-    <div class="dash-number" id="kpiGolpes">0</div>
-    <div class="dash-label">TOTAL GOLPES</div>
+  <div class="section">
+    <h3>Comprobaciones</h3>
+
+    <label class="check-line">
+      <input id="espesorOk" type="checkbox" checked>
+      Espesor OK
+    </label>
+
+    <label class="check-line">
+      <input id="lineaOk" type="checkbox" checked>
+      Línea OK
+    </label>
+  </div>
+
+  <div class="button" onclick="guardarParte()">💾 GUARDAR PARTE</div>
+  <div class="row" style="margin-top:18px; gap:14px;">
+
+  <div class="button"
+       onclick="volverMenu()"
+       style="flex:1;">
+       ← VOLVER AL MENÚ
+  </div>
+
+  <div class="button"
+       onclick="abrirPagina2()"
+       style="flex:1;">
+       SIGUIENTE PÁGINA →
+  </div>
+
   </div>
 
 </div>
+  <div id="pantallaPagina2" class="container" style="display:none;">
+
+<header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+
+<div class="button" onclick="volverParte()" style="margin:10px;">
+← PÁGINA ANTERIOR
+</div>
+
+<div class="section">
+
+<h2 style="
+text-align:center;
+color:white;
+margin-top:20px;
+margin-bottom:20px;
+">
+PÁGINA 2 / 2 · PARTE TRASERA
+</h2>
+
+<div style="
+height:400px;
+border:2px dashed rgba(255,255,255,0.15);
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:rgba(255,255,255,0.45);
+font-size:22px;
+font-weight:700;
+">
+PARTE TRASERA EN DESARROLLO
+</div>
+
+</div>
+
+  </div>
+  <div id="pantallaDashboard" class="container" style="display:none;">
+
+  <h2 style="text-align:center;color:white;margin-bottom:25px;letter-spacing:2px;">
+    📊 DASHBOARD CL05
+  </h2>
+
+  <div class="section">
+    <h3>Panel de estadísticas</h3>
+
+    <div class="dashboard-grid">
+
+      <div class="dash-card">
+        <div class="dash-number" id="kpiPartes">0</div>
+        <div class="dash-label">PARTES GUARDADOS</div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-number" id="kpiBobinas">0</div>
+        <div class="dash-label">BOBINAS USADAS</div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-number" id="kpiUltimaOrden">-</div>
+        <div class="dash-label">ÚLTIMA ORDEN</div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-number" id="kpiMetros">0</div>
+        <div class="dash-label">METROS CORTADOS</div>
+      </div>
+
+      <div class="dash-card dash-card-wide">
+        <div class="dash-number" id="kpiGolpes">0</div>
+        <div class="dash-label">TOTAL GOLPES</div>
+      </div>
+
+    </div>
+
+    <div class="button" onclick="volverMenu()">
+      ← VOLVER AL MENÚ
+    </div>
+
+  </div>
+
+</div>
+<div id="pantallaAyuda" class="container" style="
+display:none;
+background:linear-gradient(135deg,#000814 0%,#002a5c 45%,#000814 100%);
+min-height:100vh;
+padding:22px;
+box-sizing:border-box;
+">
+
+<h2 style="
+text-align:center;
+color:white;
+margin-bottom:25px;
+">
+❔ AYUDA
+</h2>
+
+<div class="section-ayuda">
+<b>📝 CREAR PARTE</b>
+<p>Desde aquí se abre un parte nuevo para rellenar los datos de producción de la línea CL05.</p>
+<p>Introduce la orden, fecha, proveedor, medidas, material, personal y bobinas utilizadas.</p>
+</div>
+
+<div class="section-ayuda">
+<b>📂 PARTES GUARDADOS</b>
+<p>En esta sección puedes consultar los partes almacenados anteriormente en el dispositivo.</p>
+<p>Puedes abrir un parte guardado para revisarlo, continuar completándolo o eliminarlo individualmente.</p>
+</div>
+
+<div class="section-ayuda">
+<b>💾 GUARDAR PARTE</b>
+<p>El sistema permite guardar el parte actual directamente en el dispositivo para evitar pérdida de información.</p>
+<p>Los datos quedan disponibles incluso sin conexión a internet.</p>
+</div>
+  
+<div class="section-ayuda">
+<b>❌ ELIMINAR BOBINA</b>
+<p>Pulsa la X situada en la esquina superior derecha de una bobina para eliminarla.</p>
+<p>Por seguridad, la app pedirá escribir CONFIRMAR antes de borrar la bobina.</p>
+</div>
+  
+<div class="section-ayuda">
+<b>❌ BORRAR PARTE</b>
+<p>Los partes guardados pueden eliminarse individualmente cuando ya no sean necesarios.</p>
+<p>Por seguridad, la aplicación no dispone de borrado masivo automático.</p>
+</div>
+
+<div class="button" onclick="volverMenu()">
+⬅ VOLVER AL MENÚ
+</div>
+
+</div>
+<div id="pantallaGuardados" class="container" style="display:none;">
+  <h3>Partes guardados</h3>
+
+  <input 
+    id="buscadorPartes"
+    type="text"
+    inputmode="numeric"
+    placeholder="Buscar por orden..."
+    oninput="filtrarNumeros(this); verPartes()"
+  >
+
+  <div id="contenidoPartes"></div>
+</div>
+
+<script>
+let contador = 0;
+
+function mostrarPantalla(pantalla){
+  if(pantalla === "parte"){
+    document.getElementById("pantallaParte").style.display = "block";
+    document.getElementById("pantallaGuardados").style.display = "none";
+  }
+
+  if(pantalla === "guardados"){
+    document.getElementById("pantallaParte").style.display = "none";
+    document.getElementById("pantallaGuardados").style.display = "block";
+  }
+}
+
+function mostrarCodigo(){
+  const input = document.getElementById("codigo");
+  if(input.value && !input.value.startsWith("Código ")){
+    input.value = "Código " + input.value;
+  }
+}
+
+function limpiarCodigo(){
+  const input = document.getElementById("codigo");
+  input.value = input.value.replace("Código ", "");
+}
+
+function saltoMaterial(){
+  const input = document.getElementById("material1");
+  if(input.value.length >= 2){
+    document.getElementById("material2").focus();
+  }
+}
+
+function soloUno(tipo){
+  if(tipo === "S"){
+    document.getElementById("checkW").checked = false;
+  } else {
+    document.getElementById("checkS").checked = false;
+  }
+}
+
+function addBobina(datos = null){
+  contador++;
+
+  const div = document.createElement("div");
+  div.className = "bobina";
+  div.id = "b" + contador;
+
+  div.innerHTML = `
+    <div class="bobina-top">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+width:100%;
+">
+
+</div>
+
+<b>BOBINA ${contador}</b>
+<button
+class="cerrar-bobina"
+onclick="eliminarBobina(this)">
+✕
+</button>
+
+<input 
+class="bob-proveedor" 
+type="text" 
+placeholder="Nº proveedor">
+
+</div>
+
+    <div class="row">
+<input class="bob-marcha" type="time" placeholder="Inicio"
+oninput="saltoEnBobina(this, 'bob-parada', 5)"
+onchange="calcularTotal(this)">
+
+<input class="bob-parada" type="time" placeholder="Fin"
+onchange="calcularTotal(this)">
+</div>
+
+    <div class="row">
+      <input class="bob-total" type="tel" inputmode="numeric" placeholder="Total"
+onblur="ponerTexto(this, 'Total')" onfocus="limpiarTexto(this, 'Total')">
+
+<input class="bob-acum" type="tel" inputmode="numeric" placeholder="Acum"
+onblur="ponerTexto(this, 'Acum')" onfocus="limpiarTexto(this, 'Acum')">
+    </div>
+    
+    <div class="row">
+      <input class="bob-cambio" type="text" inputmode="numeric" maxlength="2" placeholder="Cambio"
+oninput="filtrarNumeros(this); calcularCambioAcumulado(); saltoEnBobina(this, 'bob-golpes', 2)">
+<input class="bob-cambio-acum" type="tel" inputmode="numeric" placeholder="Cambio acum">
+    </div>
+
+    <div class="row">
+      <input class="bob-golpes" type="tel" inputmode="numeric" placeholder="Total de golpes"
+      oninput="calcularMetros(this)"
+onblur="ponerTexto(this, 'Total de golpes')" 
+onfocus="limpiarTexto(this, 'Total de golpes')">
+<input class="bob-primeras" type="tel" inputmode="numeric" placeholder="Hojas de primera"
+onblur="ponerTexto(this, 'Hojas de primera')" onfocus="limpiarTexto(this, 'Hojas de primera')">
+    </div>
+
+    <div class="row">
+      <input class="bob-esp-mas" type="tel" inputmode="numeric" placeholder="+Esp"
+onblur="ponerTexto(this, '+Esp')" onfocus="limpiarTexto(this, '+Esp')">
+      <input class="bob-esp-menos" type="tel" inputmode="numeric" placeholder="-Esp"
+onblur="ponerTexto(this, '-Esp')" onfocus="limpiarTexto(this, '-Esp')">
+    </div>
+
+   <div class="row">
+  <input class="bob-visual" type="tel" inputmode="numeric" placeholder="Visual"
+  onblur="ponerTexto(this, 'Visual');"
+  onfocus="limpiarTexto(this, 'Visual')">
+
+  <input class="bob-poros" type="tel" inputmode="numeric" placeholder="Poros"
+  onblur="ponerTexto(this, 'Poros');"
+  onfocus="limpiarTexto(this, 'Poros')">
+</div>
+
+    <input class="bob-otros" type="tel" inputmode="numeric" placeholder="Otros"
+oninput="filtrarNumeros(this)"
+onblur="ponerTextoFinal(this, 'OTROS', 'HOJAS')"
+onfocus="limpiarTextoFinal(this, 'OTROS', 'HOJAS')">
+
+    
+<div class="row">
+  <input class="bob-a1" type="tel" inputmode="numeric" placeholder="A1"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A1', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A1', 'HOJAS')">
+
+  <input class="bob-a2" type="tel" inputmode="numeric" placeholder="A2"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A2', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A2', 'HOJAS')">
+</div>
+
+<div class="row">
+  <input class="bob-a3" type="tel" inputmode="numeric" placeholder="A3"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A3', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A3', 'HOJAS')">
+
+  <input class="bob-a4" type="tel" inputmode="numeric" placeholder="A4"
+  oninput="filtrarNumeros(this)"
+  onblur="ponerTextoFinal(this, 'A4', 'HOJAS')"
+  onfocus="limpiarTextoFinal(this, 'A4', 'HOJAS')">
+</div>
+
+    <div class="row">
+      <input class="bob-etiqueta"
+type="tel"
+inputmode="decimal"
+placeholder="Metros etiqueta"
+oninput="filtrarDecimal(this)">
+
+<input class="bob-largo-real"
+type="tel"
+inputmode="decimal"
+placeholder="Largo real"
+oninput="filtrarDecimal(this); calcularMetros(this)">
+
+<input class="bob-medidos"
+type="text"
+placeholder="Metros medidos"
+disabled>
+    </div>
+    <div class="row">
+  <div class="extra-box soldadura-box">
+  <span>SOLD:</span>
+
+  <label>
+    <input type="checkbox" name="soldadura" onclick="seleccionarSoldadura(this)"> 1
+  </label>
+
+  <label>
+    <input type="checkbox" name="soldadura" onclick="seleccionarSoldadura(this)"> 2
+  </label>
+
+  <label>
+    <input type="checkbox" name="soldadura" onclick="seleccionarSoldadura(this)"> 3
+  </label>
+
+  <label>
+    <input type="checkbox" name="soldadura" onclick="seleccionarSoldadura(this)"> 4
+  </label>
+</div>
+
+  <div class="extra-box"></div>
+  <div class="extra-box"></div>
+</div>
+  </div>
+
+  <div class="extra-box"></div>
+  <div class="extra-box"></div>
+</div>
+
+    <div class="button" onclick="confirmar('${div.id}')">✔ Confirmar</div>
+  `;
+
+  document.getElementById("bobinas").appendChild(div);
+
+  if(datos){
+    cargarDatosBobina(div, datos);
+  }
+}
+
+function cargarDatosBobina(div, datos){
+  div.querySelector(".bob-marcha").value = datos.marcha || "";
+  div.querySelector(".bob-parada").value = datos.parada || "";
+  div.querySelector(".bob-total").value = datos.total || "";
+  div.querySelector(".bob-acum").value = datos.acum || "";
+  div.querySelector(".bob-cambio").value = datos.cambio || "";
+  div.querySelector(".bob-cambio-acum").value = datos.cambioAcum || "";
+  div.querySelector(".bob-golpes").value = datos.golpes || "";
+  div.querySelector(".bob-primeras").value = datos.primeras || "";
+  div.querySelector(".bob-esp-mas").value = datos.espMas || "";
+  div.querySelector(".bob-esp-menos").value = datos.espMenos || "";
+  div.querySelector(".bob-visual").value = datos.visual || "";
+  div.querySelector(".bob-poros").value = datos.poros || "";
+  div.querySelector(".bob-otros").value = datos.otros || "";
+  div.querySelector(".bob-a1").value = datos.a1 || "";
+  div.querySelector(".bob-a2").value = datos.a2 || "";
+  div.querySelector(".bob-a3").value = datos.a3 || "";
+  div.querySelector(".bob-a4").value = datos.a4 || "";
+  div.querySelector(".bob-etiqueta").value = datos.etiqueta || "";
+  div.querySelector(".bob-medidos").value = datos.medidos || "";
+  const checks = div.querySelectorAll('.soldadura-box input[type="checkbox"]');
+
+checks.forEach(c => {
+  if(c.parentElement.innerText.trim() === datos.soldadura){
+    c.checked = true;
+  }
+});
+
+  if(datos.confirmada){
+    confirmar(div.id, true);
+  }
+}
+
+function confirmar(id, desdeCarga = false){
+  const b = document.getElementById(id);
+  const inputs = b.querySelectorAll("input");
+  const boton = b.querySelector(".button");
+
+  if(!b.classList.contains("confirmada")){
+    inputs.forEach(i => i.disabled = true);
+    b.classList.add("confirmada");
+    boton.innerText = "✏ Editar";
+
+    // 👉 SOLO si NO viene de carga
+    if(!desdeCarga){
+  mostrarMensajeConfirmacion("✔ Bobina confirmada");
+
+  setTimeout(() => {
+    const btnAdd = document.querySelector('[onclick="addBobina()"]');
+    if(btnAdd){
+      btnAdd.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, 200);
+    }
+
+  } else {
+    inputs.forEach(i => i.disabled = false);
+    b.classList.remove("confirmada");
+    boton.innerText = "✔ Confirmar";
+  }
+}
+
+function quitarBobina(){
+
+  if(contador === 0) return;
+
+  const confirmar = confirm("¿Eliminar última bobina? Se perderán los datos.");
+
+  if(!confirmar) return;
+
+  const ultima = document.getElementById("b" + contador);
+  if(ultima) ultima.remove();
+  contador--;
+
+}
+function eliminarBobina(boton){
+  const bobina = boton.closest(".bobina");
+  if(!bobina) return;
+
+  const confirmar = prompt("Para eliminar esta bobina escribe CONFIRMAR");
+
+  if(!confirmar || confirmar.trim().toUpperCase() !== "CONFIRMAR"){
+    alert("Borrado cancelado");
+    return;
+  }
+
+  bobina.remove();
+}
+function recogerBobinas(){
+  const lista = [];
+  const bloques = document.querySelectorAll(".bobina");
+
+  bloques.forEach(b => {
+    lista.push({
+      marcha: b.querySelector(".bob-marcha").value,
+      parada: b.querySelector(".bob-parada").value,
+      total: b.querySelector(".bob-total").value,
+      acum: b.querySelector(".bob-acum").value,
+      cambio: b.querySelector(".bob-cambio").value,
+      cambioAcum: b.querySelector(".bob-cambio-acum").value,
+      golpes: b.querySelector(".bob-golpes").value,
+      primeras: b.querySelector(".bob-primeras").value,
+      espMas: b.querySelector(".bob-esp-mas").value,
+      espMenos: b.querySelector(".bob-esp-menos").value,
+      visual: b.querySelector(".bob-visual").value,
+      poros: b.querySelector(".bob-poros").value,
+      otros: b.querySelector(".bob-otros").value,
+      a1: b.querySelector(".bob-a1").value,
+      a2: b.querySelector(".bob-a2").value,
+      a3: b.querySelector(".bob-a3").value,
+      a4: b.querySelector(".bob-a4").value,
+      etiqueta: b.querySelector(".bob-etiqueta").value,
+      medidos: b.querySelector(".bob-medidos").value,
+      soldadura: (() => {
+  const checks = b.querySelectorAll('.soldadura-box input[type="checkbox"]');
+  for(let c of checks){
+    if(c.checked) return c.parentElement.innerText.trim();
+  }
+  return "";
+})(),
+      confirmada: b.classList.contains("confirmada")
+    });
+  });
+
+  return lista;
+}
+
+function guardarParte(){
+  limpiarCodigo();
+
+  const numeroOrden = document.getElementById("orden").value;
+
+  if(!numeroOrden){
+    alert("Introduce Número de Orden");
+    return;
+  }
+
+  const parte = {
+    orden: numeroOrden,
+    guardadoEn: Date.now(),
+    linea: "CL05",
+    fecha: document.getElementById("fecha").value,
+    proveedor: document.getElementById("proveedor").value,
+    codigo: document.getElementById("codigo").value,
+    material1: document.getElementById("material1").value,
+    material2: document.getElementById("material2").value,
+    formato: document.getElementById("checkS").checked ? "S" : (document.getElementById("checkW").checked ? "W" : ""),
+    ancho: document.getElementById("ancho").value,
+    largo: document.getElementById("largo").value,
+    espesor: document.getElementById("espesor").value,
+    limite: document.getElementById("limite").value,
+    diferencial: document.getElementById("diferencial").value,
+    st: "ST",
+    mecanico: document.getElementById("mecanico").value,
+    apoyo: document.getElementById("apoyo").value,
+    espesorOk: document.getElementById("espesorOk").checked,
+    lineaOk: document.getElementById("lineaOk").checked,
+    bobinas: recogerBobinas()
+  };
+
+  localStorage.setItem("parte_" + numeroOrden, JSON.stringify(parte));
+
+  mostrarCodigo();
+  alert("Parte guardado correctamente");
+}
+
+function verPartes(){
+
+  const contenedor = document.getElementById("contenidoPartes");
+  contenedor.innerHTML = "";
+
+  const textoBusqueda = document.getElementById("buscadorPartes")?.value.toLowerCase() || "";
+
+  const partes = [];
+
+  // recoger partes
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key.startsWith("parte_")){
+      const parte = JSON.parse(localStorage.getItem(key));
+      partes.push(parte);
+    }
+  }
+
+  // ordenar por último guardado
+  partes.sort((a, b) => (b.guardadoEn || 0) - (a.guardadoEn || 0));
+
+  // pintar
+  partes.forEach(parte => {
+
+    const fechaFormateada = parte.fecha ? parte.fecha.split("-").reverse().join("/") : "";
+
+    const texto = (parte.orden + " " + fechaFormateada).toLowerCase();
+
+    // 🔍 FILTRO BUSCADOR
+    if(!texto.includes(textoBusqueda)) return;
+
+    const div = document.createElement("div");
+    div.className = "guardado-item";
+
+    div.innerHTML = `
+      <div class="guardado-top">
+        <span class="orden">Orden: ${parte.orden}</span>
+      </div>
+      <div class="guardado-fecha">
+        Fecha: ${fechaFormateada}
+      </div>
+    `;
+
+    div.onclick = function(){
+      abrirParte(parte.orden);
+    };
+
+    const btnBorrar = document.createElement("button");
+    btnBorrar.innerText = "❌";
+    btnBorrar.onclick = function(e){
+      e.stopPropagation();
+      borrarParte(parte.orden);
+    };
+
+    div.appendChild(btnBorrar);
+    contenedor.appendChild(div);
+  });
+
+}
+
+function abrirParte(numeroOrden){
+  const data = localStorage.getItem("parte_" + numeroOrden);
+
+  if(!data){
+    alert("No se encontró el parte");
+    return;
+  }
+
+  const parte = JSON.parse(data);
+
+  limpiarFormulario();
+
+  document.getElementById("orden").value = parte.orden || "";
+  document.getElementById("fecha").value = parte.fecha || "";
+  document.getElementById("proveedor").value = parte.proveedor || "";
+  document.getElementById("codigo").value = parte.codigo ? "Código " + parte.codigo : "";
+
+  document.getElementById("material1").value = parte.material1 || "";
+  document.getElementById("material2").value = parte.material2 || "";
+
+  document.getElementById("checkS").checked = parte.formato === "S";
+  document.getElementById("checkW").checked = parte.formato === "W";
+
+  document.getElementById("ancho").value = parte.ancho || "";
+  document.getElementById("largo").value = parte.largo || "";
+  document.getElementById("espesor").value = parte.espesor || "";
+  document.getElementById("limite").value = parte.limite || "";
+  document.getElementById("diferencial").value = parte.diferencial || "";
+
+  document.getElementById("mecanico").value = parte.mecanico || "";
+  document.getElementById("apoyo").value = parte.apoyo || "";
+
+  document.getElementById("espesorOk").checked = parte.espesorOk !== false;
+  document.getElementById("lineaOk").checked = parte.lineaOk !== false;
+
+  if(parte.bobinas && parte.bobinas.length){
+    parte.bobinas.forEach(b => addBobina(b));
+  }
+
+  mostrarPantalla("parte");
+}
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+function borrarParte(numeroOrden){
+  const confirmar = confirm("¿Borrar parte " + numeroOrden + "?");
+
+  if(!confirmar) return;
+
+  localStorage.removeItem("parte_" + numeroOrden);
+  verPartes();
+}
+
+function limpiarFormulario(){
+  document.getElementById("orden").value = "";
+  document.getElementById("fecha").value = "";
+  document.getElementById("proveedor").value = "";
+  document.getElementById("codigo").value = "";
+  document.getElementById("material1").value = "";
+  document.getElementById("material2").value = "";
+
+  document.getElementById("checkS").checked = false;
+  document.getElementById("checkW").checked = false;
+
+  document.getElementById("ancho").value = "";
+  document.getElementById("largo").value = "";
+  document.getElementById("espesor").value = "";
+  document.getElementById("limite").value = "";
+  document.getElementById("diferencial").value = "";
+
+  document.getElementById("mecanico").value = "";
+  document.getElementById("apoyo").value = "";
+
+  document.getElementById("espesorOk").checked = true;
+  document.getElementById("lineaOk").checked = true;
+
+  document.getElementById("bobinas").innerHTML = "";
+  contador = 0;
+}
+  function calcularTotal(el){
+
+  const bobina = el.closest(".bobina");
+
+  const inicio = bobina.querySelector(".bob-marcha").value;
+  const fin = bobina.querySelector(".bob-parada").value;
+  const totalInput = bobina.querySelector(".bob-total");
+
+  if(!inicio || !fin) return;
+
+  const [h1, m1] = inicio.split(":").map(Number);
+  const [h2, m2] = fin.split(":").map(Number);
+
+  const minutosInicio = h1 * 60 + m1;
+  const minutosFin = h2 * 60 + m2;
+
+  let total = minutosFin - minutosInicio;
+
+  if(total < 0) total += 24 * 60; // por si pasa medianoche
+
+  totalInput.value = "Total " + total;
+totalInput.setAttribute("data-valor", total);
+    
+    calcularAcumulados();
+// aplicarFormatoVisual();
+  }
+  function calcularAcumulados(){
+
+  let acumulado = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const totalInput = b.querySelector(".bob-total");
+const acumInput = b.querySelector(".bob-acum");
+
+acumInput.value = acumInput.value.replace("Acum ", "");
+    
+
+    const total = parseInt(totalInput.value.replace("Total ", "")) || 0;
+
+    acumulado += total;
+
+    acumInput.value = "Acum " + acumulado;
+acumInput.setAttribute("data-valor", acumulado);
+     
+    // aplicarFormatoVisual(total, acumulado);
+  });
+  }
+  document.addEventListener("keydown", function(e){
+
+  if(e.key !== "Enter") return;
+
+  const campos = Array.from(document.querySelectorAll("input"));
+
+  const actual = document.activeElement;
+
+  const index = campos.indexOf(actual);
+
+  if(index > -1 && index < campos.length - 1){
+
+    e.preventDefault();
+
+    campos[index + 1].focus();
+
+  }
+
+});
+  function calcularMetros(input){
+
+  const bobina = input.closest('.bobina');
+
+  function extraerNumero(valor){
+    const encontrado = valor.replace(",", ".").match(/[\d.]+/);
+    return encontrado ? parseFloat(encontrado[0]) : 0;
+  }
+
+  const largoReal = extraerNumero(
+    bobina.querySelector('.bob-largo-real').value
+  );
+
+  const golpes = extraerNumero(
+    bobina.querySelector('.bob-golpes').value
+  );
+
+  const metros = largoReal * golpes;
+
+  const campoMetros = bobina.querySelector('.bob-medidos');
+
+  if(metros > 0){
+    campoMetros.value = metros.toFixed(0) + " m";
+  }else{
+    campoMetros.value = "";
+  }
+
+  }
+  function calcularCambioAcumulado(){
+
+  let acumulado = 0;
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  bobinas.forEach(b => {
+
+    const cambioInput = b.querySelector(".bob-cambio");
+    const cambioAcumInput = b.querySelector(".bob-cambio-acum");
+
+    const cambio = parseInt(cambioInput.value.replace("Cambio ", "")) || 0;
+    if(cambioInput.value && !cambioInput.value.startsWith("Cambio ")){
+  cambioInput.value = "Cambio " + cambio;
+    }
+
+    acumulado += cambio;
+
+    cambioAcumInput.value = "Cambio acum " + acumulado;
+
+  });
+  }
+  function ponerTexto(input, texto){
+  if(!input.value) return;
+
+  // quitar texto si ya existe
+  let valor = input.value.replace(texto + " ", "");
+
+  input.value = texto + " " + valor;
+}
+
+function limpiarTexto(input, texto){
+  input.value = input.value.replace(texto + " ", "");
+}
+  function ponerTextoFinal(input, prefijo, sufijo){
+
+const numero = input.value.replace(/\D/g,'');
+
+if(numero !== ''){
+input.value = prefijo + ' ' + numero + ' ' + sufijo;
+}
+
+}
+
+function limpiarTextoFinal(input, prefijo, sufijo){
+
+const numero = input.value.replace(/\D/g,'');
+
+input.value = numero;
+
+}
+  function aplicarFormatoVisual(){
+
+  document.querySelectorAll(".bob-total").forEach(i=>{
+    const v = i.getAttribute("data-valor");
+    if(v) i.value = "Total " + v;
+  });
+
+  document.querySelectorAll(".bob-acum").forEach(i=>{
+    const v = i.getAttribute("data-valor");
+    if(v) i.value = "Acum " + v;
+  });
+
+  document.querySelectorAll(".bob-cambio").forEach(i=>{
+    if(i.value) i.value = "Cambio " + i.value;
+  });
+
+  document.querySelectorAll(".bob-cambio-acum").forEach(i=>{
+    if(i.value) i.value = "Cambio acum " + i.value;
+  });
+
+  }
+  function saltoPersonal(input, siguienteId){
+  if(input.value.length >= 2){
+    document.getElementById(siguienteId).focus();
+  }
+  }
+  function filtrarNumeros(input){
+  input.value = input.value.replace(/\D/g, '');
+  }
+  function filtrarDecimal(input){
+  input.value = input.value
+    .replace(",", ".")
+    .replace(/[^0-9.]/g, "")
+    .replace(/(\..*)\./g, "$1");
+  }
+function saltoEnBobina(input, siguienteClase, longitud){
+  if(input.value.length >= longitud){
+    const bobina = input.closest(".bobina");
+    const siguiente = bobina.querySelector("." + siguienteClase);
+    if(siguiente){
+      siguiente.focus();
+    }
+  }
+}
+  function seleccionarSoldadura(check){
+
+  const contenedor = check.closest(".soldadura-box");
+  const checks = contenedor.querySelectorAll('input[type="checkbox"]');
+
+  checks.forEach(c => {
+    if(c !== check){
+      c.checked = false;
+    }
+  });
+
+  }
+  function mostrarMensajeConfirmacion(texto){
+
+  const msg = document.getElementById("mensajeConfirmacion");
+
+  msg.innerText = texto;
+  msg.style.opacity = "1";
+
+  setTimeout(() => {
+    msg.style.opacity = "0";
+  }, 1500);
+
+  }
+ function ocultarPantallas(){
+  document.getElementById("menuPrincipal").style.display = "none";
+  document.getElementById("pantallaParte").style.display = "none";
+  document.getElementById("pantallaGuardados").style.display = "none";
+  document.getElementById("pantallaPagina2").style.display = "none";
+  document.getElementById("pantallaAyuda").style.display = "none";
+  document.getElementById("pantallaDashboard").style.display = "none";
+}
+
+function subirArriba(){
+  setTimeout(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, 100);
+}
+
+function entrarApp() {
+  document.getElementById("pantallaInicio").style.display = "none";
+  ocultarPantallas();
+  document.getElementById("menuPrincipal").style.display = "flex";
+  subirArriba();
+}
+
+function abrirCrearParte() {
+  limpiarFormulario();
+  localStorage.removeItem("borrador_cl05");
+
+  ocultarPantallas();
+  document.getElementById("pantallaParte").style.display = "block";
+  subirArriba();
+}
+
+function abrirGuardados() {
+  ocultarPantallas();
+  document.getElementById("pantallaGuardados").style.display = "block";
+  verPartes();
+  subirArriba();
+}
+
+function abrirAyuda() {
+  ocultarPantallas();
+  document.getElementById("pantallaAyuda").style.display = "block";
+  subirArriba();
+}
+
+function abrirDashboard() {
+  ocultarPantallas();
+  document.getElementById("pantallaDashboard").style.display = "block";
+
+  function numero(valor){
+    if(valor === undefined || valor === null) return 0;
+    const encontrado = String(valor).replace(",", ".").match(/[0-9]+(\.[0-9]+)?/);
+    return encontrado ? Number(encontrado[0]) : 0;
+  }
+
+  let totalPartes = 0;
+  let totalBobinas = 0;
+  let ultimaOrden = "-";
+  let ultimoGuardado = 0;
+  let totalMetros = 0;
+  let totalGolpes = 0;
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key && key.startsWith("parte_")){
+      const parte = JSON.parse(localStorage.getItem(key));
+      totalPartes++;
+
+      if((parte.guardadoEn || 0) > ultimoGuardado){
+        ultimoGuardado = parte.guardadoEn || 0;
+        ultimaOrden = parte.orden || "-";
+      }
+
+      if(parte.bobinas){
+        totalBobinas += parte.bobinas.length;
+
+        parte.bobinas.forEach(b => {
+          totalGolpes += numero(b.golpes);
+          totalMetros += numero(b.medidos);
+        });
+      }
+    }
+  }
+
+  document.getElementById("kpiPartes").innerText = totalPartes;
+  document.getElementById("kpiBobinas").innerText = totalBobinas;
+  document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
+  document.getElementById("kpiMetros").innerText = totalMetros;
+  document.getElementById("kpiGolpes").innerText = totalGolpes;
+
+  subirArriba();
+}
+
+function volverMenu() {
+  ocultarPantallas();
+  document.getElementById("menuPrincipal").style.display = "flex";
+  subirArriba();
+}
+
+function abrirPagina2(){
+  ocultarPantallas();
+  document.getElementById("pantallaPagina2").style.display = "block";
+  subirArriba();
+}
+
+function volverParte(){
+  ocultarPantallas();
+  document.getElementById("pantallaParte").style.display = "block";
+  subirArriba();
+}
+function autoGuardarTemporal() {
+
+const borrador = {
+
+orden: document.getElementById("orden")?.value || "",
+fecha: document.getElementById("fecha")?.value || "",
+proveedor: document.getElementById("proveedor")?.value || "",
+codigo: document.getElementById("codigo")?.value || "",
+ancho: document.getElementById("ancho")?.value || "",
+largo: document.getElementById("largo")?.value || "",
+espesor: document.getElementById("espesor")?.value || ""
+
+};
+
+localStorage.setItem(
+"borrador_cl05",
+JSON.stringify(borrador)
+);
+
+}
+  window.onload = function() {
+
+const borradorGuardado =
+JSON.parse(localStorage.getItem("borrador_cl05"));
+
+if(borradorGuardado){
+
+document.getElementById("orden").value =
+borradorGuardado.orden || "";
+
+document.getElementById("fecha").value =
+borradorGuardado.fecha || "";
+
+document.getElementById("proveedor").value =
+borradorGuardado.proveedor || "";
+
+document.getElementById("codigo").value =
+borradorGuardado.codigo || "";
+
+document.getElementById("ancho").value =
+borradorGuardado.ancho || "";
+
+document.getElementById("largo").value =
+borradorGuardado.largo || "";
+
+document.getElementById("espesor").value =
+borradorGuardado.espesor || "";
+
+}
+
+  }
+</script>
+
+</body>
+</html>
