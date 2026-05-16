@@ -1797,25 +1797,22 @@ function abrirDashboard() {
   document.getElementById("kpiUltimaOrden").innerText = ultimaOrden;
   document.getElementById("kpiMetros").innerText = totalMetros;
   document.getElementById("kpiGolpes").innerText = totalGolpes;
-const maxValor = Math.max(
-  totalPartes,
-  totalBobinas,
-  totalMetros,
-  totalGolpes,
-  1
-);
+function barra(valor, objetivo){
+  if(valor <= 0) return "0%";
+  return Math.min((valor / objetivo) * 100, 100) + "%";
+}
 
 document.getElementById("barPartes").style.width =
-  ((totalPartes / maxValor) * 100) + "%";
+  barra(totalPartes, 50);
 
 document.getElementById("barBobinas").style.width =
-  ((totalBobinas / maxValor) * 100) + "%";
+  barra(totalBobinas, 200);
 
 document.getElementById("barMetros").style.width =
-  ((totalMetros / maxValor) * 100) + "%";
+  barra(totalMetros, 100000);
 
 document.getElementById("barGolpes").style.width =
-  ((totalGolpes / maxValor) * 100) + "%";
+  barra(totalGolpes, 150000);
   subirArriba();
 }
 
