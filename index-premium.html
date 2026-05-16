@@ -500,6 +500,20 @@ height:46px;
 }
 
 .chart-row span{
+  .chart-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+  gap:12px;
+}
+
+.chart-top span:last-child{
+  color:#7dd3ff;
+  font-weight:900;
+  font-size:13px;
+  letter-spacing:1px;
+}
   display:block;
   margin-bottom:8px;
   font-size:14px;
@@ -886,28 +900,37 @@ PARTE TRASERA EN DESARROLLO
   <h3>Resumen visual</h3>
 
   <div class="chart-row">
+  <div class="chart-top">
     <span>PARTES GUARDADOS</span>
+    <span id="txtPartes">0 / 50</span>
+  </div>
     <div class="chart-bar-bg">
       <div id="barPartes" class="chart-bar"></div>
     </div>
   </div>
 
-  <div class="chart-row">
-    <span>BOBINAS USADAS</span>
+  <div class="chart-top">
+  <span>BOBINAS USADAS</span>
+  <span id="txtBobinas">0 / 200</span>
+  </div>
     <div class="chart-bar-bg">
       <div id="barBobinas" class="chart-bar"></div>
     </div>
   </div>
 
-  <div class="chart-row">
-    <span>METROS CORTADOS</span>
+  <div class="chart-top">
+  <span>METROS CORTADOS</span>
+  <span id="txtMetros">0 / 100000</span>
+  </div>
     <div class="chart-bar-bg">
       <div id="barMetros" class="chart-bar"></div>
     </div>
   </div>
 
-  <div class="chart-row">
-    <span>TOTAL GOLPES</span>
+  <div class="chart-top">
+  <span>TOTAL GOLPES</span>
+  <span id="txtGolpes">0 / 150000</span>
+  </div>
     <div class="chart-bar-bg">
       <div id="barGolpes" class="chart-bar"></div>
     </div>
@@ -1830,6 +1853,17 @@ setTimeout(() => {
   barMetros.style.width = barra(totalMetros, 100000);
   barGolpes.style.width = barra(totalGolpes, 150000);
 }, 150);
+  document.getElementById("txtPartes").innerText =
+  totalPartes + " / 50";
+
+document.getElementById("txtBobinas").innerText =
+  totalBobinas + " / 200";
+
+document.getElementById("txtMetros").innerText =
+  totalMetros + " / 100000 m";
+
+document.getElementById("txtGolpes").innerText =
+  totalGolpes + " / 150000";
   subirArriba();
 }
 
