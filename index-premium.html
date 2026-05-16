@@ -521,9 +521,21 @@ height:46px;
   width:0%;
   border-radius:999px;
   background:linear-gradient(90deg,#19b8ff,#4f7dff);
-  transition:width .7s ease;
+  transition:
+  width 1.4s cubic-bezier(.22,.61,.36,1),
+  box-shadow .4s ease;
   box-shadow:0 0 14px rgba(24,184,255,.35);
+  animation:barGlow 2s infinite alternate;
 }
+  @keyframes barGlow{
+  from{
+    box-shadow:0 0 10px rgba(24,184,255,.25);
+  }
+
+  to{
+    box-shadow:0 0 20px rgba(79,125,255,.55);
+  }
+  }
 </style>
 </head>
 
