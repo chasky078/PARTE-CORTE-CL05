@@ -1961,26 +1961,26 @@ document.getElementById("circleMetrosTexto").innerText =
 const circleMetros = document.getElementById("circleMetros");
 const circleMetrosTexto = document.getElementById("circleMetrosTexto");
 
-circleMetrosTexto.innerText = "0%";
+let progreso = 0;
 
-circleMetros.style.background =
-  `conic-gradient(
-    #19b8ff 0deg,
-    #4f7dff 0deg,
-    rgba(255,255,255,.08) 0deg
-  )`;
+const animacionCircle = setInterval(() => {
 
-setTimeout(() => {
-  circleMetrosTexto.innerText =
-    Math.round(porcentajeMetros) + "%";
+  progreso++;
+
+  circleMetrosTexto.innerText = progreso + "%";
 
   circleMetros.style.background =
     `conic-gradient(
-      #19b8ff ${porcentajeMetros * 3.6}deg,
-      #4f7dff ${porcentajeMetros * 3.6}deg,
+      #19b8ff ${progreso * 3.6}deg,
+      #4f7dff ${progreso * 3.6}deg,
       rgba(255,255,255,.08) 0deg
     )`;
-}, 1200);
+
+  if(progreso >= Math.round(porcentajeMetros)){
+    clearInterval(animacionCircle);
+  }
+
+}, 25);
   subirArriba();
 }
 
