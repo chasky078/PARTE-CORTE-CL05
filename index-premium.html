@@ -550,6 +550,79 @@ height:46px;
     box-shadow:0 0 20px rgba(79,125,255,.55);
   }
   }
+  .circle-kpi-box{
+  margin-top:28px;
+  padding:28px;
+  border-radius:24px;
+  background:linear-gradient(145deg, rgba(12,38,64,.94), rgba(6,24,46,.98));
+  border:1px solid rgba(140,210,255,.16);
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
+  text-align:center;
+}
+
+.circle-kpi-box h3{
+  margin-top:0;
+  margin-bottom:28px;
+  color:#7dd3ff;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.circle-kpi{
+  display:flex;
+  justify-content:center;
+}
+
+.circle-ring{
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      #19b8ff 0deg,
+      #4f7dff 0deg,
+      rgba(255,255,255,.08) 0deg
+    );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:all 1.2s ease;
+
+  box-shadow:
+    0 0 24px rgba(24,184,255,.22),
+    inset 0 0 20px rgba(255,255,255,.04);
+}
+
+.circle-inner{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:#071a31;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    inset 0 0 18px rgba(255,255,255,.03);
+}
+
+#circleMetrosTexto{
+  font-size:38px;
+  font-weight:900;
+  color:white;
+}
+
+.circle-inner span{
+  margin-top:6px;
+  color:rgba(220,240,255,.72);
+  font-size:14px;
+  letter-spacing:2px;
+  font-weight:800;
+}
 </style>
 </head>
 
@@ -894,7 +967,18 @@ PARTE TRASERA EN DESARROLLO
         <div class="dash-number" id="kpiGolpes">0</div>
         <div class="dash-label">TOTAL GOLPES</div>
       </div>
+<div class="circle-kpi-box">
+  <h3>Indicador principal</h3>
 
+  <div class="circle-kpi">
+    <div class="circle-ring" id="circleMetros">
+      <div class="circle-inner">
+        <div id="circleMetrosTexto">0%</div>
+        <span>METROS</span>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 <div class="dashboard-chart">
   <h3>Resumen visual</h3>
