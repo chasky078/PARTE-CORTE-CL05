@@ -1814,17 +1814,22 @@ function barra(valor, objetivo){
   return Math.min((valor / objetivo) * 100, 100) + "%";
 }
 
-document.getElementById("barPartes").style.width =
-  barra(totalPartes, 50);
+const barPartes = document.getElementById("barPartes");
+const barBobinas = document.getElementById("barBobinas");
+const barMetros = document.getElementById("barMetros");
+const barGolpes = document.getElementById("barGolpes");
 
-document.getElementById("barBobinas").style.width =
-  barra(totalBobinas, 200);
+barPartes.style.width = "0%";
+barBobinas.style.width = "0%";
+barMetros.style.width = "0%";
+barGolpes.style.width = "0%";
 
-document.getElementById("barMetros").style.width =
-  barra(totalMetros, 100000);
-
-document.getElementById("barGolpes").style.width =
-  barra(totalGolpes, 150000);
+setTimeout(() => {
+  barPartes.style.width = barra(totalPartes, 50);
+  barBobinas.style.width = barra(totalBobinas, 200);
+  barMetros.style.width = barra(totalMetros, 100000);
+  barGolpes.style.width = barra(totalGolpes, 150000);
+}, 150);
   subirArriba();
 }
 
