@@ -477,6 +477,53 @@ height:46px;
     grid-template-columns:1fr;
   }
 }
+  .dashboard-chart{
+  margin-top:26px;
+  padding:22px;
+  border-radius:22px;
+  background:linear-gradient(145deg, rgba(12,38,64,.92), rgba(6,24,46,.96));
+  border:1px solid rgba(140,210,255,.18);
+  box-shadow:0 12px 28px rgba(0,0,0,.28);
+}
+
+.dashboard-chart h3{
+  margin-top:0;
+  margin-bottom:24px;
+  color:#7dd3ff;
+  letter-spacing:2px;
+  font-size:18px;
+  text-transform:uppercase;
+}
+
+.chart-row{
+  margin-bottom:18px;
+}
+
+.chart-row span{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:1px;
+  color:rgba(220,240,255,.82);
+}
+
+.chart-bar-bg{
+  width:100%;
+  height:18px;
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.chart-bar{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#19b8ff,#4f7dff);
+  transition:width .7s ease;
+  box-shadow:0 0 14px rgba(24,184,255,.35);
+}
 </style>
 </head>
 
@@ -823,7 +870,37 @@ PARTE TRASERA EN DESARROLLO
       </div>
 
     </div>
+<div class="dashboard-chart">
+  <h3>Resumen visual</h3>
 
+  <div class="chart-row">
+    <span>PARTES GUARDADOS</span>
+    <div class="chart-bar-bg">
+      <div id="barPartes" class="chart-bar"></div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <span>BOBINAS USADAS</span>
+    <div class="chart-bar-bg">
+      <div id="barBobinas" class="chart-bar"></div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <span>METROS CORTADOS</span>
+    <div class="chart-bar-bg">
+      <div id="barMetros" class="chart-bar"></div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <span>TOTAL GOLPES</span>
+    <div class="chart-bar-bg">
+      <div id="barGolpes" class="chart-bar"></div>
+    </div>
+  </div>
+</div>
     <div class="button" onclick="volverMenu()">
       ← VOLVER AL MENÚ
     </div>
