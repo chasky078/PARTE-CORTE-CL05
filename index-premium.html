@@ -1958,12 +1958,29 @@ document.getElementById("txtGolpes").innerText =
 document.getElementById("circleMetrosTexto").innerText =
   Math.round(porcentajeMetros) + "%";
 
-document.getElementById("circleMetros").style.background =
+const circleMetros = document.getElementById("circleMetros");
+const circleMetrosTexto = document.getElementById("circleMetrosTexto");
+
+circleMetrosTexto.innerText = "0%";
+
+circleMetros.style.background =
   `conic-gradient(
-    #19b8ff ${porcentajeMetros * 3.6}deg,
-    #4f7dff ${porcentajeMetros * 3.6}deg,
+    #19b8ff 0deg,
+    #4f7dff 0deg,
     rgba(255,255,255,.08) 0deg
   )`;
+
+setTimeout(() => {
+  circleMetrosTexto.innerText =
+    Math.round(porcentajeMetros) + "%";
+
+  circleMetros.style.background =
+    `conic-gradient(
+      #19b8ff ${porcentajeMetros * 3.6}deg,
+      #4f7dff ${porcentajeMetros * 3.6}deg,
+      rgba(255,255,255,.08) 0deg
+    )`;
+}, 200);
   subirArriba();
 }
 
