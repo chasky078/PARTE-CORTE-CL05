@@ -1576,7 +1576,7 @@ acumInput.setAttribute("data-valor", acumulado);
     bobina.querySelector('.bob-golpes').value
   );
 
-  const metros = largoReal * golpes;
+  const metros = (largoReal * golpes) / 1000;
 
   const campoMetros = bobina.querySelector('.bob-medidos');
 
