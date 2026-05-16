@@ -1952,6 +1952,18 @@ document.getElementById("txtMetros").innerText =
 
 document.getElementById("txtGolpes").innerText =
   totalGolpes + " / 150000";
+  const porcentajeMetros =
+  Math.min((totalMetros / 100000) * 100, 100);
+
+document.getElementById("circleMetrosTexto").innerText =
+  Math.round(porcentajeMetros) + "%";
+
+document.getElementById("circleMetros").style.background =
+  `conic-gradient(
+    #19b8ff ${porcentajeMetros * 3.6}deg,
+    #4f7dff ${porcentajeMetros * 3.6}deg,
+    rgba(255,255,255,.08) 0deg
+  )`;
   subirArriba();
 }
 
