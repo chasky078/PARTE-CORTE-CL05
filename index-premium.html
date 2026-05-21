@@ -1989,8 +1989,68 @@ function volverMenu() {
   document.getElementById("menuPrincipal").style.display = "flex";
   subirArriba();
 }
+function generarParteTrasera(){
 
+  const contenedor = document.getElementById("contenedorParteTrasera");
+  contenedor.innerHTML = "";
+
+  const bobinas = document.querySelectorAll(".bobina");
+
+  if(bobinas.length === 0){
+    contenedor.innerHTML = `
+      <div style="
+        padding:30px;
+        text-align:center;
+        color:rgba(255,255,255,0.55);
+        font-size:22px;
+        font-weight:800;
+      ">
+        No hay bobinas añadidas en la página 1
+      </div>
+    `;
+    return;
+  }
+
+  bobinas.forEach((bobina, index) => {
+
+    const numero = index + 1;
+    const proveedor = bobina.querySelector(".bob-proveedor")?.value || "";
+
+    const bloque = document.createElement("div");
+    bloque.className = "trasera-bobina";
+
+    bloque.innerHTML = `
+      <h3>BOBINA ${numero} · PARTE TRASERA</h3>
+
+      <div class="row">
+        <input type="text" value="${numero}" placeholder="Nº bobina respecto orden">
+        <input type="text" value="${proveedor}" placeholder="Bobina proveedor">
+      </div>
+
+      <div class="row">
+        <input type="text" placeholder="PCD">
+        <input type="text" placeholder="Clasificadores (PQT)">
+      </div>
+
+      <div class="row">
+        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.1">
+        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.2">
+        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.3">
+      </div>
+
+      <div class="row">
+        <input type="text" placeholder="Presión">
+        <input type="time" placeholder="Hora">
+      </div>
+
+      <textarea class="comentario-trasera" placeholder="Comentarios"></textarea>
+    `;
+
+    contenedor.appendChild(bloque);
+  });
+}
 function abrirPagina2(){
+  generarParteTrasera();
   ocultarPantallas();
   document.getElementById("pantallaPagina2").style.display = "block";
   subirArriba();
