@@ -649,6 +649,17 @@ height:46px;
   border-color:rgba(24,184,255,.85);
   box-shadow:0 0 0 3px rgba(24,184,255,.14);
 }
+  .back-comments{
+    width: 100%;
+    margin-top: 14px;
+}
+
+.back-comments textarea{
+    width: 100%;
+    min-height: 120px;
+    margin: 0;
+    box-sizing: border-box;
+}
 </style>
 </head>
 
@@ -2069,7 +2080,9 @@ function generarParteTrasera(){
         <input type="time" placeholder="Hora">
       </div>
 
-      <textarea class="comentario-trasera" placeholder="Comentarios"></textarea>
+      <div class="back-comments">
+    <textarea class="comentario-trasera" placeholder="Comentarios"></textarea>
+</div>
     `;
 
     contenedor.appendChild(bloque);
