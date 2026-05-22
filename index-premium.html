@@ -1179,6 +1179,9 @@ function addBobina(datos = null){
   contador++;
 
   const div = document.createElement("div");
+  div.addEventListener("click", () => {
+    bobinaActiva = contador - 1;
+});
   div.className = "bobina";
   div.id = "b" + contador;
 
@@ -1700,6 +1703,7 @@ acumInput.setAttribute("data-valor", acumulado);
     // aplicarFormatoVisual(total, acumulado);
   });
   }
+  let bobinaActiva = 0;
   document.addEventListener("keydown", function(e){
 
   if(e.key !== "Enter") return;
