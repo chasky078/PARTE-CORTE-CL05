@@ -1468,6 +1468,14 @@ function recogerBobinas(){
   }
   return "";
 })(),
+      pcd: b.querySelector(".pcd")?.value || "",
+clasificadores: b.querySelector(".clasificadores")?.value || "",
+mtsSold1: b.querySelector(".mts1")?.value || "",
+mtsSold2: b.querySelector(".mts2")?.value || "",
+mtsSold3: b.querySelector(".mts3")?.value || "",
+presion: b.querySelector(".presion")?.value || "",
+horaPresion: b.querySelector(".hora-presion")?.value || "",
+comentariosTrasera: b.querySelector(".comentario-trasera")?.value || "",
       confirmada: b.classList.contains("confirmada")
     });
   });
@@ -2069,19 +2077,20 @@ function generarParteTrasera(){
       </div>
 
       <div class="row">
-        <input type="text" placeholder="PCD">
-        <input type="text" placeholder="Clasificadores (PQT)">
+        <input class="pcd" type="text" placeholder="PCD">
+        <input class="clasificadores" type="text" placeholder="Clasificadores (PQT)">
       </div>
 
       <div class="row">
-        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.1">
-        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.2">
-        <input type="tel" inputmode="numeric" placeholder="MTS SOLD.3">
+        <input class="mts1" type="tel" inputmode="numeric" placeholder="MTS SOLD.1">
+<input class="mts2" type="tel" inputmode="numeric" placeholder="MTS SOLD.2">
+<input class="mts3" type="tel" inputmode="numeric" placeholder="MTS SOLD.3">
+
       </div>
 
       <div class="row">
-        <input type="text" placeholder="Presión">
-        <input type="time" placeholder="Hora">
+        <input class="presion" type="text" placeholder="Presión">
+        <input class="hora-presion" type="time" placeholder="Hora">
       </div>
 
       <div class="back-comments">
