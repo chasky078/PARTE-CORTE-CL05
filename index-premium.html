@@ -1367,6 +1367,14 @@ function cargarDatosBobina(div, datos){
   div.querySelector(".bob-a4").value = datos.a4 || "";
   div.querySelector(".bob-etiqueta").value = datos.etiqueta || "";
   div.querySelector(".bob-medidos").value = datos.medidos || "";
+  div.dataset.pcd = datos.pcd || "";
+div.dataset.clasificadores = datos.clasificadores || "";
+div.dataset.mtsSold1 = datos.mtsSold1 || "";
+div.dataset.mtsSold2 = datos.mtsSold2 || "";
+div.dataset.mtsSold3 = datos.mtsSold3 || "";
+div.dataset.presion = datos.presion || "";
+div.dataset.horaPresion = datos.horaPresion || "";
+div.dataset.comentariosTrasera = datos.comentariosTrasera || "";
   const checks = div.querySelectorAll('.soldadura-box input[type="checkbox"]');
 
 checks.forEach(c => {
@@ -2044,6 +2052,22 @@ function volverMenu() {
   document.getElementById("menuPrincipal").style.display = "flex";
   subirArriba();
 }
+  function guardarTraseraActual(){
+  const index = bobinaActiva - 1;
+  const bobina = document.querySelectorAll(".bobina")[index];
+  const trasera = document.querySelector(".trasera-bobina");
+
+  if(!bobina || !trasera) return;
+
+  bobina.dataset.pcd = trasera.querySelector(".pcd")?.value || "";
+  bobina.dataset.clasificadores = trasera.querySelector(".clasificadores")?.value || "";
+  bobina.dataset.mtsSold1 = trasera.querySelector(".mts1")?.value || "";
+  bobina.dataset.mtsSold2 = trasera.querySelector(".mts2")?.value || "";
+  bobina.dataset.mtsSold3 = trasera.querySelector(".mts3")?.value || "";
+  bobina.dataset.presion = trasera.querySelector(".presion")?.value || "";
+  bobina.dataset.horaPresion = trasera.querySelector(".hora-presion")?.value || "";
+  bobina.dataset.comentariosTrasera = trasera.querySelector(".comentario-trasera")?.value || "";
+  }
 function generarParteTrasera(){
 
   const contenedor = document.getElementById("contenedorParteTrasera");
@@ -2131,6 +2155,7 @@ function abrirTrasera(numeroBobina){
 }
 
 function volverParte(){
+  guardarTraseraActual();
   ocultarPantallas();
   document.getElementById("pantallaParte").style.display = "block";
   setTimeout(() => {
