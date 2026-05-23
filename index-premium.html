@@ -1887,13 +1887,13 @@ function saltoEnBobina(input, siguienteClase, longitud){
 
   }
  function ocultarPantallas(){
-  document.getElementById("menuPrincipal").style.display = "none";
-  document.getElementById("pantallaParte").style.display = "none";
-  document.getElementById("pantallaGuardados").style.display = "none";
-  document.getElementById("pantallaPagina2").style.display = "none";
-  document.getElementById("pantallaAyuda").style.display = "none";
-  document.getElementById("pantallaDashboard").style.display = "none";
-}
+  ["menuPrincipal", "pantallaParte", "pantallaGuardados", "pantallaPagina2", "pantallaAyuda", "pantallaDashboard"].forEach(id => {
+    const pantalla = document.getElementById(id);
+    if(pantalla){
+      pantalla.style.display = "none";
+    }
+  });
+ }
 
 function subirArriba(){
   setTimeout(() => {
