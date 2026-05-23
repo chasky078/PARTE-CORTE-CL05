@@ -1448,7 +1448,8 @@ function recogerBobinas(){
   const lista = [];
   const bloques = document.querySelectorAll(".bobina");
 
-  bloques.forEach(b => {
+  bloques.forEach((b, index) => {
+    const trasera = document.querySelectorAll(".trasera-bobina")[index];
     lista.push({
       marcha: b.querySelector(".bob-marcha").value,
       parada: b.querySelector(".bob-parada").value,
@@ -1469,6 +1470,12 @@ function recogerBobinas(){
       a4: b.querySelector(".bob-a4").value,
       etiqueta: b.querySelector(".bob-etiqueta").value,
       medidos: b.querySelector(".bob-medidos").value,
+      pcd: trasera?.querySelector(".pcd")?.value || "",
+clasificadores: trasera?.querySelector(".clasificadores")?.value || "",
+mtsSold1: trasera?.querySelector(".mts1")?.value || "",
+mtsSold2: trasera?.querySelector(".mts2")?.value || "",
+mtsSold3: trasera?.querySelector(".mts3")?.value || "",
+comentarioTrasera: trasera?.querySelector(".comentario-trasera")?.value || "",
       soldadura: (() => {
   const checks = b.querySelectorAll('.soldadura-box input[type="checkbox"]');
   for(let c of checks){
