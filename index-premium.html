@@ -1469,12 +1469,12 @@ function recogerBobinas(){
       a4: b.querySelector(".bob-a4").value,
       etiqueta: b.querySelector(".bob-etiqueta").value,
       medidos: b.querySelector(".bob-medidos").value,
-      pcd: trasera?.querySelector(".pcd")?.value || "",
-clasificadores: trasera?.querySelector(".clasificadores")?.value || "",
-mtsSold1: trasera?.querySelector(".mts1")?.value || "",
-mtsSold2: trasera?.querySelector(".mts2")?.value || "",
-mtsSold3: trasera?.querySelector(".mts3")?.value || "",
-comentarioTrasera: trasera?.querySelector(".comentario-trasera")?.value || "",
+      pcd: b.dataset.pcd || "",
+clasificadores: b.dataset.clasificadores || "",
+mtsSold1: b.dataset.mtsSold1 || "",
+mtsSold2: b.dataset.mtsSold2 || "",
+mtsSold3: b.dataset.mtsSold3 || "",
+comentariosTrasera: b.dataset.comentariosTrasera || "",
       soldadura: (() => {
   const checks = b.querySelectorAll('.soldadura-box input[type="checkbox"]');
   for(let c of checks){
@@ -1482,14 +1482,7 @@ comentarioTrasera: trasera?.querySelector(".comentario-trasera")?.value || "",
   }
   return "";
 })(),
-      pcd: b.querySelector(".pcd")?.value || "",
-clasificadores: b.querySelector(".clasificadores")?.value || "",
-mtsSold1: b.querySelector(".mts1")?.value || "",
-mtsSold2: b.querySelector(".mts2")?.value || "",
-mtsSold3: b.querySelector(".mts3")?.value || "",
-presion: b.querySelector(".presion")?.value || "",
-horaPresion: b.querySelector(".hora-presion")?.value || "",
-comentariosTrasera: b.querySelector(".comentario-trasera")?.value || "",
+      
       confirmada: b.classList.contains("confirmada")
     });
   });
