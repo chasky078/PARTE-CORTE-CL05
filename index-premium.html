@@ -1178,7 +1178,7 @@ function addBobina(datos = null){
 
   const div = document.createElement("div");
   div.addEventListener("click", () => {
-    bobinaActiva = contador - 1;
+    bobinaActiva = Number(div.id.replace("b", ""));
 });
   div.className = "bobina";
   div.id = "b" + contador;
