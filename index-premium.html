@@ -925,7 +925,7 @@ oninput="filtrarNumeros(this)">
   </div>
 
   <div class="button"
-       onclick="abrirPagina2()"
+       onclick="abrirTrasera(contador-1)"
        style="flex:1;">
        SIGUIENTE PÁGINA →
   </div>
@@ -1337,6 +1337,7 @@ disabled>
 </div>
 
     <div class="button" onclick="confirmar('${div.id}')">✔ Confirmar</div>
+    <div class="button" onclick="abrirTrasera(${contador})">📄 Página 2</div>
   `;
 
   document.getElementById("bobinas").appendChild(div);
@@ -2114,11 +2115,27 @@ function generarParteTrasera(){
     contenedor.appendChild(bloque);
   });
 }
-function abrirPagina2(){
-  generarParteTrasera();
-  ocultarPantallas();
-  document.getElementById("pantallaPagina2").style.display = "block";
-  subirArriba();
+function abrirTrasera(numeroBobina){
+
+    bobinaActiva = numeroBobina;
+
+    generarParteTrasera();
+
+    document.querySelectorAll(".trasera-bobina").forEach((b, index) => {
+
+        if(index === numeroBobina){
+            b.style.display = "block";
+        } else {
+            b.style.display = "none";
+        }
+
+    });
+
+    ocultarPantallas();
+
+    document.getElementById("pantallaPagina2").style.display = "block";
+
+    subirArriba();
 }
 
 function volverParte(){
