@@ -2123,7 +2123,7 @@ function abrirTrasera(numeroBobina){
 
     document.querySelectorAll(".trasera-bobina").forEach((b, index) => {
 
-        if(index === numeroBobina){
+        if(index === numeroBobina - 1){
             b.style.display = "block";
         } else {
             b.style.display = "none";
