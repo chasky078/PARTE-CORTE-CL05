@@ -2141,7 +2141,16 @@ function abrirTrasera(numeroBobina){
 function volverParte(){
   ocultarPantallas();
   document.getElementById("pantallaParte").style.display = "block";
-  subirArriba();
+  setTimeout(() => {
+    const bobina = document.getElementById("b" + bobinaActiva);
+
+    if(bobina){
+        bobina.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+}, 100);
 }
 function autoGuardarTemporal() {
 
