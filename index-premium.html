@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -715,6 +715,78 @@ height:46px;
   letter-spacing:12px;
   user-select:none;
   }
+
+.duolite-box{
+  margin-top:16px;
+  padding:18px;
+  border-radius:20px;
+  border:1px solid rgba(140,210,255,.26);
+  background:rgba(0,10,28,.38);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.duolite-title{
+  color:#7dd3ff;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.duolite-result{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.10);
+  color:white;
+  font-weight:900;
+  font-size:18px;
+}
+
+.duolite-chip{
+  min-width:92px;
+  text-align:center;
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:900;
+  color:white;
+  border:1px solid rgba(255,255,255,.22);
+}
+
+.duolite-check{
+  display:block;
+  margin-top:14px;
+  font-weight:900;
+  color:white;
+}
+
+.duolite-check input{
+  width:auto;
+  margin-right:10px;
+}
+
+.duolite-obs{
+  width:100%;
+  min-height:78px;
+  margin-top:12px;
+  padding:16px 18px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,10,28,0.48);
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  resize:vertical;
+  outline:none;
+}
+
+.duolite-obs::placeholder{ color:rgba(210,230,255,.62); }
+
 </style>
 </head>
 
@@ -923,9 +995,24 @@ SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05
     <label>Nº MATERIAL</label>
     <div class="material">
       3 0 0 0
-      <input id="material1" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" oninput="saltoMaterial()">
+      <input id="material1" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="2" oninput="saltoMaterial(); consultarDuolite()">
       /
-      <input id="material2" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3">
+      <input id="material2" type="tel" inputmode="numeric" enterkeyhint="next" maxlength="3" oninput="consultarDuolite()">
+    </div>
+
+    <div class="duolite-box">
+      <div class="duolite-title">Consulta automática duolite</div>
+      <div id="duoliteResultado" class="duolite-result">
+        <span>Introduce material para consultar duolite</span>
+        <span id="duoliteChip" class="duolite-chip" style="background:rgba(255,255,255,.10);">--</span>
+      </div>
+
+      <label class="duolite-check">
+        <input id="duoliteNoHay" type="checkbox">
+        NO HAY DUOLITE EN FÁBRICA
+      </label>
+
+      <textarea id="duoliteObs" class="duolite-obs" placeholder="Observaciones duolite: por ejemplo, se usa otro color, falta material, pendiente de almacén..."></textarea>
     </div>
   </div>
   
@@ -1223,6 +1310,105 @@ margin-bottom:25px;
 
 <script>
 let contador = 0;
+
+const duolitePorMaterial = {
+  // Formato: 3000XX / XXX en el parte = 3000XX-00XXX aquí
+  // Tabla base creada desde el comunicado interno de duolites. Se puede ampliar cuando tengamos más datos revisados.
+  "300000-00004": "ROJ",
+  "300001-00008": "ROJ",
+  "300001-00011": "ROJ",
+  "300001-00017": "ROJ",
+  "300002-00011": "GRI",
+  "300002-00022": "NAR",
+  "300002-00024": "BLA",
+  "300002-00026": "GRI",
+  "300002-00031": "NEG",
+  "300002-00033": "NEG",
+  "300002-00034": "ROJ",
+  "300002-00036": "NEG",
+  "300002-00038": "ROJ",
+  "300002-00040": "NAR",
+  "300002-00049": "NEG",
+  "300002-00084": "NEG",
+  "300002-00086": "VER",
+  "300002-00087": "NAR",
+  "300002-00088": "MAR",
+  "300002-00089": "MAR",
+  "300002-00090": "NAR",
+  "300002-00093": "MAR",
+  "300002-00095": "NEG",
+  "300002-00096": "NEG",
+  "300002-00097": "NEG",
+  "300002-00099": "AZU",
+  "300002-00100": "BLA",
+  "300002-00102": "NEG",
+  "300002-00104": "BLA",
+  "300002-00105": "NEG",
+  "300002-00106": "NEG",
+  "300002-00109": "NEG",
+  "300002-00113": "GRI",
+  "300002-00114": "GRI",
+  "300002-00115": "NEG",
+  "300002-00116": "NEG",
+  "300002-00117": "NEG",
+  "300005-00022": "SIN DUOLITE",
+  "300015-00003": "SIN DUOLITE"
+};
+
+const coloresDuoliteUI = {
+  ROJ:{nombre:"ROJO", fondo:"#d71920", texto:"#fff"},
+  AZU:{nombre:"AZUL", fondo:"#1683e8", texto:"#fff"},
+  VER:{nombre:"VERDE", fondo:"#108447", texto:"#fff"},
+  NEG:{nombre:"NEGRO", fondo:"#050505", texto:"#fff"},
+  GRI:{nombre:"GRIS", fondo:"#9ca3af", texto:"#111"},
+  MAR:{nombre:"MARRÓN", fondo:"#7a3f1d", texto:"#fff"},
+  AMA:{nombre:"AMARILLO", fondo:"#ffe033", texto:"#111"},
+  NAR:{nombre:"NARANJA", fondo:"#f97316", texto:"#111"},
+  BLA:{nombre:"BLANCO", fondo:"#ffffff", texto:"#111"},
+  "SIN DUOLITE":{nombre:"SIN DUOLITE", fondo:"#b91c1c", texto:"#fff"},
+  "SIN DATO":{nombre:"SIN DATO", fondo:"rgba(255,255,255,.10)", texto:"#fff"}
+};
+
+function obtenerMaterialCompleto(){
+  const m1 = (document.getElementById("material1")?.value || "").replace(/\D/g, "");
+  const m2 = (document.getElementById("material2")?.value || "").replace(/\D/g, "");
+
+  if(!m1 || !m2) return "";
+
+  return "3000" + m1.padStart(2, "0") + "-" + m2.padStart(5, "0");
+}
+
+function consultarDuolite(){
+  const material = obtenerMaterialCompleto();
+  const resultado = document.getElementById("duoliteResultado");
+  const chip = document.getElementById("duoliteChip");
+
+  if(!resultado || !chip) return;
+
+  if(!material){
+    resultado.querySelector("span").innerText = "Introduce material para consultar duolite";
+    chip.innerText = "--";
+    chip.style.background = "rgba(255,255,255,.10)";
+    chip.style.color = "white";
+    return;
+  }
+
+  const codigoColor = duolitePorMaterial[material] || "SIN DATO";
+  const info = coloresDuoliteUI[codigoColor] || coloresDuoliteUI["SIN DATO"];
+
+  if(codigoColor === "SIN DATO"){
+    resultado.querySelector("span").innerText = material + " · duolite no cargado en tabla";
+  }else if(codigoColor === "SIN DUOLITE"){
+    resultado.querySelector("span").innerText = material + " · este formato figura SIN DUOLITE";
+  }else{
+    resultado.querySelector("span").innerText = material + " · color duolite recomendado";
+  }
+
+  chip.innerText = info.nombre;
+  chip.style.background = info.fondo;
+  chip.style.color = info.texto;
+}
+
 
 function mostrarPantalla(pantalla){
   if(pantalla === "parte"){
@@ -1607,6 +1793,10 @@ function guardarParte(){
     codigo: document.getElementById("codigo").value,
     material1: document.getElementById("material1").value,
     material2: document.getElementById("material2").value,
+    materialCompleto: obtenerMaterialCompleto(),
+    duoliteColor: duolitePorMaterial[obtenerMaterialCompleto()] || "",
+    duoliteNoHay: document.getElementById("duoliteNoHay")?.checked || false,
+    duoliteObs: document.getElementById("duoliteObs")?.value || "",
     formato: document.getElementById("checkS").checked ? "S" : (document.getElementById("checkW").checked ? "W" : ""),
     ancho: document.getElementById("ancho").value,
     largo: document.getElementById("largo").value,
@@ -1707,6 +1897,9 @@ function abrirParte(numeroOrden){
 
   document.getElementById("material1").value = parte.material1 || "";
   document.getElementById("material2").value = parte.material2 || "";
+  consultarDuolite();
+  document.getElementById("duoliteNoHay").checked = parte.duoliteNoHay || false;
+  document.getElementById("duoliteObs").value = parte.duoliteObs || "";
 
   document.getElementById("checkS").checked = parte.formato === "S";
   document.getElementById("checkW").checked = parte.formato === "W";
@@ -1747,6 +1940,9 @@ function limpiarFormulario(){
   document.getElementById("codigo").value = "";
   document.getElementById("material1").value = "";
   document.getElementById("material2").value = "";
+  document.getElementById("duoliteNoHay").checked = false;
+  document.getElementById("duoliteObs").value = "";
+  consultarDuolite();
 
   document.getElementById("checkS").checked = false;
   document.getElementById("checkW").checked = false;
