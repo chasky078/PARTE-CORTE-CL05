@@ -2164,28 +2164,27 @@ const animacionCircle = setInterval(() => {
 }
 let pulsacionSecreta;
 let contadorToques = 0;
-document.getElementById("logoInicio").addEventListener("click", () => {
 
+document.getElementById("logoInicio").addEventListener("click", () => {
   contadorToques++;
 
-  if(contadorToques >= 5){
+  clearTimeout(pulsacionSecreta);
 
-    document.getElementById("modalCodigoBeta").style.display = "flex";
+  if(contadorToques >= 5){
+    const modal = document.getElementById("modalCodigoBeta");
+    modal.style.display = "flex";
 
     setTimeout(() => {
       document.getElementById("inputCodigoBeta").focus();
     }, 100);
 
     contadorToques = 0;
-return;
+    return;
   }
-
-  clearTimeout(pulsacionSecreta);
 
   pulsacionSecreta = setTimeout(() => {
     contadorToques = 0;
   }, 2000);
-
 });
 
 function cerrarCodigoBeta(){
@@ -2194,25 +2193,17 @@ function cerrarCodigoBeta(){
 }
 
 function validarCodigoBeta(){
-
-  const codigo =
-    document.getElementById("inputCodigoBeta").value;
-
-  const marca =
-    document.getElementById("watermarkBeta");
+  const codigo = document.getElementById("inputCodigoBeta").value.trim();
+  const marca = document.getElementById("watermarkBeta");
 
   if(codigo === "268beta"){
-  if(marca.style.display === "flex"){
-    marca.style.display = "none";
+    marca.style.display = (marca.style.display === "flex") ? "none" : "flex";
+    cerrarCodigoBeta();
   }else{
-    marca.style.display = "flex";
+    alert("Código incorrecto");
   }
+}
 
-  document.getElementById("inputCodigoBeta").value = "";
-  cerrarCodigoBeta();
-}else{
-  alert("Código incorrecto");
-  }
 function volverMenu() {
   ocultarPantallas();
   document.getElementById("menuPrincipal").style.display = "flex";
