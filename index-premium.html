@@ -683,6 +683,23 @@ height:46px;
 .ancho-real-box{
   margin-top:8px;
 }
+  .sello-cara-rayada{
+  display:none;
+  margin-top:18px;
+  padding:14px;
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  line-height:1;
+  color:#4aa3ff;
+  border:4px solid #4aa3ff;
+  border-radius:14px;
+  transform:rotate(-8deg);
+  opacity:.82;
+  text-shadow:0 0 12px rgba(74,163,255,.35);
+  box-shadow:0 0 18px rgba(74,163,255,.18);
+  background:rgba(74,163,255,.05);
+  }
 </style>
 </head>
 
@@ -2158,8 +2175,11 @@ const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
       <div class="back-comments">
     <div class="back-checks">
   <label>
-    <input class="cara-rayada" type="checkbox">
-    CARA RAYADA HACIA ARRIBA
+    <input class="cara-rayada"
+       type="checkbox"
+       onchange="this.closest('.trasera-bobina').querySelector('.sello-cara-rayada').style.display = this.checked ? 'block' : 'none'">
+
+CARA RAYADA HACIA ARRIBA
   </label>
 
   <label>
@@ -2173,6 +2193,10 @@ const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
   </label>
 
   <input class="ancho-real-box" type="tel" inputmode="decimal" placeholder="Ancho real mm" style="display:none;">
+</div>
+<div class="sello-cara-rayada">
+  CARA RAYADA<br>
+  HACIA ARRIBA
 </div>
 <textarea class="comentario-trasera" placeholder="Comentarios">${comentariosTrasera}</textarea>
     <div class="button" onclick="guardarTraseraActual(); volverParte();">
