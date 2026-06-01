@@ -786,7 +786,7 @@ z-index:0;
 pointer-events:none;
 ">
 
-<img src="./logo.png?v=1" style="
+<img id="logoInicio" src="./logo.png?v=1" style="
 width:180px;
 margin-bottom:40px;
 position:relative;
@@ -2163,12 +2163,12 @@ const animacionCircle = setInterval(() => {
   subirArriba();
 }
 let pulsacionSecreta;
+let contadorToques = 0;
+document.getElementById("logoInicio").addEventListener("click", () => {
 
-document.getElementById("logoSecreto").addEventListener("click", () => {
+  contadorToques++;
 
-  clearTimeout(pulsacionSecreta);
-
-  pulsacionSecreta = setTimeout(() => {
+  if(contadorToques >= 5){
 
     document.getElementById("modalCodigoBeta").style.display = "flex";
 
@@ -2176,7 +2176,14 @@ document.getElementById("logoSecreto").addEventListener("click", () => {
       document.getElementById("inputCodigoBeta").focus();
     }, 100);
 
-  }, 800);
+    contadorToques = 0;
+  }
+
+  clearTimeout(pulsacionSecreta);
+
+  pulsacionSecreta = setTimeout(() => {
+    contadorToques = 0;
+  }, 2000);
 
 });
 
