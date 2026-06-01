@@ -2202,7 +2202,7 @@ function validarCodigoBeta(){
     document.getElementById("watermarkBeta");
 
   if(codigo === "268beta"){
-if(marca.style.display === "flex"){
+if(marca.style.display !== "none"){
   marca.style.display = "none";
 }else{
   marca.style.display = "flex";
