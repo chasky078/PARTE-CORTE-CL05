@@ -2193,14 +2193,26 @@ function cerrarCodigoBeta(){
 }
 
 function validarCodigoBeta(){
-  const codigo = document.getElementById("inputCodigoBeta").value.trim();
+  const input = document.getElementById("inputCodigoBeta");
   const marca = document.getElementById("watermarkBeta");
+  const codigo = input.value.trim();
 
   if(codigo === "268beta"){
-    marca.style.display = (marca.style.display === "flex") ? "none" : "flex";
+    const estaActiva = marca.classList.contains("beta-activa");
+
+    if(estaActiva){
+      marca.classList.remove("beta-activa");
+      marca.style.display = "none";
+    }else{
+      marca.classList.add("beta-activa");
+      marca.style.display = "flex";
+    }
+
+    input.value = "";
     cerrarCodigoBeta();
   }else{
     alert("Código incorrecto");
+    input.value = "";
   }
 }
 
