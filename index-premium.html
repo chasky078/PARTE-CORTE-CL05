@@ -2042,7 +2042,7 @@ function volverMenu() {
   function guardarTraseraActual(){
   const index = bobinaActiva - 1;
   const bobina = document.querySelectorAll(".bobina")[index];
-  const trasera = document.querySelector(".trasera-bobina");
+  const trasera = document.querySelectorAll(".trasera-bobina")[index];
 
   if(!bobina || !trasera) return;
 
