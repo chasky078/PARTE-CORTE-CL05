@@ -960,7 +960,7 @@ oninput="filtrarNumeros(this)">
 
   <div class="button"
        onclick="volverMenu()"
-       style="flex:1; position:relative; z-index:9999; display:flex; align-items:center; justify-content:center;"
+       style="flex:1; position:relative; z-index:9999; display:flex; align-items:center; justify-content:center;">
        <span style="display:block; width:100%; text-align:center; color:white; font-weight:900;">
 ← VOLVER AL MENÚ
   </span>
@@ -1411,6 +1411,10 @@ div.dataset.mtsSold3 = datos.mtsSold3 || "";
 div.dataset.presion = datos.presion || "";
 div.dataset.horaPresion = datos.horaPresion || "";
 div.dataset.comentariosTrasera = datos.comentariosTrasera || "";
+div.dataset.caraRayada = datos.caraRayada || "";
+div.dataset.microporoOk = datos.microporoOk || "";
+div.dataset.anchoRealCheck = datos.anchoRealCheck || "";
+div.dataset.anchoReal = datos.anchoReal || "";
   const checks = div.querySelectorAll('.soldadura-box input[type="checkbox"]');
 
 checks.forEach(c => {
@@ -1511,6 +1515,10 @@ mtsSold1: b.dataset.mtsSold1 || "",
 mtsSold2: b.dataset.mtsSold2 || "",
 mtsSold3: b.dataset.mtsSold3 || "",
 comentariosTrasera: b.dataset.comentariosTrasera || "",
+caraRayada: b.dataset.caraRayada || "",
+microporoOk: b.dataset.microporoOk || "",
+anchoRealCheck: b.dataset.anchoRealCheck || "",
+anchoReal: b.dataset.anchoReal || "",
       soldadura: (() => {
   const checks = b.querySelectorAll('.soldadura-box input[type="checkbox"]');
   for(let c of checks){
@@ -2109,7 +2117,11 @@ bobina.dataset.anchoReal = trasera.querySelector(".ancho-real-box")?.value || ""
     mtsSold3: bobina.dataset.mtsSold3,
     presion: bobina.dataset.presion,
     horaPresion: bobina.dataset.horaPresion,
-    comentariosTrasera: bobina.dataset.comentariosTrasera
+    comentariosTrasera: bobina.dataset.comentariosTrasera,
+    caraRayada: bobina.dataset.caraRayada,
+    microporoOk: bobina.dataset.microporoOk,
+    anchoRealCheck: bobina.dataset.anchoRealCheck,
+    anchoReal: bobina.dataset.anchoReal
 };
   }
 function generarParteTrasera(){
@@ -2147,10 +2159,6 @@ const presion = bobina.dataset.presion || "";
 const horaPresion = bobina.dataset.horaPresion || "";
 const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
     const caraRayada = bobina.dataset.caraRayada || "";
-const microporoOk = bobina.dataset.microporoOk || "";
-const anchoRealCheck = bobina.dataset.anchoRealCheck || "";
-const anchoReal = bobina.dataset.anchoReal || "";
-const caraRayada = bobina.dataset.caraRayada || "";
 const microporoOk = bobina.dataset.microporoOk || "";
 const anchoRealCheck = bobina.dataset.anchoRealCheck || "";
 const anchoReal = bobina.dataset.anchoReal || "";
@@ -2216,7 +2224,7 @@ CARA RAYADA HACIA ARRIBA
        value="${anchoReal}"
        placeholder="Ancho real mm"
        style="display:${anchoRealCheck ? 'block' : 'none'};">
-<div class="sello-cara-rayada">
+<div class="sello-cara-rayada" style="display:${caraRayada ? 'block' : 'none'};">
   CARA RAYADA<br>
   HACIA ARRIBA
 </div>
