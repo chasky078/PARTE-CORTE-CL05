@@ -660,6 +660,29 @@ height:46px;
     margin: 0;
     box-sizing: border-box;
 }
+  .back-checks{
+  margin:16px 0;
+  padding:16px;
+  border:1px solid rgba(140,210,255,.22);
+  border-radius:18px;
+  background:rgba(0,10,28,.35);
+}
+
+.back-checks label{
+  display:block;
+  margin-bottom:12px;
+  font-weight:900;
+  color:white;
+}
+
+.back-checks input[type="checkbox"]{
+  width:auto;
+  margin-right:10px;
+}
+
+.ancho-real-box{
+  margin-top:8px;
+}
 </style>
 </head>
 
@@ -2133,7 +2156,24 @@ const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
       </div>
 
       <div class="back-comments">
-    
+    <div class="back-checks">
+  <label>
+    <input class="cara-rayada" type="checkbox">
+    CARA RAYADA HACIA ARRIBA
+  </label>
+
+  <label>
+    <input class="microporo-ok" type="checkbox">
+    MICROPORO OK
+  </label>
+
+  <label>
+    <input class="ancho-check" type="checkbox" onchange="this.closest('.trasera-bobina').querySelector('.ancho-real-box').style.display = this.checked ? 'block' : 'none'">
+    ANCHO REAL
+  </label>
+
+  <input class="ancho-real-box" type="tel" inputmode="decimal" placeholder="Ancho real mm" style="display:none;">
+</div>
 <textarea class="comentario-trasera" placeholder="Comentarios">${comentariosTrasera}</textarea>
     <div class="button" onclick="guardarTraseraActual(); volverParte();">
 💾 GUARDAR TRASERA BOBINA ${numero}
