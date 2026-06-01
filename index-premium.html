@@ -2125,12 +2125,14 @@ const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
       </div>
 
       <div class="row">
-        <input class="presion" type="text" placeholder="Presión">
-        <input class="hora-presion" type="time" placeholder="Hora">
+        
+<input class="presion" type="text" value="${presion}" placeholder="Presión">
+<input class="hora-presion" type="time" value="${horaPresion}" placeholder="Hora">
       </div>
 
       <div class="back-comments">
-    <textarea class="comentario-trasera" placeholder="Comentarios"></textarea>
+    
+<textarea class="comentario-trasera" placeholder="Comentarios">${comentariosTrasera}</textarea>
     <div class="button" onclick="guardarTraseraActual(); volverParte();">
 💾 GUARDAR TRASERA BOBINA ${numero}
 </div>
