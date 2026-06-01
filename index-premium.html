@@ -2097,6 +2097,10 @@ function volverMenu() {
   bobina.dataset.presion = trasera.querySelector(".presion")?.value || "";
   bobina.dataset.horaPresion = trasera.querySelector(".hora-presion")?.value || "";
   bobina.dataset.comentariosTrasera = trasera.querySelector(".comentario-trasera")?.value || "";
+    bobina.dataset.caraRayada = trasera.querySelector(".cara-rayada")?.checked ? "1" : "";
+bobina.dataset.microporoOk = trasera.querySelector(".microporo-ok")?.checked ? "1" : "";
+bobina.dataset.anchoRealCheck = trasera.querySelector(".ancho-check")?.checked ? "1" : "";
+bobina.dataset.anchoReal = trasera.querySelector(".ancho-real-box")?.value || "";
     traserasGuardadas[index] = {
     pcd: bobina.dataset.pcd,
     clasificadores: bobina.dataset.clasificadores,
@@ -2142,7 +2146,14 @@ const mtsSold3 = bobina.dataset.mtsSold3 || "";
 const presion = bobina.dataset.presion || "";
 const horaPresion = bobina.dataset.horaPresion || "";
 const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
-
+    const caraRayada = bobina.dataset.caraRayada || "";
+const microporoOk = bobina.dataset.microporoOk || "";
+const anchoRealCheck = bobina.dataset.anchoRealCheck || "";
+const anchoReal = bobina.dataset.anchoReal || "";
+const caraRayada = bobina.dataset.caraRayada || "";
+const microporoOk = bobina.dataset.microporoOk || "";
+const anchoRealCheck = bobina.dataset.anchoRealCheck || "";
+const anchoReal = bobina.dataset.anchoReal || "";
     const bloque = document.createElement("div");
     bloque.className = "trasera-bobina";
 
@@ -2177,23 +2188,32 @@ const comentariosTrasera = bobina.dataset.comentariosTrasera || "";
   <label>
     <input class="cara-rayada"
        type="checkbox"
+       ${caraRayada ? "checked" : ""}
        onchange="this.closest('.trasera-bobina').querySelector('.sello-cara-rayada').style.display = this.checked ? 'block' : 'none'">
 
 CARA RAYADA HACIA ARRIBA
   </label>
 
   <label>
-    <input class="microporo-ok" type="checkbox">
+    <input class="microporo-ok"
+       type="checkbox"
+       ${microporoOk ? "checked" : ""}>
     MICROPORO OK
   </label>
 
   <label>
-    <input class="ancho-check" type="checkbox" onchange="this.closest('.trasera-bobina').querySelector('.ancho-real-box').style.display = this.checked ? 'block' : 'none'">
-    ANCHO REAL
+<input class="ancho-check"
+       type="checkbox"
+       ${anchoRealCheck ? "checked" : ""}
+       onchange="this.closest('.trasera-bobina').querySelector('.ancho-real-box').style.display = this.checked ? 'block' : 'none'">    ANCHO REAL
   </label>
 
-  <input class="ancho-real-box" type="tel" inputmode="decimal" placeholder="Ancho real mm" style="display:none;">
-</div>
+<input class="ancho-real-box"
+       type="tel"
+       inputmode="decimal"
+       value="${anchoReal}"
+       placeholder="Ancho real mm"
+       style="display:${anchoRealCheck ? 'block' : 'none'};"></div>
 <div class="sello-cara-rayada">
   CARA RAYADA<br>
   HACIA ARRIBA
