@@ -2202,11 +2202,13 @@ CARA RAYADA HACIA ARRIBA
   </label>
 
   <label>
-<input class="ancho-check"
-       type="checkbox"
-       ${anchoRealCheck ? "checked" : ""}
-       onchange="this.closest('.trasera-bobina').querySelector('.ancho-real-box').style.display = this.checked ? 'block' : 'none'">    ANCHO REAL
-  </label>
+<label>
+  <input class="ancho-check"
+         type="checkbox"
+         ${anchoRealCheck ? "checked" : ""}
+         onchange="this.closest('.trasera-bobina').querySelector('.ancho-real-box').style.display = this.checked ? 'block' : 'none'">
+  ANCHO REAL
+</label>
 
 <input class="ancho-real-box"
        type="tel"
@@ -2214,7 +2216,6 @@ CARA RAYADA HACIA ARRIBA
        value="${anchoReal}"
        placeholder="Ancho real mm"
        style="display:${anchoRealCheck ? 'block' : 'none'};">
-       </div>
 <div class="sello-cara-rayada">
   CARA RAYADA<br>
   HACIA ARRIBA
