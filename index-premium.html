@@ -722,6 +722,40 @@ height:46px;
   <div id="watermarkBeta" class="watermark-beta">
   BETA
   </div>
+  <div id="modalCodigoBeta" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:100000;
+align-items:center;
+justify-content:center;
+">
+  <div style="
+  width:min(420px,90%);
+  background:#071b35;
+  border:1px solid rgba(120,200,255,.35);
+  border-radius:22px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.55);
+  ">
+    <h2 style="margin-top:0;color:white;">Código secreto</h2>
+
+    <input id="inputCodigoBeta"
+      type="password"
+      placeholder="Introduce código"
+      style="text-align:center;font-size:22px;">
+
+    <div class="button" onclick="validarCodigoBeta()">
+      ACTIVAR / DESACTIVAR BETA
+    </div>
+
+    <div class="button button-danger" onclick="cerrarCodigoBeta()">
+      CERRAR
+    </div>
+  </div>
+  </div>
 <div id="pantallaInicio" style="
 position:fixed;
 top:0;
@@ -853,7 +887,9 @@ MENÚ PRINCIPAL
 </div>
 
   </div>
-<header>SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05</header>
+<header id="logoSecreto">
+SECCIÓN DE CORTE · PARTE PRODUCCIÓN CL05
+</header>
   <div onclick="volverMenu()" class="btn-volver">
 ← VOLVER AL MENÚ
   </div>
@@ -2126,7 +2162,55 @@ const animacionCircle = setInterval(() => {
 }, 60);
   subirArriba();
 }
+let pulsacionSecreta;
 
+document.getElementById("logoSecreto").addEventListener("click", () => {
+
+  clearTimeout(pulsacionSecreta);
+
+  pulsacionSecreta = setTimeout(() => {
+
+    document.getElementById("modalCodigoBeta").style.display = "flex";
+
+    setTimeout(() => {
+      document.getElementById("inputCodigoBeta").focus();
+    }, 100);
+
+  }, 800);
+
+});
+
+function cerrarCodigoBeta(){
+  document.getElementById("modalCodigoBeta").style.display = "none";
+}
+
+function validarCodigoBeta(){
+
+  const codigo =
+    document.getElementById("inputCodigoBeta").value;
+
+  const marca =
+    document.getElementById("watermarkBeta");
+
+  if(codigo === "268beta"){
+
+    if(marca.style.display === "flex"){
+      marca.style.display = "none";
+    }else{
+      marca.style.display = "flex";
+    }
+
+    cerrarCodigoBeta();
+
+    document.getElementById("inputCodigoBeta").value = "";
+
+  }else{
+
+    alert("Código incorrecto");
+
+  }
+
+}
 function volverMenu() {
   ocultarPantallas();
   document.getElementById("menuPrincipal").style.display = "flex";
