@@ -2055,6 +2055,16 @@ function volverMenu() {
   bobina.dataset.presion = trasera.querySelector(".presion")?.value || "";
   bobina.dataset.horaPresion = trasera.querySelector(".hora-presion")?.value || "";
   bobina.dataset.comentariosTrasera = trasera.querySelector(".comentario-trasera")?.value || "";
+    traserasGuardadas[index] = {
+    pcd: bobina.dataset.pcd,
+    clasificadores: bobina.dataset.clasificadores,
+    mtsSold1: bobina.dataset.mtsSold1,
+    mtsSold2: bobina.dataset.mtsSold2,
+    mtsSold3: bobina.dataset.mtsSold3,
+    presion: bobina.dataset.presion,
+    horaPresion: bobina.dataset.horaPresion,
+    comentariosTrasera: bobina.dataset.comentariosTrasera
+};
   }
 function generarParteTrasera(){
 
