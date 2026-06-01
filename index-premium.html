@@ -2194,12 +2194,12 @@ function validarCodigoBeta(){
     document.getElementById("watermarkBeta");
 
   if(codigo === "268beta"){
-
-    const visible =
-window.getComputedStyle(marca).display !== "none";
-
-marca.style.display = visible ? "none" : "flex";
-
+if(marca.style.display === "flex"){
+  marca.style.display = "none";
+}else{
+  marca.style.display = "flex";
+}
+    
     document.getElementById("inputCodigoBeta").value = "";
 cerrarCodigoBeta();
 
