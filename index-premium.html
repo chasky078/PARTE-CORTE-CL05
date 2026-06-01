@@ -2182,6 +2182,7 @@ document.getElementById("logoSecreto").addEventListener("click", () => {
 
 function cerrarCodigoBeta(){
   document.getElementById("modalCodigoBeta").style.display = "none";
+  document.getElementById("inputCodigoBeta").value = "";
 }
 
 function validarCodigoBeta(){
@@ -2200,9 +2201,8 @@ function validarCodigoBeta(){
       marca.style.display = "flex";
     }
 
-    cerrarCodigoBeta();
-
     document.getElementById("inputCodigoBeta").value = "";
+cerrarCodigoBeta();
 
   }else{
 
