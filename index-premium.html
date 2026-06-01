@@ -719,6 +719,9 @@ height:46px;
 </head>
 
 <body>
+  <div id="watermarkBeta" class="watermark-beta">
+  BETA
+  </div>
 <div id="pantallaInicio" style="
 position:fixed;
 top:0;
@@ -1779,6 +1782,30 @@ acumInput.setAttribute("data-valor", acumulado);
   }
   let bobinaActiva = 0;
   let traserasGuardadas = {};
+  let codigoBeta = "";
+
+document.addEventListener("keydown", function(e){
+
+  codigoBeta += e.key.toLowerCase();
+
+  if(codigoBeta.length > 20){
+    codigoBeta = codigoBeta.slice(-20);
+  }
+
+  if(codigoBeta.includes("268beta")){
+
+    const marca = document.getElementById("watermarkBeta");
+
+    if(marca.style.display === "flex"){
+      marca.style.display = "none";
+    }else{
+      marca.style.display = "flex";
+    }
+
+    codigoBeta = "";
+  }
+
+});
   document.addEventListener("keydown", function(e){
 
   if(e.key !== "Enter") return;
