@@ -2195,11 +2195,10 @@ function validarCodigoBeta(){
 
   if(codigo === "268beta"){
 
-    if(marca.style.display === "flex"){
-      marca.style.display = "none";
-    }else{
-      marca.style.display = "flex";
-    }
+    const visible =
+window.getComputedStyle(marca).display !== "none";
+
+marca.style.display = visible ? "none" : "flex";
 
     document.getElementById("inputCodigoBeta").value = "";
 cerrarCodigoBeta();
