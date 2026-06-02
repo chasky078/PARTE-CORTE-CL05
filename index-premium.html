@@ -925,8 +925,11 @@ padding:24px;
 box-sizing:border-box;
 ">
 
-<img src="./logo.png?v=1" onclick="document.getElementById('modalCodigoBeta').style.display='flex'; setTimeout(()=>document.getElementById('inputCodigoBeta').focus(),100);" style="
-width:140px;
+<img src="./logo.png?v=1"
+oncontextmenu="return false;"
+ontouchstart="timerBeta=setTimeout(()=>{document.getElementById('modalCodigoBeta').style.display='flex';setTimeout(()=>document.getElementById('inputCodigoBeta').focus(),100);},2000)"
+ontouchend="clearTimeout(timerBeta)"
+style="width:140px;
 margin-bottom:35px;
 ">
 
