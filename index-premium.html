@@ -953,6 +953,10 @@ MENÚ PRINCIPAL
   <div class="menu-icon">📊</div>
   <div>DASHBOARD</div>
 </div>
+    <div onclick="abrirSeguridad()" class="menu-card">
+    <div class="menu-icon">🛡️</div>
+    <div>SEGURIDAD Y NORMAS</div>
+    </div>
 <div onclick="abrirAyuda()" class="menu-card">
   <div class="menu-icon">ℹ️</div>
   <div>AYUDA</div>
@@ -1241,6 +1245,43 @@ font-weight:700;
     </div>
 
   </div>
+
+</div>
+
+<div id="pantallaSeguridad" style="display:none;padding:20px;">
+
+<h2 style="
+color:white;
+font-size:32px;
+margin-bottom:25px;
+text-align:center;
+">
+🛡️ SEGURIDAD Y NORMAS
+</h2>
+
+<div class="menu-card">
+    <div class="menu-icon">🚨</div>
+    <div>LOS 5 INACEPTABLES</div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-icon">🦺</div>
+    <div>EPIs OBLIGATORIOS</div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-icon">⚠️</div>
+    <div>AVISOS CRÍTICOS</div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-icon">🏭</div>
+    <div>INFORMACIÓN CL05</div>
+</div>
+
+<button class="btn-volver" onclick="volverMenu()">
+⬅ VOLVER AL MENÚ
+</button>
 
 </div>
 <div id="pantallaAyuda" class="container" style="
@@ -2261,7 +2302,14 @@ function abrirGuardados() {
   verPartes();
   subirArriba();
 }
+function abrirSeguridad(){
 
+    ocultarPantallas();
+
+    document.getElementById("pantallaSeguridad").style.display = "block";
+
+    subirArriba();
+}
 function abrirAyuda() {
   ocultarPantallas();
   document.getElementById("pantallaAyuda").style.display = "block";
