@@ -165,33 +165,31 @@ box-shadow:
   box-shadow:0 10px 24px rgba(0,0,0,0.30), 0 0 14px rgba(211,47,47,0.18);
 }
 
+
 .menu-card{
-background:
-linear-gradient(135deg,rgba(18,43,75,0.92),rgba(24,58,98,0.88));
-border:2px solid rgba(74,158,255,0.45);
-border-radius:18px;
-padding:32px 38px;
-margin-bottom:22px;
-color:white;
-font-size:26px;
-font-weight:900;
-display:flex;
-align-items:center;
-gap:22px;
-justify-content:flex-start;
-padding-left:70px;
-cursor:pointer;
-transition:0.25s;
-box-shadow:
-0 14px 34px rgba(0,0,0,0.45),
-inset 0 0 0 1px rgba(255,255,255,0.04);
-width:min(620px,92vw);
-letter-spacing:0.5px;
+  background:linear-gradient(135deg,rgba(18,43,75,0.92),rgba(24,58,98,0.88));
+  border:2px solid rgba(74,158,255,0.45);
+  border-radius:18px;
+  padding:32px 38px;
+  margin-bottom:22px;
+  color:white;
+  font-size:26px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  justify-content:flex-start;
+  padding-left:70px;
+  cursor:pointer;
+  transition:0.25s;
+  box-shadow:0 14px 34px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.04);
+  width:min(620px,92vw);
+  letter-spacing:0.5px;
 }
 
 .menu-card:hover{
-filter:brightness(1.08);
-box-shadow:0 12px 30px rgba(0,0,0,0.45);
+  filter:brightness(1.08);
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
 }
 
 .menu-icon{
@@ -763,6 +761,157 @@ height:46px;
 
 .duolite-obs::placeholder{ color:rgba(210,230,255,.62); }
 
+
+/* ===== SEGURIDAD CL05 · VISOR PREMIUM ===== */
+.seguridad-cl05-wrap{
+  display:none;
+  padding:20px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.seguridad-cl05-title{
+  color:white;
+  font-size:32px;
+  margin:0 0 24px 0;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.seguridad-cl05-subtitle{
+  color:rgba(215,235,255,.82);
+  text-align:center;
+  max-width:720px;
+  margin:0 auto 24px auto;
+  font-size:16px;
+  line-height:1.5;
+}
+
+.seguridad-cl05-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin:0 auto 26px auto;
+  max-width:760px;
+}
+
+.seguridad-cl05-card{
+  width:100%;
+  border:none;
+  text-align:left;
+  background:linear-gradient(135deg,rgba(18,43,75,.96),rgba(24,58,98,.90));
+  border:2px solid rgba(74,158,255,.42);
+  border-radius:20px;
+  padding:22px 22px;
+  color:white;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  cursor:pointer;
+  box-shadow:0 14px 34px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.04);
+  transition:filter .2s, box-shadow .2s;
+}
+
+.seguridad-cl05-card:hover{
+  filter:brightness(1.08);
+  box-shadow:0 16px 38px rgba(0,0,0,.50), 0 0 28px rgba(24,184,255,.16);
+}
+
+.seguridad-cl05-icon{
+  min-width:54px;
+  width:54px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  font-size:28px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.seguridad-cl05-card strong{
+  display:block;
+  font-size:22px;
+  letter-spacing:.5px;
+  margin-bottom:5px;
+}
+
+.seguridad-cl05-card span{
+  display:block;
+  color:rgba(215,235,255,.78);
+  font-size:14px;
+  font-weight:700;
+  line-height:1.35;
+}
+
+.seguridad-viewer{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100001;
+  background:rgba(0,8,20,.94);
+  backdrop-filter:blur(8px);
+  padding:18px;
+  align-items:center;
+  justify-content:center;
+}
+
+.seguridad-viewer.open{
+  display:flex;
+}
+
+.seguridad-viewer-img{
+  max-width:96vw;
+  max-height:86vh;
+  border-radius:18px;
+  box-shadow:0 22px 70px rgba(0,0,0,.70);
+  background:white;
+  object-fit:contain;
+}
+
+.seguridad-viewer-close{
+  position:fixed;
+  top:16px;
+  right:16px;
+  width:54px;
+  height:54px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,20,48,.92);
+  color:white;
+  font-size:30px;
+  font-weight:900;
+  cursor:pointer;
+  z-index:100002;
+}
+
+.seguridad-viewer-title{
+  position:fixed;
+  left:18px;
+  bottom:18px;
+  max-width:calc(100vw - 36px);
+  padding:12px 16px;
+  border-radius:16px;
+  color:white;
+  background:rgba(0,20,48,.84);
+  border:1px solid rgba(255,255,255,.12);
+  font-weight:900;
+  letter-spacing:.5px;
+  z-index:100002;
+}
+
+@media(max-width:700px){
+  .seguridad-cl05-wrap{ padding:14px; }
+  .seguridad-cl05-title{ font-size:28px; }
+  .seguridad-cl05-card{ padding:18px 16px; gap:14px; border-radius:18px; }
+  .seguridad-cl05-card strong{ font-size:18px; }
+  .seguridad-cl05-card span{ font-size:13px; }
+  .seguridad-cl05-icon{ min-width:48px; width:48px; height:48px; font-size:25px; }
+  .seguridad-viewer-img{ max-width:98vw; max-height:82vh; border-radius:12px; }
+}
+
 </style>
 </head>
 
@@ -1224,122 +1373,86 @@ font-weight:700;
 
 </div>
 
-<div id="pantallaSeguridad" style="display:none;padding:20px;max-width:900px;margin:0 auto;">
+<div id="pantallaSeguridad" class="seguridad-cl05-wrap">
 
-<h2 style="
-color:white;
-font-size:32px;
-margin-bottom:25px;
-text-align:center;
-">
-🛡️ SEGURIDAD Y NORMAS
-</h2>
-<div style="
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.12);
-border-radius:20px;
-padding:16px;
-margin-top:20px;
-max-width:420px;
-margin-left:auto;
-margin-right:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.35);
-">
+  <h2 class="seguridad-cl05-title">🛡️ SEGURIDAD Y NORMAS</h2>
 
-<img
-src="img/seguridad/inaceptables-banner.png"
-style="
-width:100%;
-border-radius:14px;
-display:block;
-">
+  <p class="seguridad-cl05-subtitle">
+    Módulo visual de consulta rápida para normas críticas, EPIs, avisos y procedimientos seguros de la línea CL05.
+  </p>
 
-<h3 style="
-color:white;
-margin-top:16px;
-margin-bottom:10px;
-font-size:22px;
-">
-🚨 LOS 5 INACEPTABLES
-</h3>
+  <div class="seguridad-cl05-grid">
 
-<p style="
-color:#d7e8ff;
-line-height:1.5;
-">
-Normas críticas de seguridad obligatorias en CL05.
-</p>
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/inaceptables-banner.png','🚨 LOS 5 INACEPTABLES')">
+      <div class="seguridad-cl05-icon">🚨</div>
+      <div>
+        <strong>LOS 5 INACEPTABLES</strong>
+        <span>Normas críticas principales. Cartel destacado de seguridad.</span>
+      </div>
+    </button>
 
-</div>
-<div class="menu-card" style="width:100%;max-width:760px;margin:14px auto;">
-    <div class="menu-icon">🚨</div>
-    <div>LOS 5 INACEPTABLES</div>
-</div>
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/inaceptables.png','⛔ CARTEL COMPLETO')">
+      <div class="seguridad-cl05-icon">⛔</div>
+      <div>
+        <strong>CARTEL COMPLETO</strong>
+        <span>Detalle completo de los inaceptables y normas de cumplimiento.</span>
+      </div>
+    </button>
 
-<div class="menu-card" style="width:100%;max-width:760px;margin:14px auto;">
-    <div class="menu-icon">🦺</div>
-    <div>EPIs OBLIGATORIOS</div>
-</div>
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/manipulacion.png','🧤 MANIPULACIÓN DE HOJALATA')">
+      <div class="seguridad-cl05-icon">🧤</div>
+      <div>
+        <strong>MANIPULACIÓN DE HOJALATA</strong>
+        <span>Buenas prácticas, guantes y manipulación segura de material.</span>
+      </div>
+    </button>
 
-<div class="menu-card" style="width:100%;max-width:760px;margin:14px auto;">
-    <div class="menu-icon">⚠️</div>
-    <div>AVISOS CRÍTICOS</div>
-</div>
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/manos.png','✋ PROTECCIÓN DE MANOS')">
+      <div class="seguridad-cl05-icon">✋</div>
+      <div>
+        <strong>PROTECCIÓN DE MANOS</strong>
+        <span>Uso de EPIs, manguitos, herramientas y prevención de cortes.</span>
+      </div>
+    </button>
 
-<div class="menu-card" style="width:100%;max-width:760px;margin:14px auto;">
-    <div class="menu-icon">🏭</div>
-    <div>INFORMACIÓN CL05</div>
-</div>
-<div class="seguridad-galeria-mini">
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/ruido.png','🔊 PROTECCIÓN AUDITIVA')">
+      <div class="seguridad-cl05-icon">🔊</div>
+      <div>
+        <strong>PROTECCIÓN AUDITIVA</strong>
+        <span>Recordatorio de uso obligatorio de protección frente a ruido.</span>
+      </div>
+    </button>
 
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/inaceptables-banner.png')">
-    <img src="img/seguridad/inaceptables-banner.png" alt="Los cinco inaceptables">
-    <h3>🚨 Los cinco inaceptables</h3>
-    <p>Normas críticas obligatorias de seguridad.</p>
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/atranque.png','⚠️ ATRANQUES')">
+      <div class="seguridad-cl05-icon">⚠️</div>
+      <div>
+        <strong>ATRANQUES</strong>
+        <span>Procedimiento seguro para retirar atranques sin asumir riesgos.</span>
+      </div>
+    </button>
+
+    <button class="seguridad-cl05-card" onclick="abrirImagenSeguridad('img/seguridad/companero.png','🤝 CUIDA DE TU COMPAÑERO')">
+      <div class="seguridad-cl05-icon">🤝</div>
+      <div>
+        <strong>CUIDA DE TU COMPAÑERO</strong>
+        <span>Trabajo en equipo, aviso y prevención entre compañeros.</span>
+      </div>
+    </button>
+
   </div>
 
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/inaceptables.png')">
-    <img src="img/seguridad/inaceptables.png" alt="Cartel cinco inaceptables">
-    <h3>⛔ Cartel completo</h3>
-    <p>Normativa básica de seguridad en fábrica.</p>
-  </div>
-
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/atranque.png')">
-    <img src="img/seguridad/atranque.png" alt="Cómo quitar un atranque">
-    <h3>⚠️ Atranques</h3>
-    <p>Procedimiento seguro ante atranques.</p>
-  </div>
-
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/manipulacion.png')">
-    <img src="img/seguridad/manipulacion.png" alt="Manipulación de hojalata">
-    <h3>🧤 Manipulación</h3>
-    <p>Uso correcto de EPIs y manipulación de hojalata.</p>
-  </div>
-
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/companero.png')">
-    <img src="img/seguridad/companero.png" alt="Cuida de tu compañero">
-    <h3>🤝 Cuida de tu compañero</h3>
-    <p>Prevención, aviso y ayuda entre compañeros.</p>
-  </div>
-
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/manos.png')">
-    <img src="img/seguridad/manos.png" alt="Protege tus manos">
-    <h3>✋ Protege tus manos</h3>
-    <p>Guantes, manguitos y herramientas adecuadas.</p>
-  </div>
-
-  <div class="seguridad-card-img-mini" onclick="abrirImagenSeguridad('img/seguridad/ruido.png')">
-    <img src="img/seguridad/ruido.png" alt="Protección ruido">
-    <h3>🔊 Ruido</h3>
-    <p>Uso obligatorio de protección auditiva.</p>
+  <div class="button" onclick="volverMenu()">
+    ⬅ VOLVER AL MENÚ
   </div>
 
 </div>
-<button class="btn-volver" onclick="volverMenu()">
-⬅ VOLVER AL MENÚ
-</button>
 
+<div id="visorSeguridad" class="seguridad-viewer" onclick="cerrarImagenSeguridad()">
+  <button class="seguridad-viewer-close" onclick="cerrarImagenSeguridad(event)">✕</button>
+  <img id="visorSeguridadImg" class="seguridad-viewer-img" src="" alt="Imagen seguridad CL05" onclick="event.stopPropagation()">
+  <div id="visorSeguridadTitulo" class="seguridad-viewer-title"></div>
 </div>
+
 <div id="pantallaAyuda" class="container" style="
 display:none;
 background:linear-gradient(135deg,#000814 0%,#002a5c 45%,#000814 100%);
@@ -2559,6 +2672,31 @@ function validarCodigoBeta(){
     alert("Código incorrecto");
     input.value = "";
   }
+}
+
+
+function abrirImagenSeguridad(src, titulo){
+  const visor = document.getElementById("visorSeguridad");
+  const img = document.getElementById("visorSeguridadImg");
+  const title = document.getElementById("visorSeguridadTitulo");
+
+  if(!visor || !img) return;
+
+  img.src = src;
+  if(title) title.innerText = titulo || "SEGURIDAD CL05";
+  visor.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarImagenSeguridad(event){
+  if(event) event.stopPropagation();
+
+  const visor = document.getElementById("visorSeguridad");
+  const img = document.getElementById("visorSeguridadImg");
+
+  if(visor) visor.classList.remove("open");
+  if(img) img.src = "";
+  document.body.style.overflow = "";
 }
 
 function volverMenu() {
