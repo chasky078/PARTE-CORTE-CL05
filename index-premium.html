@@ -2310,9 +2310,12 @@ function abrirSeguridad(){
 
     subirArriba();
 }
-function abrirAyuda() {
+function abrirAyuda(){
   ocultarPantallas();
+
+  document.getElementById("pantallaSeguridad").style.display = "none";
   document.getElementById("pantallaAyuda").style.display = "block";
+
   subirArriba();
 }
 
